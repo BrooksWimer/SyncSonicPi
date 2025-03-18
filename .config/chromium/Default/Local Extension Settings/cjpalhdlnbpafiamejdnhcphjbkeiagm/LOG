@@ -1,0 +1,17 @@
+2025/03/03-23:50:38.389 4ca9 Creating DB /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm since it was missing.
+2025/03/03-23:50:38.406 4ca9 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/MANIFEST-000001
+2025/03/03-23:50:50.285 4caa Level-0 table #5: started
+2025/03/03-23:50:50.457 4caa Level-0 table #5: 4347500 bytes OK
+2025/03/03-23:50:50.466 4caa Delete type=0 #3
+2025/03/03-23:51:00.536 4caa Level-0 table #7: started
+2025/03/03-23:51:00.711 4caa Level-0 table #7: 4665167 bytes OK
+2025/03/03-23:51:00.718 4caa Delete type=0 #4
+2025/03/03-23:52:08.303 4cab Level-0 table #9: started
+2025/03/03-23:52:08.696 4cab Level-0 table #9: 8680045 bytes OK
+2025/03/03-23:52:08.710 4cab Delete type=0 #6
+2025/03/04-00:52:10.981 4caa Level-0 table #11: started
+2025/03/04-00:52:11.174 4caa Level-0 table #11: 4089714 bytes OK
+2025/03/04-00:52:11.190 4caa Delete type=0 #8
+2025/03/04-00:52:14.161 4ca9 Level-0 table #13: started
+2025/03/04-00:52:14.396 4ca9 Level-0 table #13: 4624462 bytes OK
+2025/03/04-00:52:14.400 4ca9 Delete type=0 #10

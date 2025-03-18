@@ -1,0 +1,7 @@
+[default-nodes]
+default.configured.audio.sink=virtual_out
+default.configured.audio.sink.0=virtual_out
+default.configured.audio.sink.1=combined_out
+default.configured.audio.sink.2=combined
+default.configured.audio.sink.3=virtual_sink
+default.configured.audio.sink.4=bluez_output.00_0C_8A_FF_18_FE.1

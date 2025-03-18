@@ -1,0 +1,40 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icons/icon128.png",
+         "16": "icons/icon16.png",
+         "48": "icons/icon48.png"
+      },
+      "default_popup": "options.html",
+      "default_title": "h264ify"
+   },
+   "background": {
+      "service_worker": "src/service_worker.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "src/inject/content_script.js" ],
+      "matches": [ "*://*.youtube.com/*", "*://*.youtube-nocookie.com/*", "*://*.youtu.be/*" ],
+      "run_at": "document_start"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_extensionDescription__",
+   "differential_fingerprint": "1.2007b59ca6741d4e9552b51f25a19010041a7e775020cd0add78607d75f8deec",
+   "homepage_url": "https://github.com/erkserkserks/h264ify",
+   "host_permissions": [ "*://*.youtube.com/*", "*://*.youtube-nocookie.com/*", "*://*.youtu.be/*" ],
+   "icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxpuYJpBArlJinXxN4oxx4UuFNreRTNO5Cl3TNF5FtDmgNLflbtYyC2nC5eZGxpNibzauHmGTD8ekFCfNZhHFpUEIZWd9AHI7TZdhu6gPxaK1lPEMukVEewFs2ovaEkjZbe3gy3v0eUDnADUkiaex7XeAWR6mJLzmcUaPFgzFRsDkozsE9tXLNN6oEYuWHN/yRsM1RYo7PYPulutHF8POL/8vDSyWHx/W9YDTnbv+2SBJZO7Dxi1/PbutasUag+/jma0X1nGhrEufr67NMvtpjPWSISWkIwxPR8u7EVyrKTSXs6U7jCbhKedhomeu9E/xZ1Er0dGWYWnhpdo0GNvblwIDAQAB",
+   "manifest_version": 3,
+   "name": "h264ify",
+   "options_ui": {
+      "page": "options.html"
+   },
+   "permissions": [ "scripting", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.0.1"
+}

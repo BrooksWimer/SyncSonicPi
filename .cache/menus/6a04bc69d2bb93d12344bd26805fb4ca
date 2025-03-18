@@ -1,0 +1,1198 @@
+1.2
+lxde-pi-applications.menu+hidden
+16
+D/home/syncsonic/.local/share/desktop-directories
+D/usr/local/share/desktop-directories
+D/usr/share/raspi-ui-overrides/desktop-directories
+D/usr/share/desktop-directories
+D/usr/share/gdm/desktop-directories
+D/var/lib/menu-xdg/desktop-directories
+D/home/syncsonic/.local/share/applications
+D/usr/local/share/applications
+D/usr/share/raspi-ui-overrides/applications
+D/usr/share/applications
+D/usr/share/gdm/applications
+D/var/lib/menu-xdg/applications
+D/etc/xdg/menus/applications-merged
+D/home/syncsonic/.config/menus/applications-merged
+F/home/syncsonic/.config/menus/lxde-pi-applications.menu
+F/etc/xdg/menus/lxde-pi-applications.menu
+Phosh;MATE;
++Applications
+Applications
+Applications
+applications-other
+lxde-menu-applications.directory
+3
+0
++Development
+Programming
+Tools for software development
+applications-development
+lxde-development.directory
+3
+0
+-geany.desktop
+Geany Programmer's Editor
+A fast and lightweight IDE using GTK+
+geany
+
+8
+Integrated Development Environment
+geany %F
+2
+0
+geany
+
+GTK;Development;IDE;TextEditor
+Text,Editor
+-python3.11.desktop
+Python (v3.11)
+Python Interpreter (v3.11)
+/usr/share/pixmaps/python3.11.xpm
+
+9
+
+/usr/bin/python3.11
+7
+0
+
+
+Development
+
+-scratch.desktop
+Scratch
+Programming system and content development tool
+scratch
+
+8
+
+scratch %f
+0
+0
+scratch
+
+Application;Development;ComputerScience
+
+-org.thonny.Thonny.desktop
+Thonny
+Python IDE for beginners
+thonny
+
+9
+Python IDE
+/usr/bin/thonny %F
+0
+0
+
+
+Development;IDE
+programming,education
+
++Education
+Education
+
+applications-science
+lxde-education.directory
+3
+4
+
++Office
+Office
+Office Applications
+applications-office
+lxde-office.directory
+3
+0
+-libreoffice-draw.desktop
+LibreOffice Draw
+Create and edit drawings, flow charts, and logos by using Draw.
+libreoffice-draw
+
+8
+Drawing Program
+libreoffice --draw %U
+2
+0
+libreoffice
+
+Office;FlowChart;2DGraphics;VectorGraphics
+Vector,Schema,Diagram,Layout,OpenDocument Graphics,Microsoft Publisher,Microsoft Visio,Corel Draw,cdr,odg,svg,pdf,vsd
+-org.gnome.Evince-previewer.desktop
+Print Preview
+Preview before printing
+document-print-preview
+
+9
+
+evince-previewer %U
+6
+0
+evince-previewer
+
+GNOME;GTK;Office;Viewer;Graphics;2DGraphics;VectorGraphics
+
+
++Internet
+Internet
+Programs for Internet access such as web and e-mail
+applications-internet
+lxde-network.directory
+3
+0
+-chromium.desktop
+Chromium Web Browser
+Access the Internet
+chromium
+
+9
+Web Browser
+/usr/bin/chromium %U
+2
+0
+
+
+Network;WebBrowser
+browser
+-firefox.desktop
+Firefox
+Browse the World Wide Web
+firefox
+
+9
+Web Browser
+/usr/bin/firefox %u
+2
+0
+
+
+Network;WebBrowser
+
+-realvnc-vncserver-service.desktop
+VNC Server
+Start VNC Server in Service Mode
+/usr/share/icons/hicolor/48x48/apps/vncserver48x48.png
+
+8
+VNC Server
+/usr/bin/pkexec /etc/vnc/vncservice start vncserver-x11-serviced
+4
+0
+
+
+Application;Network;RemoteAccess
+
+-lxde-x-www-browser.desktop
+Web Browser
+
+web-browser
+
+9
+X Web Browser
+/usr/bin/x-www-browser %u
+4
+0
+
+
+GTK;WebBrowser;Network
+
+
++Multimedia
+Sound & Video
+Multimedia menu
+applications-multimedia
+lxde-audio-video.directory
+3
+0
+-org.rncbc.qpwgraph.desktop
+qpwgraph
+qpwgraph is a PipeWire graph Qt GUI interface
+org.rncbc.qpwgraph
+
+9
+PipeWire Graph/Patchbay
+qpwgraph %f
+0
+0
+
+
+AudioVideo;Audio;Video;Midi;X-Alsa;X-PipeWire;Qt
+PipeWire,MIDI,ALSA,JACK,Qt
+-vlc.desktop
+VLC Media Player
+Read, capture, broadcast your multimedia streams
+vlc
+
+8
+Media player
+/usr/bin/vlc --started-from-file %U
+0
+0
+/usr/bin/vlc
+
+AudioVideo;Player;Recorder
+Player,Capture,DVD,Audio,Video,Server,Broadcast
+
++Graphics
+Graphics
+Graphics applications
+applications-graphics
+lxde-graphics.directory
+3
+0
+-eom.desktop
+Image Viewer
+Browse and rotate images
+eom
+
+8
+
+eom %U
+2
+0
+eom
+
+GTK;Graphics;2DGraphics;RasterGraphics;Viewer
+image,viewer,JPEG,PNG,TIFF,SVG,MATE,photos,browse,thumbnails,rotate
+-org.gnome.Evince-previewer.desktop
+Print Preview
+Preview before printing
+document-print-preview
+
+9
+
+evince-previewer %U
+6
+0
+evince-previewer
+
+GNOME;GTK;Office;Viewer;Graphics;2DGraphics;VectorGraphics
+
+
++Games
+Games
+Games and Amusements
+applications-games
+lxde-game.directory
+3
+4
+
++Other
+Other
+Applications that do not fit in other categories
+applications-other
+lxde-other.directory
+3
+0
+-gcr-prompter.desktop
+Access Prompt
+Unlock access to passwords and other secrets
+security-medium
+
+9
+
+/usr/libexec/gcr-prompter
+4
+0
+
+
+
+
+-dillo.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-htop.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-lp-connection-editor.desktop
+Icon for network dialogs
+
+network-transmit-receive
+
+9
+
+lp-connection-editor
+4
+0
+
+
+
+
+-wf-panel-pi.desktop
+Icon for panel dialogs
+
+preferences-desktop
+
+9
+
+wf-panel-pi
+4
+0
+
+
+
+
+-libreoffice-startcenter.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-lxde-logout.desktop
+Logout
+Logout, shutdown or reboot
+gnome-logout
+
+9
+
+lxde-logout
+4
+0
+lxsession-logout
+
+
+
+-lxappearance.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-lxhotkey-gtk.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-lxrandr.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-lxsession-edit.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-notification-daemon.desktop
+Notification Daemon
+Display notifications
+
+
+9
+
+/usr/lib/notification-daemon/notification-daemon
+4
+0
+
+
+
+
+-obconf.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-openbox.desktop
+Openbox
+
+openbox
+
+9
+
+openbox
+4
+0
+
+
+
+wm,windowmanager,window,manager,gnome
+-org.rncbc.qjackctl.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-org.xfce.mousepad-settings.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-pcmanfm-desktop-pref.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-xdg-desktop-portal-gtk.desktop
+Portal
+
+applications-system-symbolic
+
+9
+
+/usr/libexec/xdg-desktop-portal-gtk
+4
+0
+
+
+
+
+-x-www-browser.desktop
+Preferred Browser
+
+
+
+8
+
+x-www-browser %U
+6
+0
+/usr/bin/x-www-browser
+
+
+
+-lxde-screenlock.desktop
+ScreenLock
+Lock your screen
+system-lock-screen
+
+9
+
+lxlock
+4
+0
+lxlock
+
+
+
+-squeak.desktop
+
+
+
+
+8
+
+
+4
+0
+
+
+
+
+-gcr-viewer.desktop
+View file
+
+
+
+9
+
+/usr/bin/gcr-viewer
+4
+0
+
+
+
+
+-realvnc-vncserverui-user.desktop
+VNC Server
+
+/usr/share/icons/hicolor/48x48/apps/vncserver48x48.png
+
+9
+VNC Server
+vncserver-x11 -showstatus
+4
+0
+
+
+
+
+-realvnc-vncserverui-service.desktop
+VNC Server
+
+/usr/share/icons/hicolor/48x48/apps/vncserver48x48.png
+
+9
+VNC Server
+
+4
+0
+
+
+
+
+-realvnc-vncserverui-virtual.desktop
+VNC Server
+
+/usr/share/icons/hicolor/48x48/apps/vncserver48x48.png
+
+9
+VNC Server
+vncserver-x11 -virtual -showexistingstatus
+4
+0
+
+
+
+
+-realvnc-vnclicensewiz.desktop
+VNC Server - Licensing
+
+/usr/share/icons/hicolor/48x48/apps/vncserver48x48.png
+
+9
+VNC Server
+
+4
+0
+
+
+
+
+-realvnc-vncviewer-scheme.desktop
+VNC Viewer URL Handler
+
+
+
+9
+
+vncviewer -uri %u
+4
+0
+
+
+
+
+
++System
+System Tools
+System configuration and monitoring
+applications-system
+lxde-system-tools.directory
+3
+0
+-pi-gpk-install-local-file.desktop
+Package Install
+Install selected packages on the system
+system-software-install
+
+9
+
+pi-gpk-install-local-file %F
+6
+0
+
+
+System
+
+-pi-gpk-log.desktop
+Package Log
+View past package management tasks
+gpk-log
+
+9
+
+pi-gpk-log
+6
+0
+
+
+GNOME;GTK;System
+
+-pi-gpk-update-viewer.desktop
+Package Updater
+Update software installed on the system
+system-software-update
+
+9
+
+pi-gpk-update-viewer
+6
+-5
+
+
+GNOME;GTK;System
+
+-pi-gpk-dbus-service.desktop
+Software Install
+Install selected software on the system
+system-software-install
+
+9
+
+pi-gpk-dbus-service
+6
+0
+
+
+System
+
+-lxde-x-terminal-emulator.desktop
+Terminal emulator
+Terminal Emulator
+terminal
+
+9
+Terminal Emulator
+/usr/bin/x-terminal-emulator
+6
+0
+
+
+System;TerminalEmulator;Utility
+
+
++Accessories
+Accessories
+Desktop accessories
+applications-accessories
+lxde-utility.directory
+3
+0
+-xarchiver.desktop
+Archiver
+A GTK+ only archive manager
+xarchiver
+
+8
+Archive manager
+xarchiver %f
+2
+0
+xarchiver
+
+GTK;Archiving;Compression;Utility
+GTK,android,archiver,archiving,comic book,compression,front end,frontend,library,7-zip,7z,7za,7zip,7zr,7zz,apk,ar,arj,bz2,bzip2,cab,cbz,compress,cpio,deb,epub,exe,gtar,gunzip,gz,gzip,iso,jar,jsonlz4,lbzip2,lha,lrz,lrzip,lsar,lunzip,lz,lz4,lzh,lzip,lzma,lzo,lzop,mksquashfs,mozlz4,oxt,pbzip2,pigz,plzip,rar,rar4,rar5,rpm,snap,squashfs,tar,unar,unarchiver,unarj,unrar,unsquashfs,unzip,xpi,xz,zip,zpaq,zst,Zstandard,zstd
+-galculator.desktop
+Calculator
+Perform simple and scientific calculations
+galculator
+
+8
+
+galculator
+2
+0
+galculator
+
+Utility
+
+-org.gnome.Evince.desktop
+Document Viewer
+View multi-page documents
+org.gnome.Evince
+
+8
+
+evince %U
+2
+0
+evince
+
+GNOME;GTK;Utility;Viewer;2DGraphics;VectorGraphics
+pdf,ps,postscript,dvi,xps,djvu,tiff,document,presentation,viewer,evince
+-pcmanfm.desktop
+File Manager
+Browse the file system and manage the files
+system-file-manager
+
+8
+File Manager
+pcmanfm %U
+2
+0
+pcmanfm
+
+FileTools;FileManager;Utility;Core;GTK
+
+-agnostics.desktop
+Raspberry Pi Diagnostics
+Test the Raspberry Pi hardware
+rpi
+
+9
+Raspberry Pi Diagnostics
+agnostics
+2
+0
+
+
+Utility
+
+-org.raspberrypi.rpi-imager.desktop
+Raspberry Pi Imager
+Raspberry Pi Imager
+rpi-imager
+
+9
+
+/usr/bin/rpi-imager %F
+0
+0
+
+
+Utility
+
+-piclone.desktop
+SD Card Copier
+Copy SD cards and USB devices
+media-removable
+
+9
+SD Card Copier
+piclone
+2
+0
+
+
+Utility
+
+-sm.puri.Squeekboard.desktop
+Squeekboard
+An on screen virtual keyboard
+input-keyboard-symbolic
+
+9
+On Screen Keyboard
+/usr/bin/squeekboard
+4
+32
+
+
+GTK;Utility
+
+-sm.puri.OSK0.desktop
+Squeekboard
+An on screen virtual keyboard
+input-keyboard-symbolic
+
+9
+On Screen Keyboard
+/usr/bin/squeekboard
+4
+32
+
+
+GTK;Utility
+
+-lxtask.desktop
+Task Manager
+Manage running processes
+utilities-system-monitor
+
+8
+Process manager
+lxtask
+2
+0
+lxtask
+
+GTK;Utility;Monitor
+task,kill,suspend,processor,memory,monitoring,performance
+-lxterminal.desktop
+Terminal
+Use the command line
+lxterminal
+
+8
+Terminal
+lxterminal
+0
+0
+lxterminal
+
+GTK;Utility;TerminalEmulator
+console,command line,execute
+-org.xfce.mousepad.desktop
+Text Editor
+Simple Text Editor
+org.xfce.mousepad
+
+8
+Text Editor
+mousepad %U
+2
+0
+mousepad
+
+Utility;TextEditor;GTK
+
+-vim.desktop
+Vim
+Edit text files
+gvim
+
+9
+Text Editor
+vim %F
+1
+0
+vim
+
+Utility;TextEditor
+Text,editor
+
++Universal Access
+Universal Access
+Universal Access Settings
+preferences-desktop-accessibility
+lxde-utility-accessibility.directory
+3
+4
+
+-
++Help
+Help
+Reference material
+gnome-help
+lxde-help.directory
+2
+0
+-rp-bookshelf.desktop
+Bookshelf
+Download and read Raspberry Pi Press publications
+bookshelf
+
+9
+Bookshelf
+rp-bookshelf
+2
+0
+
+
+Help
+
+-debian-reference-common.desktop
+Debian Reference
+Debian Reference Guide
+debian-reference
+
+8
+
+debian-reference
+0
+0
+debian-reference
+
+Help
+user,shell,command,documentation,manual,help,guide,debian
+-raspi_getstart.desktop
+Get Started
+
+rpi
+
+8
+
+x-www-browser https://rptl.io/get-started
+2
+0
+/usr/bin/x-www-browser
+
+Help
+
+-raspi_help.desktop
+Help
+
+rpi
+
+8
+
+x-www-browser https://rptl.io/help
+2
+0
+/usr/bin/x-www-browser
+
+Help
+
+-raspi_resources.desktop
+Projects
+
+rpi
+
+8
+
+x-www-browser https://rptl.io/tutorials
+2
+0
+/usr/bin/x-www-browser
+
+Help
+
+-raspi_safety.desktop
+Safety Information
+
+rpi
+
+8
+
+x-www-browser https://rptl.io/safety-info
+2
+0
+/usr/bin/x-www-browser
+
+Help
+
+-magpi.desktop
+The MagPi
+Link to downloads of The MagPi magazine
+magpi
+
+8
+
+x-www-browser http://www.raspberrypi.org/magpi
+0
+0
+/usr/bin/x-www-browser
+
+Help
+
+
+-
++DesktopSettings
+Preferences
+Personal preferences
+preferences-desktop
+lxde-settings.directory
+3
+0
+-pi-packages.desktop
+Add / Remove Software
+Add or remove software installed on the system
+system-software-install
+
+9
+
+pi-packages
+2
+-5
+
+
+GNOME;GTK;System;Settings;PackageManager
+Updates,Upgrade,Sources,Repositories,Preferences,Install,Store
+-pipanel.desktop
+Appearance Settings
+Configure the appearance of the desktop and windows
+preferences-desktop-theme
+
+9
+
+pipanel
+2
+0
+
+
+Settings
+
+-alacarte.desktop
+Main Menu Editor
+Add or remove applications from the main menu
+alacarte
+
+9
+
+alacarte
+2
+-5
+
+
+GNOME;Settings;DesktopSettings
+
+-lxinput.desktop
+Mouse and Keyboard Settings
+Configure mouse, keyboard, and other input devices
+preferences-desktop-peripherals
+
+9
+
+lxinput
+2
+0
+lxinput
+
+GTK;Settings;HardwareSettings;X-LXDE-Settings
+
+-pi-gpk-prefs.desktop
+Package Sources
+Enable or disable package repositories
+gpk-prefs
+
+9
+
+pi-gpk-prefs
+6
+-5
+
+
+Settings;X-GNOME-SystemSettings
+
+-system-config-printer.desktop
+Print Settings
+Configure printers
+printer
+
+9
+Print Settings
+system-config-printer
+2
+0
+
+
+GNOME;GTK;Settings;HardwareSettings;X-GNOME-Settings-Panel;X-Unity-Settings-Panel;System;Printing
+Printer,Queue,Print,Paper,Ink,Toner
+-qt5ct.desktop
+Qt5 Settings
+Qt5 Configuration Tool
+preferences-desktop-theme
+
+8
+
+qt5ct
+4
+0
+
+
+Settings;DesktopSettings;Qt
+settings,desktop,qt,qtsettings,qt5
+-rc_gui.desktop
+Raspberry Pi Configuration
+Configure Raspberry Pi system
+rpi
+
+9
+Raspberry Pi Configuration
+rc_gui
+2
+0
+
+
+Settings;DesktopSettings;GTK;X-LXDE-Settings
+
+-rp-prefapps.desktop
+Recommended Software
+Install additional programs recommended for use on the Pi
+rpi
+
+9
+Recommended Software
+rp-prefapps
+2
+0
+
+
+Settings;DesktopSettings;GTK;X-LXDE-Settings
+
+-raindrop.desktop
+Screen Configuration
+
+computer
+
+9
+Screen Configuration
+raindrop
+2
+0
+
+
+Settings
+
+
+

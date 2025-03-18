@@ -1,0 +1,9 @@
+[default-routes]
+bluez_card.00_0C_8A_FF_18_FE:output:headphone-output:channelMap=FL;FR;
+bluez_card.00_0C_8A_FF_18_FE:output:headphone-output:channelVolumes=0.17472855746746;0.17472855746746;
+bluez_card.00_0C_8A_FF_18_FE:output:headphone-output:latencyOffsetNsec=0
+bluez_card.00_0C_8A_FF_18_FE:profile:a2dp-sink=headphone-output;
+bluez_card.98_52_3D_A3_C4_1B:output:speaker-output:channelMap=FL;FR;
+bluez_card.98_52_3D_A3_C4_1B:output:speaker-output:channelVolumes=0.53345835208893;0.53345835208893;
+bluez_card.98_52_3D_A3_C4_1B:output:speaker-output:latencyOffsetNsec=0
+bluez_card.98_52_3D_A3_C4_1B:profile:a2dp-sink=speaker-output;

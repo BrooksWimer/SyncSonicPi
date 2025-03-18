@@ -1,0 +1,65 @@
+Xsession: X session started for syncsonic at Tue 18 Mar 12:20:23 EDT 2025
+dbus-update-activation-environment: setting DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+xrdb: Can't open display ''
+xhost:  unable to open display ""
+dbus-update-activation-environment: setting USER=syncsonic
+dbus-update-activation-environment: setting TEXTDOMAIN=Linux-PAM
+dbus-update-activation-environment: setting XDG_SESSION_TYPE=wayland
+dbus-update-activation-environment: setting HOME=/home/syncsonic
+dbus-update-activation-environment: setting DESKTOP_SESSION=LXDE-pi-labwc
+dbus-update-activation-environment: setting XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+dbus-update-activation-environment: setting DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+dbus-update-activation-environment: setting LOGNAME=syncsonic
+dbus-update-activation-environment: setting XDG_SESSION_CLASS=user
+dbus-update-activation-environment: setting PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+dbus-update-activation-environment: setting XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0
+dbus-update-activation-environment: setting XDG_RUNTIME_DIR=/run/user/1000
+dbus-update-activation-environment: setting LANG=en_GB.UTF-8
+dbus-update-activation-environment: setting XDG_SESSION_DESKTOP=LXDE-pi-labwc
+dbus-update-activation-environment: setting XDG_GREETER_DATA_DIR=/var/lib/lightdm/data/syncsonic
+dbus-update-activation-environment: setting SHELL=/bin/bash
+dbus-update-activation-environment: setting GDMSESSION=LXDE-pi-labwc
+dbus-update-activation-environment: setting NO_AT_BRIDGE=1
+dbus-update-activation-environment: setting GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+dbus-update-activation-environment: setting PWD=/home/syncsonic
+00:00:00.232 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
+00:00:00.239 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
+/usr/bin/sbtest: 2: .: cannot open /usr/share/squeekboard/output: No such file
+no profile matched
+pgrep: pattern that searches for process name longer than 15 characters will result in zero matches
+Try `pgrep -f' option to match against the complete command line.
+pgrep: pattern that searches for process name longer than 15 characters will result in zero matches
+Try `pgrep -f' option to match against the complete command line.
+
+(polkit-mate-authentication-agent-1:952): GLib-CRITICAL **: 12:20:30.319: g_variant_new_string: assertion 'string != NULL' failed
+
+(polkit-mate-authentication-agent-1:952): polkit-mate-1-WARNING **: 12:20:30.320: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
+xsettingsd: Loaded 19 settings from /home/syncsonic/.config/xsettingsd/xsettingsd.conf
+II 18-03-25 12:20:31.193 - [src/panel/config/file.cpp:576] Reading XML configuration options from directory /usr/share/wf-panel-pi/metadata
+II 18-03-25 12:20:31.195 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cputemp.xml
+II 18-03-25 12:20:31.197 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/gpu.xml
+II 18-03-25 12:20:31.197 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/window-list.xml
+II 18-03-25 12:20:31.199 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/notify.xml
+II 18-03-25 12:20:31.200 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/smenu.xml
+II 18-03-25 12:20:31.201 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/updater.xml
+II 18-03-25 12:20:31.201 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/tray.xml
+II 18-03-25 12:20:31.202 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/panel-pi.xml
+II 18-03-25 12:20:31.203 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/clock.xml
+II 18-03-25 12:20:31.204 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/ejecter.xml
+II 18-03-25 12:20:31.206 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/launchers.xml
+II 18-03-25 12:20:31.209 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cpu.xml
+II 18-03-25 12:20:31.210 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/batt.xml
+Failure: Module initialization failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+xsettingsd: Created window 0x600001 on screen 0 with timestamp 19177
+xsettingsd: Selection _XSETTINGS_S0 is owned by 0x0
+xsettingsd: Took ownership of selection _XSETTINGS_S0
+xsettingsd: Ignoring event of type 33
+** Message: 12:20:33.145: batt: battery 0 not found
+** Message: 12:20:33.426: up: Checking for updates
+** Message: 12:20:38.011: up: Cache updated - comparing versions
+** Message: 12:20:43.646: up: Check complete - 53 updates available
+no profile matched
