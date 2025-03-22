@@ -42,16 +42,21 @@ pair_speaker() {
     send_bt_cmd "select $ctrl_mac"
     sleep 2
 
-    
+    send_bt_cmd "scan on"
+
+    sleep 5
+
     send_bt_cmd "pair $speaker_mac"
-    
+
     sleep 3
 
     send_bt_cmd "trust $speaker_mac"
-    
+
     sleep 3
 
     send_bt_cmd "connect $speaker_mac"
+
+    sleep 5
 
     return 0
 }

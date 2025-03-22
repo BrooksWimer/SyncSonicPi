@@ -1,0 +1,47 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@9.2.0
+2 info using node@v18.19.0
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 7ms
+5 timing config:load:file:/usr/share/nodejs/npm/npmrc Completed in 7ms
+6 timing config:load:builtin Completed in 9ms
+7 timing config:load:cli Completed in 8ms
+8 timing config:load:env Completed in 2ms
+9 timing config:load:file:/home/syncsonic/my-pi-api/.npmrc Completed in 0ms
+10 timing config:load:project Completed in 4ms
+11 timing config:load:file:/home/syncsonic/.npmrc Completed in 0ms
+12 timing config:load:user Completed in 1ms
+13 timing config:load:file:/etc/npmrc Completed in 0ms
+14 timing config:load:global Completed in 1ms
+15 timing config:load:setEnvs Completed in 4ms
+16 timing config:load Completed in 39ms
+17 timing npm:load:configload Completed in 40ms
+18 timing npm:load:mkdirpcache Completed in 0ms
+19 timing npm:load:mkdirplogs Completed in 0ms
+20 verbose title npm init
+21 verbose argv "init" "--yes"
+22 timing npm:load:setTitle Completed in 5ms
+23 timing config:load:flatten Completed in 13ms
+24 timing npm:load:display Completed in 18ms
+25 verbose logfile logs-max:10 dir:/home/syncsonic/.npm/_logs/2025-03-20T16_30_08_401Z-
+26 verbose logfile /home/syncsonic/.npm/_logs/2025-03-20T16_30_08_401Z-debug-0.log
+27 timing npm:load:logFile Completed in 20ms
+28 timing npm:load:timers Completed in 1ms
+29 timing npm:load:configScope Completed in 0ms
+30 timing npm:load Completed in 89ms
+31 silly logfile done cleaning log files
+32 silly package data {
+32 silly package data   name: 'my-pi-api',
+32 silly package data   version: '1.0.0',
+32 silly package data   description: '',
+32 silly package data   main: 'index.js',
+32 silly package data   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+32 silly package data   keywords: [],
+32 silly package data   author: '',
+32 silly package data   license: 'ISC'
+32 silly package data }
+33 info init written successfully
+34 timing command:init Completed in 82ms
+35 verbose exit 0
+36 timing npm Completed in 262ms
+37 info ok

@@ -1,0 +1,54 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@9.2.0
+2 info using node@v18.19.0
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 7ms
+5 timing config:load:file:/usr/share/nodejs/npm/npmrc Completed in 7ms
+6 timing config:load:builtin Completed in 9ms
+7 timing config:load:cli Completed in 7ms
+8 timing config:load:env Completed in 4ms
+9 timing config:load:project Completed in 4ms
+10 timing config:load:file:/home/syncsonic/.npmrc Completed in 1ms
+11 timing config:load:user Completed in 1ms
+12 timing config:load:file:/etc/npmrc Completed in 0ms
+13 timing config:load:global Completed in 1ms
+14 timing config:load:setEnvs Completed in 4ms
+15 timing config:load Completed in 42ms
+16 timing npm:load:configload Completed in 44ms
+17 timing npm:load:mkdirpcache Completed in 1ms
+18 timing npm:load:mkdirplogs Completed in 1ms
+19 verbose title npm install npm
+20 verbose argv "install" "--global" "npm"
+21 timing npm:load:setTitle Completed in 6ms
+22 timing config:load:flatten Completed in 13ms
+23 timing npm:load:display Completed in 18ms
+24 verbose logfile logs-max:10 dir:/home/syncsonic/.npm/_logs/2025-03-20T16_30_05_960Z-
+25 verbose logfile /home/syncsonic/.npm/_logs/2025-03-20T16_30_05_960Z-debug-0.log
+26 timing npm:load:logFile Completed in 20ms
+27 timing npm:load:timers Completed in 1ms
+28 timing npm:load:configScope Completed in 0ms
+29 timing npm:load Completed in 94ms
+30 timing config:load:flatten Completed in 3ms
+31 silly logfile done cleaning log files
+32 http fetch GET 200 https://registry.npmjs.org/npm 510ms (cache miss)
+33 timing command:install Completed in 631ms
+34 verbose stack Error: Unsupported engine
+34 verbose stack     at Object.checkEngine (/usr/share/nodejs/npm/node_modules/npm-install-checks/lib/index.js:14:25)
+34 verbose stack     at Install.exec (/usr/share/nodejs/npm/lib/commands/install.js:110:16)
+34 verbose stack     at async module.exports (/usr/share/nodejs/npm/lib/cli.js:133:5)
+35 verbose pkgid npm@11.2.0
+36 verbose cwd /home/syncsonic
+37 verbose Linux 6.6.51+rpt-rpi-v8
+38 verbose node v18.19.0
+39 verbose npm  v9.2.0
+40 error code EBADENGINE
+41 error engine Unsupported engine
+42 error engine Not compatible with your version of node/npm: npm@11.2.0
+43 error notsup Not compatible with your version of node/npm: npm@11.2.0
+43 error notsup Required: {"node":"^20.17.0 || >=22.9.0"}
+43 error notsup Actual:   {"npm":"9.2.0"}
+44 verbose exit 1
+45 timing npm Completed in 797ms
+46 verbose code 1
+47 error A complete log of this run can be found in:
+47 error     /home/syncsonic/.npm/_logs/2025-03-20T16_30_05_960Z-debug-0.log
