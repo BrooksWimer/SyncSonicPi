@@ -411,3 +411,2367 @@ The XKEYBOARD keymap compiler (xkbcomp) reports:
 > Warning:          Unsupported maximum keycode 708, clipping.
 >                   X11 cannot support keycodes above 255.
 Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:18:29.765: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:18:29.765: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:18:29.765: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:18:29.765: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:18:29.765: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.027: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.027: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.027: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.027: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.027: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.027: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.027: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.042: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.042: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.042: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.042: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.042: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.042: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.042: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.042: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.043: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.043: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.043: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.043: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.054: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.054: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:01.054: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:01.054: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:01.054: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.026: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.026: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.026: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.026: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.026: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.026: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.027: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.040: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.040: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.040: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.040: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.040: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.041: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.041: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.041: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.041: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.041: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.041: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.041: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.052: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.053: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.053: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.053: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.053: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.053: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.053: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.053: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.053: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.053: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.053: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.053: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.065: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.065: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.065: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.065: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.065: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.065: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.077: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.077: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:02.077: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:02.077: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:02.077: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.029: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.029: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.029: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.029: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.029: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.029: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.029: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.041: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.042: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.042: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.042: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.042: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.042: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.042: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.042: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.042: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.042: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.042: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.042: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.054: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.054: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.054: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.054: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.054: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.054: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.054: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.054: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.054: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.054: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.054: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.054: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.066: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.066: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.066: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.066: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.066: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.067: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.067: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.067: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.067: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.067: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.067: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.067: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.078: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.078: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.078: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.078: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.078: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.079: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.079: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.079: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.079: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.079: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.079: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.079: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.090: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.090: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.090: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.090: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.090: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.091: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.091: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.091: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.091: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.091: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.091: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.091: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.102: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.102: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.102: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.102: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.102: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.103: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.103: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.103: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.103: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.103: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.103: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.103: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.114: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.114: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:03.114: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:03.114: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:03.114: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.027: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.028: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.028: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.028: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.028: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.028: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.028: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.040: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.040: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.040: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.040: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.040: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.040: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.040: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.040: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.040: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.040: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.040: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.040: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.052: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.052: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.052: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.052: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.052: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.052: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.052: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.052: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.052: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.052: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.052: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.052: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.064: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.064: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.064: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.064: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.064: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.065: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.065: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.065: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.076: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.076: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.076: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.076: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.076: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.076: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.076: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.076: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.076: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.076: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.076: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.076: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.087: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.087: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:04.088: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:04.088: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:04.088: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:11.040: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:11.041: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:11.041: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:11.041: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:11.041: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:11.041: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:11.041: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:11.065: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:11.065: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:11.065: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:11.065: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:11.065: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.784: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.788: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.788: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.788: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.788: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.789: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.789: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.789: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.789: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.789: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.789: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.789: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.824: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.824: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.824: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.824: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.824: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.825: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.825: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.825: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.825: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.825: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.825: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.825: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.841: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.842: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.842: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.842: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.842: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.842: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.842: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:16.842: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:16.842: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:16.842: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.199: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.199: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.200: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.200: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.200: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.299: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.299: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.299: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.299: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.299: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.299: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.299: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.318: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.318: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.318: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.318: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.318: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.347: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.347: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.347: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.347: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.348: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.348: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.348: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.369: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.369: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.369: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.369: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.369: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.490: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.490: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.490: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.490: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.491: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.523: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.523: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.523: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.523: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.523: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.546: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.547: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:18.547: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:18.547: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:18.547: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.875: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.875: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.875: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.875: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.875: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.876: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.876: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.876: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.876: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.876: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.876: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.876: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.911: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.912: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.912: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.912: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.912: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.913: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.913: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.913: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.913: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.913: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.913: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.913: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.941: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.941: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.941: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.941: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.941: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.942: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.942: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:40.942: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:40.942: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:40.942: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.594: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.594: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.594: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.594: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.594: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.735: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.735: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.735: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.736: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.736: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.736: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.736: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.761: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.761: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.761: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.761: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.762: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.787: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.787: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.787: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.787: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.787: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.787: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.787: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.808: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.809: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.809: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.809: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.809: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.865: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.865: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.865: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.865: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.865: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.920: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.920: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.920: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.920: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.920: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.953: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.953: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:19:42.953: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:19:42.953: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:19:42.953: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.284: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.284: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.284: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.284: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.284: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.285: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.285: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.285: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.285: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.285: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.285: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.285: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.317: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.317: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.317: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.317: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.318: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.318: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.318: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.318: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.318: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.318: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.318: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.319: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.336: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.336: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.336: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.336: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.336: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.337: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.337: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:05.337: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:05.337: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:05.337: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.738: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.738: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.739: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.739: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.739: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.859: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.859: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.859: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.859: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.859: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.859: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.860: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.883: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.883: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.883: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.883: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.883: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.912: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.912: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.912: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.912: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.913: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.913: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.913: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.937: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.937: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.937: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.937: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.937: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.997: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.997: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:06.997: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:06.997: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:06.997: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.065: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.066: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.066: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.066: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.066: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.087: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.087: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.087: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.087: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.087: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.446: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.446: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.446: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.446: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.446: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.471: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.471: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.471: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.471: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.471: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.497: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.497: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.497: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.497: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.497: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.504: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.504: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.504: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.504: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.504: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.541: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.541: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.541: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.541: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.541: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.574: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.574: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.574: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.574: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.574: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.586: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.586: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.586: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.586: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.586: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.616: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.616: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.616: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.616: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.616: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.623: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.623: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.623: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.623: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.623: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.669: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.670: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.670: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.670: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.670: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.749: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.749: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.749: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.749: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.749: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.813: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.813: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.814: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.814: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.814: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.889: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.890: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.890: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.890: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.890: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.974: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.974: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:07.974: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:07.974: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:07.974: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.418: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.418: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.418: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.419: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.419: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.419: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.419: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.419: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.419: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.419: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.419: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.419: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.453: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.453: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.453: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.453: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.453: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.454: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.455: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.455: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.455: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.455: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.455: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.455: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.480: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.480: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.480: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.480: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.480: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.481: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.481: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:29.481: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:29.481: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:29.481: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.540: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.540: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.540: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.540: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.540: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.678: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.678: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.678: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.678: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.678: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.678: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.678: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.690: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.690: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.690: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.690: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.690: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.718: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.718: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.718: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.718: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.718: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.718: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.718: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.730: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.730: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.730: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.730: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.730: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.807: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.807: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.807: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.807: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.807: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.892: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.892: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.892: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.892: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.892: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.925: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.925: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:31.925: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:31.925: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:31.925: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.204: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.204: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.204: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.204: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.204: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.205: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.205: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.205: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.205: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.205: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.205: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.206: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.234: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.234: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.234: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.234: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.234: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.235: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.235: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.235: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.235: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.235: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.235: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.235: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.254: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.254: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.254: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.255: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.255: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.255: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.255: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:54.255: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:54.255: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:54.255: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.398: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.399: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.399: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.399: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.399: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.543: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.543: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.543: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.543: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.543: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.543: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.543: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.568: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.568: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.569: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.569: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.569: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.591: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.592: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.592: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.592: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.592: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.592: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.592: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.616: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.616: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.617: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.617: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.617: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.668: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.668: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.668: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.668: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.668: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.748: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.748: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.748: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.748: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.748: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.782: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.782: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:20:55.782: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:20:55.782: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:20:55.782: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.077: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.077: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.077: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.077: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.077: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.077: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.077: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.077: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.077: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.077: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.077: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.077: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.092: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.092: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.092: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.092: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.092: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.107: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.107: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.107: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.107: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.107: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.107: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.107: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.120: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.120: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.120: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.120: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.120: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.121: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.121: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:18.121: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:18.121: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:18.121: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.443: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.443: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.443: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.443: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.444: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.570: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.570: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.570: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.570: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.570: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.570: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.570: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.581: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.581: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.582: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.582: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.582: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.614: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.614: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.614: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.614: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.614: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.614: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.614: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.627: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.627: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.627: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.627: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.627: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.680: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.680: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.680: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.680: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.680: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.746: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.746: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.746: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.746: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.746: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.795: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.795: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:19.795: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:19.795: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:19.795: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.126: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.126: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.126: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.126: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.126: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.127: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.127: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.127: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.127: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.127: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.127: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.127: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.158: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.158: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.158: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.158: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.158: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.159: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.159: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.160: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.160: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.160: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.160: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.160: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.186: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.186: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.186: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.186: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.186: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.187: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.187: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:42.187: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:42.187: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:42.187: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.103: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.103: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.103: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.103: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.103: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.238: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.238: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.238: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.238: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.238: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.238: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.238: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.250: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.250: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.250: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.250: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.250: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.282: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.282: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.282: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.282: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.282: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.282: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.282: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.294: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.294: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.294: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.294: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.294: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.352: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.352: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.352: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.352: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.352: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.414: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.414: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.414: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.414: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.414: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.535: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.536: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:21:43.536: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:21:43.536: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:21:43.536: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.796: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.797: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.797: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.797: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.797: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.797: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.797: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.797: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.797: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.798: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.798: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.798: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.821: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.821: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.821: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.821: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.821: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.847: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.847: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.847: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.847: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.847: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.848: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.848: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.871: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.871: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.871: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.872: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.872: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.872: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.872: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:05.873: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:05.873: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:05.873: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.517: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.518: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.518: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.518: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.518: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.646: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.646: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.646: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.646: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.646: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.646: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.646: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.658: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.658: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.658: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.658: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.658: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.690: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.690: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.690: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.690: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.690: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.690: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.690: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.701: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.702: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.702: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.702: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.702: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.743: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.744: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.744: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.744: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.744: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.846: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.846: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.846: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.846: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.846: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.900: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.900: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:07.900: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:07.900: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:07.900: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.187: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.187: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.188: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.188: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.188: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.188: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.188: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.188: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.188: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.188: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.189: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.189: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.213: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.213: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.213: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.213: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.214: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.236: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.237: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.237: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.237: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.237: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.237: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.237: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.255: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.256: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.256: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.256: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.256: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.256: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.257: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:30.257: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:30.257: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:30.257: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.526: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.526: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.526: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.526: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.526: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.676: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.676: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.676: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.676: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.676: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.676: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.676: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.699: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.699: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.699: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.699: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.699: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.735: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.735: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.735: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.735: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.736: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.736: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.736: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.756: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.756: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.756: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.756: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.756: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.806: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.806: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.806: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.806: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.806: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.995: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.995: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:31.995: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:31.995: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:31.995: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:32.306: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:32.306: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:32.306: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:32.306: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:32.306: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.957: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.957: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.957: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.957: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.957: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.958: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.958: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.958: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.958: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.958: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.958: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.958: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.987: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.987: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.987: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.987: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.987: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.988: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.989: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.989: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.989: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:22:59.989: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:22:59.989: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:22:59.989: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:00.010: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:00.010: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:00.010: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:00.010: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:00.010: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:00.011: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:00.011: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:00.011: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:00.011: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:00.011: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.448: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.448: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.448: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.448: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.448: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.611: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.611: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.611: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.611: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.611: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.611: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.612: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.636: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.636: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.636: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.637: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.637: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.656: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.657: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.657: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.657: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.657: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.657: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.657: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.681: g_object_ref: assertion 'G_IS_OBJECT (object)' failed
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.681: invalid unclassed pointer in cast to 'GDBusInterface'
+
+(wf-panel-pi:994): GLib-GObject-WARNING **: 19:23:01.681: invalid unclassed pointer in cast to 'GDBusProxy'
+
+(wf-panel-pi:994): GLib-GIO-CRITICAL **: 19:23:01.681: g_dbus_proxy_get_interface_name: assertion 'G_IS_DBUS_PROXY (proxy)' failed
+
+(wf-panel-pi:994): GLib-GObject-CRITICAL **: 19:23:01.681: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Unsupported maximum keycode 708, clipping.
+>                   X11 cannot support keycodes above 255.
+Errors from xkbcomp are not fatal to the X server

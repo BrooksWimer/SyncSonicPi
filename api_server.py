@@ -167,6 +167,38 @@ def api_connect():
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/disconnect", methods=["POST"])
+def api_disconnect():
+    import json
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Missing JSON data"}), 400
+
+    # Ensure required fields are provided.
+    required_fields = ["configID", "configName", "speakers", "settings"]
+    for field in required_fields:
+        if field not in data:
+            return jsonify({"error": f"Missing field: {field}"}), 400
+
+    config_id = data["configID"]
+    config_name = data["configName"]
+    speakers = data["speakers"]  # mapping: mac -> name
+    settings = data["settings"]  # mapping: mac -> { volume, latency }
+
+    try:
+        # Build command to call your disconnect shell script
+        # Make sure that disconnect_configuration.sh exists and is executable.
+        cmd = [
+            "./disconnect_configuration.sh",
+            str(config_id),
+            config_name,
+            json.dumps(speakers),
+            json.dumps(settings)
+        ]
+        subprocess.run(cmd, check=True)
+        return jsonify({"message": "Configuration disconnected successfully."})
+    except subprocess.CalledProcessError as e:
+        return jsonify({"error": str(e)}), 500
 
 
 
