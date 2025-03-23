@@ -2,6 +2,7 @@
 import subprocess
 import time
 import re
+import json
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -56,10 +57,8 @@ def parse_devices(scan_output):
             parts = clean_line.split()
             if len(parts) >= 4:
                 mac = parts[2]  # e.g., "57:EE:5E:98:26:81"
-                display_name = ""
-                for part in range(3, len(parts)):
-                     display_name += parts[part] + " "
-                devices[mac] = display_name.strip()
+                display_name = " ".join(parts[3:]).strip()
+                devices[mac] = display_name
     # Add paired devices
     try:
         paired_output = subprocess.check_output(
@@ -90,20 +89,26 @@ def api_pair():
     data = request.get_json()
     if not data or "devices" not in data:
         return jsonify({"error": "Missing 'devices' field in JSON body"}), 400
-    # data["devices"] should be a dictionary mapping MAC addresses to display names.
-    selected_devices = data["devices"]
-    # Save the selected devices to a file for your pairing script.
-    with open("selected_devices.txt", "w") as f:
-        for mac, name in selected_devices.items():
-            f.write(f"{mac},{name}\n")
-    # Call your existing pairing script.
+    # Instead of saving to a file and calling pair_selected_devices.sh,
+    # we now call connect_configuration.sh with the proper JSON arguments.
+    config_id = data.get("configID", "defaultID")
+    config_name = data.get("configName", "defaultName")
+    devices = data["devices"]  # mapping: MAC -> display name
+    # Use an empty settings dict if not provided.
+    settings = data.get("settings", {})
     try:
-        subprocess.run(["./pair_selected_devices.sh"], check=True)
+        cmd = [
+            "./connect_configuration.sh",
+            str(config_id),
+            config_name,
+            json.dumps(devices),
+            json.dumps(settings)
+        ]
+        subprocess.run(cmd, check=True)
         return jsonify({"message": "Pairing process completed successfully."})
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
 
-# Placeholder endpoints for adjusting volume and latency can be added similarly.
 @app.route("/volume", methods=["POST"])
 def api_volume():
     data = request.get_json()
@@ -123,26 +128,20 @@ def api_latency():
     data = request.get_json()
     if not data or "mac" not in data or "latency" not in data:
         return jsonify({"error": "Missing 'mac' or 'latency' field"}), 400
-    # For adjusting latency, you would integrate your existing set_latency logic.
-    # Here, we'll assume a placeholder implementation.
     mac = data["mac"]
     latency = data["latency"]
     try:
-        # Example: call a shell script that sets latency for the given MAC.
         subprocess.run(["./set_latency.sh", mac, str(latency)], check=True)
         return jsonify({"message": f"Latency for {mac} set to {latency} ms."})
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route("/connect", methods=["POST"])
 def api_connect():
-    import json
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
 
-    # Ensure required fields are provided.
     required_fields = ["configID", "configName", "speakers", "settings"]
     for field in required_fields:
         if field not in data:
@@ -154,7 +153,6 @@ def api_connect():
     settings = data["settings"]  # mapping: mac -> { volume, latency }
 
     try:
-        # Build command with shell script and pass arguments as JSON strings.
         cmd = [
             "./connect_configuration.sh",
             str(config_id),
@@ -169,12 +167,10 @@ def api_connect():
 
 @app.route("/disconnect", methods=["POST"])
 def api_disconnect():
-    import json
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
 
-    # Ensure required fields are provided.
     required_fields = ["configID", "configName", "speakers", "settings"]
     for field in required_fields:
         if field not in data:
@@ -182,12 +178,10 @@ def api_disconnect():
 
     config_id = data["configID"]
     config_name = data["configName"]
-    speakers = data["speakers"]  # mapping: mac -> name
-    settings = data["settings"]  # mapping: mac -> { volume, latency }
+    speakers = data["speakers"]
+    settings = data["settings"]
 
     try:
-        # Build command to call your disconnect shell script
-        # Make sure that disconnect_configuration.sh exists and is executable.
         cmd = [
             "./disconnect_configuration.sh",
             str(config_id),
@@ -199,8 +193,6 @@ def api_disconnect():
         return jsonify({"message": "Configuration disconnected successfully."})
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
-
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000)
