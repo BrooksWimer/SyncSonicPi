@@ -1,2 +1,3 @@
-2025/03/03-23:50:27.056 4 Creating DB /home/syncsonic/.config/chromium/Default/Session Storage since it was missing.
-2025/03/03-23:50:27.129 4 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Session Storage/MANIFEST-000001
+2025/03/23-21:18:43.757 4 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Session Storage/MANIFEST-000001
+2025/03/23-21:18:43.778 4 Recovering log #3
+2025/03/23-21:18:43.795 4 Reusing old log /home/syncsonic/.config/chromium/Default/Session Storage/000003.log 

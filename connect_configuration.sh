@@ -336,16 +336,28 @@ log "Virtual sink created with index: $VIRTUAL_SINK"
 sleep 2
 
 #####################################################
+# Known phone MAC address for dynamic loopback handling
+#####################################################
+KNOWN_PHONE_MAC="AC:DF:A1:52:8A:41"
+
+#####################################################
 # Create loopbacks from the virtual sink to each speaker's sink
 #####################################################
 for mac in "${!speakers[@]}"; do
     # Only create a loopback if the speaker ended up connected
     if [ -n "${speakerPort[$mac]}" ]; then
         sink_name="bluez_sink.${mac//:/_}.a2dp_sink"
-        log "Loading loopback for sink: $sink_name"
-        load_loopback "$sink_name"
+        if [ "$mac" = "$KNOWN_PHONE_MAC" ]; then
+            log "Detected phone ($mac). Skipping special sink creation for this device."
+            # Instead of creating a loopback for the phone, simply skip it.
+        else
+            log "Loading loopback for sink: $sink_name"
+            load_loopback "$sink_name"
+        fi
     fi
 done
+
+
 
 #####################################################
 # Unsuspend all sinks

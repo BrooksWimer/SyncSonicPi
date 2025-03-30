@@ -76,17 +76,27 @@ EOF
     while IFS= read -r line; do
         if [[ $line =~ ^Device[[:space:]]([[:xdigit:]:]{17})[[:space:]] ]]; then
             mac="${BASH_REMATCH[1]}"
-            # If speaker already exists on another port, disconnect it from this one.
-            if [ -n "${speakerPort[$mac]}" ]; then
-                log "Speaker $mac is connected on multiple ports (${speakerPort[$mac]} and $ctrl). Disconnecting from controller $ctrl."
+            # If the connected device is not in the provided speakers list, disconnect it.
+            if [ -z "${speakers[$mac]}" ]; then
+                log "Speaker $mac is connected on controller $ctrl but is not in the configuration. Disconnecting..."
                 bluetoothctl <<EOF
 select $ctrl
 disconnect $mac
 EOF
                 sleep 2
             else
-                speakerPort["$mac"]="$ctrl"
-                portSpeaker["$ctrl"]="$mac"
+                # If speaker already exists on another port, disconnect it from this one.
+                if [ -n "${speakerPort[$mac]}" ]; then
+                    log "Speaker $mac is connected on multiple ports (${speakerPort[$mac]} and $ctrl). Disconnecting from controller $ctrl."
+                    bluetoothctl <<EOF
+select $ctrl
+disconnect $mac
+EOF
+                    sleep 2
+                else
+                    speakerPort["$mac"]="$ctrl"
+                    portSpeaker["$ctrl"]="$mac"
+                fi
             fi
         fi
     done <<< "$CONN_OUT"

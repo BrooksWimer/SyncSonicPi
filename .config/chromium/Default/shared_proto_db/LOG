@@ -1,2 +1,3 @@
-2025/03/03-23:50:27.556 4ca9 Creating DB /home/syncsonic/.config/chromium/Default/shared_proto_db since it was missing.
-2025/03/03-23:50:27.658 4ca9 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/shared_proto_db/MANIFEST-000001
+2025/03/23-21:18:43.512 4ce1 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/shared_proto_db/MANIFEST-000001
+2025/03/23-21:18:43.513 4ce1 Recovering log #3
+2025/03/23-21:18:43.518 4ce1 Reusing old log /home/syncsonic/.config/chromium/Default/shared_proto_db/000003.log 

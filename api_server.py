@@ -2,99 +2,115 @@
 import subprocess
 import time
 import re
+import queue
+import threading
 import json
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+# Global scanning state and discovered devices
+device_queue = queue.Queue()
+scanning = False
+seen_devices = {}
+scan_process = None
+
+
 def remove_ansi(text):
     ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
     return ansi_escape.sub('', text)
 
-def scan_devices(scan_duration=10):
-    """
-    Start a temporary bluetoothctl subprocess, enable the agent,
-    turn on scanning for a fixed duration, then stop scanning.
-    Returns the complete scan output as a string.
-    """
-    proc = subprocess.Popen(
-        ['bluetoothctl'],
+@app.route("/start-scan")
+def start_scan():
+    global scanning
+    if scanning:
+        return jsonify({"message": "Already scanning."}), 200
+    scanning = True
+    threading.Thread(target=scan_devices_background, daemon=True).start()
+    return jsonify({"message": "Scan started."}), 200
+
+
+@app.route("/stop-scan")
+def stop_scan():
+    global scanning, scan_process
+    scanning = False
+    try:
+        if scan_process and scan_process.stdin:
+            scan_process.stdin.write("scan off\n")
+            scan_process.stdin.flush()
+            time.sleep(1)
+            scan_process.kill()
+            scan_process = None
+            print("DEBUG: Scan stopped and bluetoothctl process killed.")
+    except Exception as e:
+        print("Error in /stop-scan:", e)
+        return jsonify({"error": str(e)}), 500
+
+    return jsonify({"message": "Scanning stopped."})
+
+
+
+
+@app.route("/device-queue")
+def device_queue_api():
+    global seen_devices
+    while not device_queue.empty():
+        mac, name = device_queue.get()
+        seen_devices[mac] = name
+    return jsonify(seen_devices)
+
+
+
+
+
+def scan_devices_background():
+    global scanning, scan_process
+    scan_process = subprocess.Popen(
+        ["bluetoothctl"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
         universal_newlines=True
     )
-    # Turn on agent and set as default
-    proc.stdin.write("agent on\n")
-    proc.stdin.write("default-agent\n")
-    proc.stdin.write("scan on\n")
-    proc.stdin.flush()
-    print("Scanning for devices for {} seconds...".format(scan_duration))
-    time.sleep(scan_duration)
-    proc.stdin.flush()
-    time.sleep(2)  # Give a moment for scanning to stop
+    scan_process.stdin.write("agent on\n")
+    scan_process.stdin.write("default-agent\n")
+    scan_process.stdin.write("scan on\n")
+    scan_process.stdin.flush()
     try:
-        output, _ = proc.communicate(timeout=2)
-    except subprocess.TimeoutExpired:
-        proc.kill()
-        output, _ = proc.communicate()
-    return output
+        while scanning:
+            line = scan_process.stdout.readline()
+            if "NEW" in line:
+                clean = remove_ansi(line.strip())
+                parts = clean.split()
+                if len(parts) >= 4:
+                    mac = parts[2]
+                    display_name = " ".join(parts[3:])
+                    if re.search(r'([0-9A-F]{2}-){2,}', display_name, re.IGNORECASE):
+                        print(f"DEBUG: Filtering out device: {display_name}")
+                    else:
+                        device_queue.put((mac, display_name))
+                        print(f"DEBUG: Adding device: {mac} with name: {display_name}")
+    except Exception as e:
+        print("Scan error:", e)
+    finally:
+        scanning = False
+        if scan_process and scan_process.stdin:
+            scan_process.stdin.write("scan off\n")
+            scan_process.stdin.flush()
+        if scan_process:
+            scan_process.kill()
+            scan_process = None
 
-def parse_devices(scan_output):
-    """
-    Parses the scan output.
-    For each line that contains "NEW", it extracts:
-      - The MAC address (third token)
-      - The display name (concatenation of tokens 4 through end)
-    Also adds paired devices (if not already discovered).
-    Returns a dictionary mapping MAC addresses to display names.
-    """
-    devices = {}
-    for line in scan_output.splitlines():
-        clean_line = remove_ansi(line).strip()
-        print("DEBUG:", clean_line)
-        if "NEW" in clean_line:
-            parts = clean_line.split()
-            if len(parts) >= 4:
-                mac = parts[2]  # e.g., "57:EE:5E:98:26:81"
-                display_name = " ".join(parts[3:]).strip()
-                devices[mac] = display_name
-    # Add paired devices
-    try:
-        paired_output = subprocess.check_output(
-            ['bluetoothctl', 'devices', 'Paired'], universal_newlines=True
-        )
-        for line in paired_output.splitlines():
-            clean_line = remove_ansi(line).strip()
-            if clean_line.startswith("Device"):
-                parts = clean_line.split()
-                if len(parts) >= 3:
-                    mac = parts[1]
-                    display_name = " ".join(parts[2:]).strip()
-                    if mac not in devices:
-                        devices[mac] = display_name
-    except subprocess.CalledProcessError as e:
-        print("Error retrieving paired devices:", e)
-    return devices
 
-@app.route("/scan", methods=["GET"])
-def api_scan():
-    raw_output = scan_devices(scan_duration=10)
-    devices = parse_devices(raw_output)
-    # Return JSON with discovered devices and raw output (if needed for debugging)
-    return jsonify({"devices": devices, "raw": raw_output})
+
 
 @app.route("/pair", methods=["POST"])
 def api_pair():
     data = request.get_json()
     if not data or "devices" not in data:
         return jsonify({"error": "Missing 'devices' field in JSON body"}), 400
-    # Instead of saving to a file and calling pair_selected_devices.sh,
-    # we now call connect_configuration.sh with the proper JSON arguments.
     config_id = data.get("configID", "defaultID")
     config_name = data.get("configName", "defaultName")
-    devices = data["devices"]  # mapping: MAC -> display name
-    # Use an empty settings dict if not provided.
+    devices = data["devices"]
     settings = data.get("settings", {})
     try:
         cmd = [
@@ -141,7 +157,6 @@ def api_connect():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
-
     required_fields = ["configID", "configName", "speakers", "settings"]
     for field in required_fields:
         if field not in data:
@@ -149,8 +164,8 @@ def api_connect():
 
     config_id = data["configID"]
     config_name = data["configName"]
-    speakers = data["speakers"]  # mapping: mac -> name
-    settings = data["settings"]  # mapping: mac -> { volume, latency }
+    speakers = data["speakers"]
+    settings = data["settings"]
 
     try:
         cmd = [
@@ -170,7 +185,6 @@ def api_disconnect():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
-
     required_fields = ["configID", "configName", "speakers", "settings"]
     for field in required_fields:
         if field not in data:
@@ -193,6 +207,62 @@ def api_disconnect():
         return jsonify({"message": "Configuration disconnected successfully."})
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/paired-devices", methods=["GET"])
+def api_paired_devices():
+    try:
+        devices = {}
+
+        # Step 1: Get list of all Bluetooth controllers
+        list_output = subprocess.check_output(
+            ["bluetoothctl", "list"],
+            universal_newlines=True
+        )
+
+        controller_macs = []
+        for line in list_output.splitlines():
+            if line.startswith("Controller"):
+                parts = line.strip().split()
+                if len(parts) >= 2:
+                    controller_macs.append(parts[1])  # e.g., BC:FC:E7:21:1A:0B
+
+        # Step 2: For each controller, list paired devices
+        for ctrl_mac in controller_macs:
+            proc = subprocess.Popen(
+                ["bluetoothctl"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+
+            proc.stdin.write(f"select {ctrl_mac}\n")
+            proc.stdin.write("devices Paired\n")
+            proc.stdin.write("exit\n")
+            proc.stdin.flush()
+
+            output, _ = proc.communicate(timeout=3)
+
+            for line in output.splitlines():
+                clean_line = remove_ansi(line).strip()
+                if clean_line.startswith("Device"):
+                    parts = clean_line.split()
+                    if len(parts) >= 3:
+                        mac = parts[1]
+                        display_name = " ".join(parts[2:]).strip()
+                        devices[mac] = display_name
+
+        return jsonify(devices)
+
+    except subprocess.CalledProcessError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000)

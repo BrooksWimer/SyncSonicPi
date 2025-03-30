@@ -1,2 +1,3 @@
-2025/03/03-23:50:25.706 4caa Creating DB /home/syncsonic/.config/chromium/Default/Sync Data/LevelDB since it was missing.
-2025/03/03-23:50:26.016 4caa Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Sync Data/LevelDB/MANIFEST-000001
+2025/03/23-21:18:41.934 4ce2 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Sync Data/LevelDB/MANIFEST-000001
+2025/03/23-21:18:42.072 4ce2 Recovering log #3
+2025/03/23-21:18:42.075 4ce2 Reusing old log /home/syncsonic/.config/chromium/Default/Sync Data/LevelDB/000003.log 

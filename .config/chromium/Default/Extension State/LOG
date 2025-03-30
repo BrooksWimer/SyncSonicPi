@@ -1,2 +1,3 @@
-2025/03/03-23:50:28.167 4cbe Creating DB /home/syncsonic/.config/chromium/Default/Extension State since it was missing.
-2025/03/03-23:50:28.252 4cbe Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Extension State/MANIFEST-000001
+2025/03/23-21:18:46.829 4ce1 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Extension State/MANIFEST-000001
+2025/03/23-21:18:46.830 4ce1 Recovering log #3
+2025/03/23-21:18:46.840 4ce1 Reusing old log /home/syncsonic/.config/chromium/Default/Extension State/000003.log 

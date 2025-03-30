@@ -1,2 +1,3 @@
-2025/03/03-23:51:16.507 4caa Creating DB /home/syncsonic/.config/chromium/Default/Local Extension Settings/aleakchihdccplidncghkekgioiakgal since it was missing.
-2025/03/03-23:51:16.531 4caa Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Local Extension Settings/aleakchihdccplidncghkekgioiakgal/MANIFEST-000001
+2025/03/23-21:19:21.562 4ce1 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Local Extension Settings/aleakchihdccplidncghkekgioiakgal/MANIFEST-000001
+2025/03/23-21:19:21.563 4ce1 Recovering log #3
+2025/03/23-21:19:21.564 4ce1 Reusing old log /home/syncsonic/.config/chromium/Default/Local Extension Settings/aleakchihdccplidncghkekgioiakgal/000003.log 

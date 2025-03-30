@@ -1,17 +1,23 @@
-2025/03/03-23:50:38.389 4ca9 Creating DB /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm since it was missing.
-2025/03/03-23:50:38.406 4ca9 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/MANIFEST-000001
-2025/03/03-23:50:50.285 4caa Level-0 table #5: started
-2025/03/03-23:50:50.457 4caa Level-0 table #5: 4347500 bytes OK
-2025/03/03-23:50:50.466 4caa Delete type=0 #3
-2025/03/03-23:51:00.536 4caa Level-0 table #7: started
-2025/03/03-23:51:00.711 4caa Level-0 table #7: 4665167 bytes OK
-2025/03/03-23:51:00.718 4caa Delete type=0 #4
-2025/03/03-23:52:08.303 4cab Level-0 table #9: started
-2025/03/03-23:52:08.696 4cab Level-0 table #9: 8680045 bytes OK
-2025/03/03-23:52:08.710 4cab Delete type=0 #6
-2025/03/04-00:52:10.981 4caa Level-0 table #11: started
-2025/03/04-00:52:11.174 4caa Level-0 table #11: 4089714 bytes OK
-2025/03/04-00:52:11.190 4caa Delete type=0 #8
-2025/03/04-00:52:14.161 4ca9 Level-0 table #13: started
-2025/03/04-00:52:14.396 4ca9 Level-0 table #13: 4624462 bytes OK
-2025/03/04-00:52:14.400 4ca9 Delete type=0 #10
+2025/03/23-21:18:47.086 4ce2 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/MANIFEST-000001
+2025/03/23-21:18:47.093 4ce2 Recovering log #12
+2025/03/23-21:18:47.097 4ce2 Reusing old log /home/syncsonic/.config/chromium/Default/Local Extension Settings/cjpalhdlnbpafiamejdnhcphjbkeiagm/000012.log 
+2025/03/23-21:19:04.240 4ce2 Level-0 table #16: started
+2025/03/23-21:19:04.395 4ce2 Level-0 table #16: 4749508 bytes OK
+2025/03/23-21:19:04.398 4ce2 Delete type=0 #12
+2025/03/23-21:19:04.400 4ce2 Compacting 4@0 + 1@1 files
+2025/03/23-21:19:04.525 4ce2 Generated table #17@0: 6 keys, 2338673 bytes
+2025/03/23-21:19:04.652 4ce2 Generated table #18@0: 8 keys, 2762484 bytes
+2025/03/23-21:19:04.790 4ce2 Generated table #19@0: 13 keys, 2033806 bytes
+2025/03/23-21:19:04.791 4ce2 Compacted 4@0 + 1@1 files => 7134963 bytes
+2025/03/23-21:19:04.793 4ce2 compacted to: files[ 0 3 1 0 0 0 0 ]
+2025/03/23-21:19:04.794 4ce2 Delete type=2 #9
+2025/03/23-21:19:04.794 4ce2 Delete type=2 #13
+2025/03/23-21:19:04.794 4ce2 Delete type=2 #11
+2025/03/23-21:19:04.794 4ce2 Delete type=2 #16
+2025/03/23-21:19:04.794 4ce2 Delete type=2 #7
+2025/03/23-21:20:07.503 4ce1 Level-0 table #21: started
+2025/03/23-21:20:07.762 4ce1 Level-0 table #21: 4360418 bytes OK
+2025/03/23-21:20:07.768 4ce1 Delete type=0 #15
+2025/03/23-21:20:10.782 4ce2 Level-0 table #23: started
+2025/03/23-21:20:10.999 4ce2 Level-0 table #23: 5214617 bytes OK
+2025/03/23-21:20:11.002 4ce2 Delete type=0 #20

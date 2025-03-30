@@ -1,0 +1,5 @@
+2025/03/23-21:22:41.679 4ce4 Creating DB /home/syncsonic/.config/chromium/Default/IndexedDB/https_open.spotify.com_0.indexeddb.leveldb since it was missing.
+2025/03/23-21:22:41.710 4ce4 Reusing MANIFEST /home/syncsonic/.config/chromium/Default/IndexedDB/https_open.spotify.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/03/23-21:29:04.479 4ce2 Level-0 table #5: started
+2025/03/23-21:29:04.618 4ce2 Level-0 table #5: 4105898 bytes OK
+2025/03/23-21:29:04.628 4ce2 Delete type=0 #3
