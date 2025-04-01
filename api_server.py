@@ -22,7 +22,7 @@ def remove_ansi(text):
 
 @app.route("/start-scan")
 def start_scan():
-    global scanning
+    global scanning, scan_process
     if scanning:
         return jsonify({"message": "Already scanning."}), 200
     scanning = True
@@ -65,19 +65,26 @@ def device_queue_api():
 
 def scan_devices_background():
     global scanning, scan_process
+    print("DEBUG: scan_devices_background thread started")
+
     scan_process = subprocess.Popen(
         ["bluetoothctl"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,  # <- Combine stderr so we can catch errors
         universal_newlines=True
     )
+    scan_process.stdin.write("power on\n")
     scan_process.stdin.write("agent on\n")
     scan_process.stdin.write("default-agent\n")
     scan_process.stdin.write("scan on\n")
     scan_process.stdin.flush()
+    print("DEBUG: Sent 'scan on' to bluetoothctl")
+
     try:
         while scanning:
             line = scan_process.stdout.readline()
+            print(f"DEBUG: bluetoothctl output: {line.strip()}")  # Always print
             if "NEW" in line:
                 clean = remove_ansi(line.strip())
                 parts = clean.split()
@@ -152,6 +159,7 @@ def api_latency():
     except subprocess.CalledProcessError as e:
         return jsonify({"error": str(e)}), 500
 
+
 @app.route("/connect", methods=["POST"])
 def api_connect():
     data = request.get_json()
@@ -175,10 +183,26 @@ def api_connect():
             json.dumps(speakers),
             json.dumps(settings)
         ]
-        subprocess.run(cmd, check=True)
-        return jsonify({"message": "Configuration connected successfully."})
+
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        full_output = result.stdout.strip()
+        print(full_output)
+        parts = full_output.split("Final connection status:")
+
+
+        json_str = parts[-1].strip()
+        connection_status = json.loads(json_str)
+
+
+        return jsonify(connection_status)
     except subprocess.CalledProcessError as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e), "stderr": e.stderr}), 500
+    except json.JSONDecodeError as e:
+        return jsonify({"error": "Invalid JSON output", "details": str(e)}), 500
+
+
+
+
 
 @app.route("/disconnect", methods=["POST"])
 def api_disconnect():

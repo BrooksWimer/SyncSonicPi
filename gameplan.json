@@ -1,0 +1,8 @@
+{
+  "F8:5C:7D:C7:B3:68": {"name": "Will’s JBL", "paired_on": ["BC:FC:E7:21:21:C6"], "connected_on": [], "disconnect": [], "action": "Action: Connect using controller BC:FC:E7:21:21:C6 (speaker is paired on BC:FC:E7:21:21:C6)."}
+,
+  "98:52:3D:A3:C4:1B": {"name": "JBL Flip 4", "paired_on": ["BC:FC:E7:21:1A:0B", "BC:FC:E7:21:21:C6"], "connected_on": ["BC:FC:E7:21:1A:0B"], "disconnect": [], "action": "No action: Already connected on BC:FC:E7:21:1A:0B."}
+,
+  "00:0C:8A:FF:18:FE": {"name": "Bose Color SoundLink", "paired_on": ["BC:FC:E7:21:1A:0B", "BC:FC:E7:21:21:C6", "2C:CF:67:CE:57:91"], "connected_on": ["BC:FC:E7:21:1A:0B"], "disconnect": ["BC:FC:E7:21:1A:0B"], "action": "Action: Connect using controller 2C:CF:67:CE:57:91 (speaker is paired on BC:FC:E7:21:1A:0B,BC:FC:E7:21:21:C6,2C:CF:67:CE:57:91)."}
+
+}

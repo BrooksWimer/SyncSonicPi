@@ -1,16 +1,10 @@
 #!/bin/bash
 set -e
 
-#####################################################
-# Logging Function
-#####################################################
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
 }
 
-#####################################################
-# Usage check
-#####################################################
 if [ "$#" -ne 4 ]; then
     log "Usage: $0 <configID> <configName> <speakersJson> <settingsJson>"
     exit 1
@@ -23,17 +17,17 @@ SETTINGS_JSON="$4"
 
 log "Starting connection process for configuration '$CONFIG_NAME' (ID: $CONFIG_ID)..."
 
-#####################################################
-# Parse the speakers JSON into an associative array
-#####################################################
+#
+# Read speakers (mac -> name) from JSON
+#
 declare -A speakers
 while IFS=, read -r mac name; do
     speakers["$mac"]="$name"
 done < <(echo "$SPEAKERS_JSON" | jq -r 'to_entries[] | "\(.key),\(.value)"')
 
-#####################################################
-# Parse the settings JSON (volume/latency)
-#####################################################
+#
+# Read volumes and latencies (mac -> volume, latency) from JSON
+#
 declare -A volumes
 declare -A latencies
 while IFS=, read -r mac volume latency; do
@@ -41,13 +35,43 @@ while IFS=, read -r mac volume latency; do
     latencies["$mac"]="$latency"
 done < <(echo "$SETTINGS_JSON" | jq -r 'to_entries[] | "\(.key),\(.value.volume),\(.value.latency)"')
 
-#####################################################
-# Discover Bluetooth controllers
-#####################################################
+#
+# Discover Bluetooth controllers and record their paired/connected devices
+#
 controllers=()
+declare -A pairedDevicesPerController
+declare -A connectedDevicesPerController
+declare -A speakerPort      # map speaker MAC -> controller MAC
+declare -A portSpeaker      # map controller MAC -> speaker MAC (one-to-one usage)
+
 while IFS= read -r line; do
     if [[ $line =~ Controller[[:space:]]([[:xdigit:]:]{17}) ]]; then
-        controllers+=("${BASH_REMATCH[1]}")
+        ctrl_mac="${BASH_REMATCH[1]}"
+        controllers+=("$ctrl_mac")
+        log "Checking paired and connected devices for controller $ctrl_mac..."
+
+        OUTPUT=$(bluetoothctl <<EOF
+select $ctrl_mac
+devices Paired
+devices Connected
+EOF
+)
+        log "--- Devices for controller $ctrl_mac ---"
+        log "$OUTPUT"
+
+        while IFS= read -r dev_line; do
+            if [[ $dev_line =~ ^Device[[:space:]]([[:xdigit:]:]{17})[[:space:]] ]]; then
+                mac="${BASH_REMATCH[1]}"
+                # If the line also contains "Connected", store it as connected
+                if [[ $dev_line == *"Connected"* ]]; then
+                    connectedDevicesPerController["$ctrl_mac"]+=" $mac"
+                    speakerPort["$mac"]="$ctrl_mac"
+                    portSpeaker["$ctrl_mac"]="$mac"
+                fi
+                # Record as paired for this controller
+                pairedDevicesPerController["$mac"]+=" $ctrl_mac"
+            fi
+        done <<< "$OUTPUT"
     fi
 done < <(bluetoothctl list)
 
@@ -57,74 +81,49 @@ if [ ${#controllers[@]} -eq 0 ]; then
 fi
 log "Found controllers: ${controllers[@]}"
 
-#####################################################
-# Build mapping for connected devices and ports
-# speakerPort: maps speaker MAC to the controller port it's connected on
-# portSpeaker: maps a controller port to the speaker MAC already connected
-#####################################################
-declare -A speakerPort
-declare -A portSpeaker
-
+#
+# Mark any controller that already has a connected device as 'used'
+#
+declare -A usedControllers
 for ctrl in "${controllers[@]}"; do
-    log "Checking devices for controller $ctrl..."
-    # Connected devices per controller
-    CONN_OUT=$(bluetoothctl <<EOF
-select $ctrl
-devices Connected
-EOF
-)
-    while IFS= read -r line; do
-        if [[ $line =~ ^Device[[:space:]]([[:xdigit:]:]{17})[[:space:]] ]]; then
-            mac="${BASH_REMATCH[1]}"
-            # If the connected device is not in the provided speakers list, disconnect it.
-            if [ -z "${speakers[$mac]}" ]; then
-                log "Speaker $mac is connected on controller $ctrl but is not in the configuration. Disconnecting..."
-                bluetoothctl <<EOF
-select $ctrl
-disconnect $mac
-EOF
-                sleep 2
-            else
-                # If speaker already exists on another port, disconnect it from this one.
-                if [ -n "${speakerPort[$mac]}" ]; then
-                    log "Speaker $mac is connected on multiple ports (${speakerPort[$mac]} and $ctrl). Disconnecting from controller $ctrl."
-                    bluetoothctl <<EOF
-select $ctrl
-disconnect $mac
-EOF
-                    sleep 2
-                else
-                    speakerPort["$mac"]="$ctrl"
-                    portSpeaker["$ctrl"]="$mac"
-                fi
-            fi
-        fi
-    done <<< "$CONN_OUT"
+    if [[ -n "${connectedDevicesPerController[$ctrl]}" ]]; then
+        usedControllers["$ctrl"]=1
+    fi
+    # Also ensure speakerPort/portSpeaker reflect connected devices
+    for dev_mac in ${connectedDevicesPerController[$ctrl]}; do
+        speakerPort["$dev_mac"]="$ctrl"
+        portSpeaker["$ctrl"]="$dev_mac"
+    done
 done
 
+#
+# Show which speakers are already connected
+#
 log "Connected speakers and ports:"
 for mac in "${!speakerPort[@]}"; do
     log "Speaker $mac is connected on controller ${speakerPort[$mac]}"
 done
 
-#####################################################
-# Unload previous virtual sink and loopback modules
-#####################################################
+#
+# Remove any old virtual sink/loopback modules before proceeding
+#
+log "Unloading previous virtual sink and loopback modules..."
 unload_virtual_modules() {
     local mods
-    mods=$(pactl list short modules | awk '{print $2 " " $1}' | grep -E 'module-null-sink|module-loopback' | awk '{print $2}')
+    mods=$(pactl list short modules \
+           | awk '{print $2 " " $1}' \
+           | grep -E 'module-null-sink|module-loopback' \
+           | awk '{print $2}')
     for mod in $mods; do
         log "Unloading module $mod"
         pactl unload-module "$mod" || true
     done
 }
-
-log "Unloading previous virtual sink and loopback modules..."
 unload_virtual_modules
 
-#####################################################
-# Helper functions to wait for device status changes
-#####################################################
+#
+# Functions for waiting on Bluetooth states and for controlling bluetoothctl
+#
 wait_for_status() {
     local mac="$1"
     local status_keyword="$2"
@@ -142,22 +141,13 @@ wait_for_status() {
     log "Timeout waiting for device $mac to become $status_keyword."
     return 1
 }
+wait_for_connection() { wait_for_status "$1" "Connected"; }
+wait_for_trust() { wait_for_status "$1" "Trusted"; }
+wait_for_pairing() { wait_for_status "$1" "Paired"; }
 
-wait_for_connection() {
-    wait_for_status "$1" "Connected"
-}
-
-wait_for_trust() {
-    wait_for_status "$1" "Trusted"
-}
-
-wait_for_pairing() {
-    wait_for_status "$1" "Paired"
-}
-
-#####################################################
-# Function to wait for PulseAudio to start
-#####################################################
+#
+# Check if PulseAudio is running
+#
 wait_for_pulseaudio() {
     local timeout=20
     local interval=2
@@ -174,9 +164,9 @@ wait_for_pulseaudio() {
     return 1
 }
 
-#####################################################
-# Function to load loopback module with retry logic
-#####################################################
+#
+# Load loopback from the virtual sink to each speaker’s sink
+#
 load_loopback() {
     local sink_name="$1"
     local attempt=1
@@ -197,26 +187,25 @@ load_loopback() {
     return 1
 }
 
-#####################################################
-# Start bluetoothctl as a coprocess
-#####################################################
+#
+# Prepare a coproc for interactive bluetoothctl to reduce overhead
+#
 coproc BTCTL { bluetoothctl; }
-sleep 2  # Allow bluetoothctl to initialize
+sleep 2
 
 send_bt_cmd() {
     local cmd="$1"
     echo "$cmd" >&"${BTCTL[1]}"
-    # Read any immediate output for a short period
+    # Collect a bit of output (non-blocking read)
     while read -t 0.5 -u "${BTCTL[0]}" line; do
         echo "$line"
     done
     sleep 1
 }
 
-#####################################################
-# Pairing function with improved timing and status checks
-# This function always issues pair and trust commands on the selected controller.
-#####################################################
+#
+# Pair/connect a single speaker on a particular controller
+#
 pair_speaker() {
     local speaker_name="$1"
     local speaker_mac="$2"
@@ -225,8 +214,13 @@ pair_speaker() {
     log "Pairing \"$speaker_name\" ($speaker_mac) using controller $ctrl_mac..."
     send_bt_cmd "select $ctrl_mac"
 
-    send_bt_cmd "scan on"
-    sleep 5
+    local did_scan=0
+    # If not in that controller’s paired list, attempt a short scan
+    if [[ " ${pairedDevicesPerController["$speaker_mac"]} " != *" $ctrl_mac "* ]]; then
+        send_bt_cmd "scan on"
+        did_scan=1
+        sleep 5
+    fi
 
     send_bt_cmd "pair $speaker_mac"
     if ! wait_for_pairing "$speaker_mac"; then
@@ -241,9 +235,9 @@ pair_speaker() {
     fi
 
     send_bt_cmd "connect $speaker_mac"
-    # Wait a few seconds to let connection settle
     sleep 3
-    # Now verify the connection by checking "devices Connected" on the selected controller
+
+    # Confirm it shows as connected
     local connected_devices
     connected_devices=$(bluetoothctl <<EOF
 select $ctrl_mac
@@ -257,74 +251,71 @@ EOF
         return 1
     fi
 
+    if [ "$did_scan" -eq 1 ]; then
+        send_bt_cmd "scan off" || log "Warning: Failed to stop scanning."
+    fi
     return 0
 }
 
-#####################################################
-# Track which controllers (ports) are already used
-#####################################################
-declare -A usedControllers
-# Initially mark controllers that already have a connected speaker as used.
-for ctrl in "${controllers[@]}"; do
-    if [ -n "${portSpeaker[$ctrl]}" ]; then
-        usedControllers["$ctrl"]=1
-    fi
-done
-
-# Function to get the next free controller that is not already used.
-get_next_free_controller() {
-    for ctrl in "${controllers[@]}"; do
-        if [ -z "${usedControllers[$ctrl]}" ]; then
+#
+# Decide which controller is the best fit for a speaker
+#
+get_best_controller_for_speaker() {
+    local mac="$1"
+    # Prefer controllers where this speaker is already paired and not in use
+    for ctrl in ${pairedDevicesPerController[$mac]}; do
+        if [[ -z "${usedControllers[$ctrl]}" ]]; then
             echo "$ctrl"
-            return 0
+            return
         fi
     done
-    # If none free, return empty
+    # Otherwise, use any unused controller
+    for ctrl in "${controllers[@]}"; do
+        if [[ -z "${usedControllers[$ctrl]}" ]]; then
+            echo "$ctrl"
+            return
+        fi
+    done
     echo ""
 }
 
-#####################################################
-# Main loop: For each speaker in the JSON config
-# Skip speakers that are already connected on any controller.
-#####################################################
+#
+# Attempt to pair/connect each speaker in the configuration
+#
 for mac in "${!speakers[@]}"; do
     speaker_name="${speakers[$mac]}"
 
-    # If the speaker is already connected on any port, skip it
-    if [ -n "${speakerPort[$mac]}" ]; then
+    # Skip if already connected
+    if [[ -n "${speakerPort[$mac]}" ]]; then
         log "Speaker $speaker_name ($mac) is already connected on controller ${speakerPort[$mac]}. Skipping."
         continue
     fi
 
-    log "Processing speaker: $speaker_name ($mac)"
-
-    # Acquire the next free controller that hasn't been used
-    ctrl_mac="$(get_next_free_controller)"
-    if [ -z "$ctrl_mac" ]; then
-        log "No free controllers left! Skipping speaker $speaker_name ($mac)."
+    ctrl_mac="$(get_best_controller_for_speaker "$mac")"
+    if [[ -z "$ctrl_mac" ]]; then
+        log "No available controller for $speaker_name ($mac). Skipping."
         continue
     fi
 
-    # Run the pairing sequence (which will ensure the speaker is paired/trusted/connected on this controller)
-    log "Running pairing sequence for speaker $speaker_name ($mac) on controller $ctrl_mac..."
-    if ! pair_speaker "$speaker_name" "$mac" "$ctrl_mac"; then
-        log "Error: $speaker_name ($mac) failed to connect on controller $ctrl_mac."
-    else
-        # Mark this controller as used and record the connection.
+    # Ensure this controller does not already have a speaker assigned
+    if [[ -n "${portSpeaker[$ctrl_mac]}" ]]; then
+        log "Controller $ctrl_mac is already assigned to speaker ${portSpeaker[$ctrl_mac]}. Skipping $speaker_name ($mac)."
+        continue
+    fi
+
+    log "Pair/Connect $speaker_name ($mac) on controller $ctrl_mac..."
+    if pair_speaker "$speaker_name" "$mac" "$ctrl_mac"; then
         usedControllers["$ctrl_mac"]=1
         speakerPort["$mac"]="$ctrl_mac"
         portSpeaker["$ctrl_mac"]="$mac"
+    else
+        log "Failed to connect $speaker_name ($mac) on controller $ctrl_mac."
     fi
 done
 
-#####################################################
-# Stop scanning safely
-#####################################################
-send_bt_cmd "scan off" || log "Warning: Failed to stop scanning."
-
-#####################################################
-# PulseAudio setup
-#####################################################
+#
+# Start PulseAudio, load our virtual sink, and loopbacks
+#
 pulseaudio --start || log "Warning: PulseAudio failed to start."
 if ! wait_for_pulseaudio; then
     log "Error: PulseAudio did not initialize properly."
@@ -335,21 +326,23 @@ VIRTUAL_SINK=$(pactl load-module module-null-sink sink_name=virtual_out sink_pro
 log "Virtual sink created with index: $VIRTUAL_SINK"
 sleep 2
 
-#####################################################
-# Create loopbacks from the virtual sink to each speaker's sink
-#####################################################
+#
+# (Optional) Example: skip loopback for a known phone MAC
+#
+KNOWN_PHONE_MAC="AC:DF:A1:52:8A:41"
+
 for mac in "${!speakers[@]}"; do
-    # Only create a loopback if the speaker ended up connected
-    if [ -n "${speakerPort[$mac]}" ]; then
+    if [[ -n "${speakerPort[$mac]}" ]]; then
         sink_name="bluez_sink.${mac//:/_}.a2dp_sink"
-        log "Loading loopback for sink: $sink_name"
-        load_loopback "$sink_name"
+        if [ "$mac" = "$KNOWN_PHONE_MAC" ]; then
+            log "Detected phone ($mac). Skipping special sink creation for this device."
+        else
+            log "Loading loopback for sink: $sink_name"
+            load_loopback "$sink_name"
+        fi
     fi
 done
 
-#####################################################
-# Unsuspend all sinks
-#####################################################
 log "Waking up all sinks..."
 while IFS= read -r line; do
     sink_name=$(echo "$line" | awk '{print $2}')
@@ -357,9 +350,9 @@ while IFS= read -r line; do
     pactl suspend-sink "$sink_name" 0
 done < <(pactl list short sinks)
 
-#####################################################
-# Unload module-suspend-on-idle
-#####################################################
+#
+# Remove module-suspend-on-idle so our sinks don't automatically suspend
+#
 log "Unloading module-suspend-on-idle..."
 for module in $(pactl list short modules | grep module-suspend-on-idle | awk '{print $1}'); do
     log "Unloading module-suspend-on-idle module $module"

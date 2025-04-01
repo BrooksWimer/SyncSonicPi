@@ -1,4 +1,4 @@
-Xsession: X session started for syncsonic at Sat 29 Mar 16:35:06 EDT 2025
+Xsession: X session started for syncsonic at Mon 31 Mar 23:24:09 EDT 2025
 dbus-update-activation-environment: setting DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 xrdb: Can't open display ''
 xhost:  unable to open display ""
@@ -22,56 +22,47 @@ dbus-update-activation-environment: setting GDMSESSION=LXDE-pi-labwc
 dbus-update-activation-environment: setting NO_AT_BRIDGE=1
 dbus-update-activation-environment: setting GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
 dbus-update-activation-environment: setting PWD=/home/syncsonic
-00:00:00.206 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
-00:00:00.214 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
-/usr/bin/sbtest: 2: .: cannot open /usr/share/squeekboard/output: No such file
+00:00:00.240 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
+00:00:00.242 [ERROR] [EGL] command: eglQueryDeviceStringEXT, error: EGL_BAD_PARAMETER (0x300c), message: "eglQueryDeviceStringEXT"
 no profile matched
+/usr/bin/sbtest: 2: .: cannot open /usr/share/squeekboard/output: No such file
 pgrep: pattern that searches for process name longer than 15 characters will result in zero matches
 Try `pgrep -f' option to match against the complete command line.
 pgrep: pattern that searches for process name longer than 15 characters will result in zero matches
 Try `pgrep -f' option to match against the complete command line.
 
-(polkit-mate-authentication-agent-1:952): GLib-CRITICAL **: 16:35:12.942: g_variant_new_string: assertion 'string != NULL' failed
+(polkit-mate-authentication-agent-1:966): GLib-CRITICAL **: 23:24:15.467: g_variant_new_string: assertion 'string != NULL' failed
 
-(polkit-mate-authentication-agent-1:952): polkit-mate-1-WARNING **: 16:35:12.943: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
+(polkit-mate-authentication-agent-1:966): polkit-mate-1-WARNING **: 23:24:15.469: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
 xsettingsd: Loaded 19 settings from /home/syncsonic/.config/xsettingsd/xsettingsd.conf
-II 29-03-25 16:35:13.837 - [src/panel/config/file.cpp:576] Reading XML configuration options from directory /usr/share/wf-panel-pi/metadata
-II 29-03-25 16:35:13.838 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cputemp.xml
-II 29-03-25 16:35:13.839 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/gpu.xml
-II 29-03-25 16:35:13.840 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/window-list.xml
-II 29-03-25 16:35:13.840 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/notify.xml
-II 29-03-25 16:35:13.841 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/smenu.xml
-II 29-03-25 16:35:13.841 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/updater.xml
-II 29-03-25 16:35:13.842 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/tray.xml
-II 29-03-25 16:35:13.843 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/panel-pi.xml
-II 29-03-25 16:35:13.845 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/clock.xml
-II 29-03-25 16:35:13.849 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/ejecter.xml
-II 29-03-25 16:35:13.851 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/launchers.xml
-II 29-03-25 16:35:13.852 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cpu.xml
-II 29-03-25 16:35:13.852 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/batt.xml
+II 31-03-25 23:24:16.307 - [src/panel/config/file.cpp:576] Reading XML configuration options from directory /usr/share/wf-panel-pi/metadata
+II 31-03-25 23:24:16.310 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cputemp.xml
+II 31-03-25 23:24:16.315 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/gpu.xml
+II 31-03-25 23:24:16.322 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/window-list.xml
+II 31-03-25 23:24:16.324 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/notify.xml
+II 31-03-25 23:24:16.325 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/smenu.xml
+II 31-03-25 23:24:16.326 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/updater.xml
+II 31-03-25 23:24:16.327 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/tray.xml
+II 31-03-25 23:24:16.328 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/panel-pi.xml
+II 31-03-25 23:24:16.329 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/clock.xml
+II 31-03-25 23:24:16.330 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/ejecter.xml
+II 31-03-25 23:24:16.330 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/launchers.xml
+II 31-03-25 23:24:16.331 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/cpu.xml
+II 31-03-25 23:24:16.332 - [src/panel/config/file.cpp:589] Reading XML configuration options from file /usr/share/wf-panel-pi/metadata/batt.xml
 Failure: Module initialization failed
 The XKEYBOARD keymap compiler (xkbcomp) reports:
 > Warning:          Unsupported maximum keycode 708, clipping.
 >                   X11 cannot support keycodes above 255.
 Errors from xkbcomp are not fatal to the X server
-xsettingsd: Created window 0x600001 on screen 0 with timestamp 18530
+xsettingsd: Created window 0x600001 on screen 0 with timestamp 16204
 xsettingsd: Selection _XSETTINGS_S0 is owned by 0x0
 xsettingsd: Took ownership of selection _XSETTINGS_S0
 xsettingsd: Ignoring event of type 33
-** Message: 16:35:19.285: batt: battery 0 not found
-** Message: 16:35:19.619: up: Checking for updates
-** Message: 16:35:24.424: up: Error updating cache - E: Release file for http://deb.debian.org/debian-security/dists/bookworm-security/InRelease is not valid yet (invalid for another 15h 36min 45s). Updates for this repository will not be applied.
-E: Release file for http://deb.debian.org/debian/dists/bookworm-updates/InRelease is not valid yet (invalid for another 17h 38min 18s). Updates for this repository will not be applied.
-
+** Message: 23:24:21.899: batt: battery 0 not found
+** Message: 23:24:22.241: up: Checking for updates
 The XKEYBOARD keymap compiler (xkbcomp) reports:
 > Warning:          Unsupported maximum keycode 708, clipping.
 >                   X11 cannot support keycodes above 255.
 Errors from xkbcomp are not fatal to the X server
-The XKEYBOARD keymap compiler (xkbcomp) reports:
-> Warning:          Unsupported maximum keycode 708, clipping.
->                   X11 cannot support keycodes above 255.
-Errors from xkbcomp are not fatal to the X server
-The XKEYBOARD keymap compiler (xkbcomp) reports:
-> Warning:          Unsupported maximum keycode 708, clipping.
->                   X11 cannot support keycodes above 255.
-Errors from xkbcomp are not fatal to the X server
+** Message: 23:24:29.673: up: Cache updated - comparing versions
+** Message: 23:24:34.391: up: Check complete - 95 updates available
