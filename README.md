@@ -54,7 +54,7 @@ The server will start and expose REST endpoints for:
 - `/disconnect`
 - `/set-latency`
 - `/reset-bluetooth`
-- And more
+- '/set-volume'
 
 2. **Trigger scripts when needed:**
 ```bash
@@ -80,4 +80,16 @@ This Pi server is designed to work with the [SyncSonic mobile app](https://githu
 - [x] Reliable phone pairing
 - [x] Low-latency loopbacks
 - [x] Bluetooth error handling
-- [ ] Full persistent config system (coming soon)
+
+
+
+- **`api_server.py`** — Main entry point of the Flask server. It initializes the app, loads all endpoints, and starts the server loop.
+- **`auto_connect.sh`** — Shell script to auto-connect speakers on startup or reset.
+- **`reset_bt_adapters.sh`** — Script to reset all Bluetooth adapters that may be stuck or unresponsive.
+- **`endpoints/connect_one_speaker.py`** — API endpoint to connect to a specific speaker using its MAC address.
+- **`endpoints/connect_phone.py`** — API endpoint to pair and connect a phone to receive A2DP audio.
+- **`endpoints/disconnect.py`** — API endpoint to disconnect a specific Bluetooth device.
+- **`endpoints/latency.py`** — API endpoint to adjust latency settings for loopbacks.
+- **`endpoints/paired_devices.py`** — API endpoint to list all devices that have been paired with the system.
+- **`endpoints/scan.py`** — API endpoint to initiate a Bluetooth scan and find nearby devices.
+- **`endpoints/setup_box.py`** — API endpoint used to initialize the system setup and restore config on boot.
