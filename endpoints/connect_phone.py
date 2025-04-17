@@ -32,9 +32,10 @@ def set_reserved_flag(mac):
 
 def api_connect_phone():
     try:
-        result = subprocess.run([AUTO_CONNECT_SCRIPT], timeout=120)
+        result = subprocess.run([AUTO_CONNECT_SCRIPT], timeout=30)
     except subprocess.TimeoutExpired:
-        return jsonify({"success": False, "error": "Pairing script timed out"}), 504
+        subprocess.kill()
+        return jsonify({"success": False, "error": "Pairing script timed out"}), 200
 
     if result.returncode == 0:
         mac = get_mac_for_adapter("hci0")

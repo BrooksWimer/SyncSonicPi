@@ -14,24 +14,8 @@ def api_latency():
     sink_name = None
 
     try:
-        # # 🔍 Find the actual sink name that matches this MAC address
-        # sinks_output = subprocess.run(["pactl", "list", "sinks", "short"], capture_output=True, text=True)
-        # if sinks_output.returncode != 0:
-        #     log(f"Error listing sinks: {sinks_output.stderr}")
-        #     return jsonify({"error": "Failed to list sinks"}), 500
 
-        # for line in sinks_output.stdout.splitlines():
-        #     if mac_formatted in line:
-        #         sink_name = line.split()[1]
-        #         break
-
-        # if not sink_name:
-        #     log(f"❌ No sink found for device {mac}")
-        #     return jsonify({"error": f"No sink found for device {mac}"}), 500
-
-        # log(f"🎯 Found sink {sink_name} for device {mac}")
-
-        sink_name = f"bluez_output.{mac_formatted}.1"
+        sink_name = f"bluez_sink.{mac_formatted}.a2dp_sink"
 
         # ♻️ Unload any existing loopbacks targeting this sink
         list_modules = subprocess.run(["pactl", "list", "short", "modules"], capture_output=True, text=True)

@@ -1,182 +1,83 @@
-# Raspberry Pi Bluetooth Audio Receiver with Spotify Connect
+# 📦 SyncSonic Pi Server
 
-This guide provides step-by-step instructions to set up a **Raspberry Pi** as a **Bluetooth audio receiver** and **Spotify Connect device** using **BlueALSA** and **Raspotify**.
+This repository contains the Raspberry Pi backend that powers the SyncSonic mobile app. It connects to Bluetooth speakers and phones, manages audio routing, and provides a REST API for the mobile UI to interact with.
 
-## Features
-- Stream audio from **Bluetooth devices** to the Raspberry Pi.
-- Act as a **Spotify Connect device** for playback via **Raspotify**.
-- Use **BlueALSA** to route Bluetooth audio to ALSA.
+## 🚀 Features
 
----
+- 🔊 Connects and configures Bluetooth speakers using BlueZ and PipeWire
+- 📱 Pairs with a phone to receive A2DP audio input
+- 🔄 Manages latency, volume, and stereo balance per speaker
+- 🔌 Automatically resets or reconnects adapters as needed
+- 🌐 REST API served by Flask with modular endpoint structure
 
-## 1. Prerequisites
-### Hardware
-- Raspberry Pi (any model, preferably Pi 3 or newer)
-- Bluetooth USB adapter (if not built-in)
-- Bluetooth speaker or audio output device
-- MicroSD card (minimum 8GB)
+## 🧰 Requirements
 
-### Software
-- Raspberry Pi OS (Lite) **Debian 12 "Bookworm"**
+- Raspberry Pi (tested on Pi Zero W and others)
+- Python 3.9+
+- `bluez`,`libspa-0.2-bluetooth`, `flask`, `dbus-python`
+- `wpctl`, `bluetoothctl`, `pactl`
 
----
-
-## 2. Install Raspberry Pi OS
-1. Download **Raspberry Pi Imager** from [here](https://www.raspberrypi.org/software/).
-2. Insert your **microSD card** and open the Raspberry Pi Imager.
-3. Select **Raspberry Pi OS (Lite) (Debian 12 "Bookworm")**.
-4. Click "Flash" and wait for the process to complete.
-5. Insert the microSD card into your Raspberry Pi and boot it up.
-
-### Enable SSH and Wi-Fi (Optional)
-If you need SSH access, create an **empty file** named `ssh` in the boot partition.
-For Wi-Fi, create a `wpa_supplicant.conf` file:
+Install Python dependencies:
 ```bash
-country=US
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-    ssid="YourWiFiSSID"
-    psk="YourWiFiPassword"
-}
+pip install flask dbus-python
 ```
 
----
+## 📁 Folder Structure
 
-## 3. Install Dependencies
-
-### Update the system:
-```bash
-sudo apt update
-sudo apt upgrade -y
+```
+SyncSonicPiRepo/
+├── api_server.py                  # Main Flask server
+├── auto_connect.sh                # Auto-connect utility script
+├── reset_bt_adapters.sh          # Resets BT modules when needed
+├── endpoints/                    # Modular Flask API endpoints
+│   ├── connect_phone.py
+│   ├── connect_one_speaker.py
+│   ├── disconnect.py
+│   ├── latency.py
+│   ├── paired_devices.py
+│   ├── scan.py
+│   └── setup_box.py
+└── utils/                         # Utility functions (e.g., state mgmt, audio control)
 ```
 
-### Install BlueALSA (Bluetooth Audio Support):
+## 🔌 Usage
+
+1. **Run the API server:**
 ```bash
-sudo apt install bluealsa bluez-utils
+python3 api_server.py
 ```
 
-### Install Raspotify (Spotify Connect Client):
+The server will start and expose REST endpoints for:
+
+- `/connect-phone`
+- `/connect-one`
+- `/disconnect`
+- `/set-latency`
+- `/reset-bluetooth`
+- And more
+
+2. **Trigger scripts when needed:**
 ```bash
-curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
+./reset_bt_adapters.sh
+./auto_connect.sh
 ```
 
-### Install ALSA utilities:
-```bash
-sudo apt install alsa-utils
-```
+## 🔧 Configuration
 
----
+You may need to edit:
 
-## 4. Bluetooth Configuration
+- `reset_bt_adapters.sh` for your hardware
+- Bluetooth controller MAC addresses in the global state manager
+- Audio backend assumptions (e.g., profile is `a2dp-sink`, sink name is `virtual_out`)
 
-### Install Bluetooth utilities:
-```bash
-sudo apt install pi-bluetooth
-```
+## 📡 API Integration
 
-### Check if Bluetooth service is running:
-```bash
-sudo systemctl status bluetooth
-```
+This Pi server is designed to work with the [SyncSonic mobile app](https://github.com/BrooksWimer/Sync-Sonic-App) and exposes endpoints consumed directly by the app.
 
-### Pair and Connect the Bluetooth Speaker:
-```bash
-bluetoothctl
-power on
-agent on
-default-agent
-scan on
-pair 00:0C:8A:FF:18:FE  # Replace with your speaker's MAC address
-trust 00:0C:8A:FF:18:FE
-connect 00:0C:8A:FF:18:FE
-exit
-```
+## ✅ Status
 
-### Verify the Connection:
-```bash
-bluetoothctl info 00:0C:8A:FF:18:FE
-```
-
----
-
-## 5. BlueALSA Setup
-
-### Restart BlueALSA service:
-```bash
-sudo systemctl restart bluealsa
-```
-
-### Check if BlueALSA is handling audio:
-```bash
-bluealsa-aplay -L
-```
-
----
-
-## 6. Raspotify Setup (Spotify Connect)
-
-### Configure Spotify Credentials:
-1. Visit the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
-2. **Create an App** and obtain your **Client ID** and **Client Secret**.
-
-### Edit Raspotify Configuration:
-```bash
-sudo nano /etc/default/raspotify
-```
-Add the following:
-```bash
-SPOTIFY_CLIENT_ID="your_client_id"
-SPOTIFY_CLIENT_SECRET="your_client_secret"
-```
-
-### Restart Raspotify:
-```bash
-sudo systemctl restart raspotify
-```
-
----
-
-## 7. Testing Audio
-
-### Test audio output using ALSA:
-```bash
-aplay -D bluealsa /usr/share/sounds/alsa/Front_Center.wav
-```
-
-### Test Spotify Playback:
-1. Open the **Spotify app** on your phone/computer.
-2. Select **your Raspberry Pi** as the playback device.
-3. Play a song and verify audio output.
-
----
-
-## 8. Troubleshooting
-
-### No Sound?
-- Ensure **PulseAudio is not interfering**:
-  ```bash
-  sudo systemctl --user stop pulseaudio
-  ```
-- Reboot and reconnect the Bluetooth speaker.
-
-### Bluetooth Issues?
-- Restart the Bluetooth service:
-  ```bash
-  sudo systemctl restart bluetooth
-  ```
-- Try reconnecting the speaker:
-  ```bash
-  bluetoothctl connect 00:0C:8A:FF:18:FE
-  ```
-
-### Raspotify Issues?
-- Check logs for errors:
-  ```bash
-  journalctl -u raspotify --no-pager --lines=100
-  ```
-- Restart Raspotify:
-  ```bash
-  sudo systemctl restart raspotify
-  ```
-
+- [x] Multi-speaker support
+- [x] Reliable phone pairing
+- [x] Low-latency loopbacks
+- [x] Bluetooth error handling
+- [ ] Full persistent config system (coming soon)

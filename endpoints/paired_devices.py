@@ -1,6 +1,6 @@
 from flask import jsonify
 import subprocess
-from utils.logging import log, RED
+from utils.logging import log
 
 
 def api_paired_devices():

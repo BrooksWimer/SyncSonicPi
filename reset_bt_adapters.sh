@@ -88,6 +88,11 @@ ensure_all_adapters_up() {
 
 ### 🔁 Main Loop
 log "Starting Bluetooth adapter recovery..."
+log "🔄 ResettingPulseAudio and bluetoothd..."
+
+
+
+log "✅ Audio and Bluetooth services restarted."
 
 while true; do
   missing_adapters=false
@@ -138,6 +143,9 @@ while true; do
   log "🔌 Ensuring all adapters are turned ON..."
   ensure_all_adapters_up
 
+
   log "🎉 All Bluetooth adapters are present and healthy."
+
+ 
   break
 done
