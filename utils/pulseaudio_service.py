@@ -147,35 +147,52 @@ def setup_pulseaudio():
         log(f"❌ Error setting up PulseAudio: {e}")
         return False
 
-def create_loopback(sink_name: str, latency_ms: int = 100) -> bool:
+
+def create_loopback(sink_name: str, latency_ms: int = 100, wait_seconds: int = 10) -> bool:
     """
-    Attempt to create a loopback from virtual_out.monitor to the given sink with specified latency.
-    Retries once if the first attempt fails.
+    Waits for a specific sink to appear, unloads any existing loopbacks for it,
+    and then creates a clean new loopback.
     """
-    def try_create():
-        return subprocess.run([
+    def sink_exists() -> bool:
+        sinks_output = subprocess.run(["pactl", "list", "sinks", "short"],
+                                      capture_output=True, text=True)
+        return sink_name in sinks_output.stdout
+
+    def unload_conflicting_loopbacks():
+        modules_output = subprocess.run(["pactl", "list", "short", "modules"],
+                                        capture_output=True, text=True)
+        for line in modules_output.stdout.strip().splitlines():
+            parts = line.split()
+            if len(parts) >= 2 and "module-loopback" in parts[1] and sink_name in line:
+                module_id = parts[0]
+                log(f"🧹 Unloading conflicting loopback module {module_id} for sink {sink_name}")
+                subprocess.run(["pactl", "unload-module", module_id])
+
+    def load_loopback():
+        result = subprocess.run([
             "pactl", "load-module", "module-loopback",
             "source=virtual_out.monitor",
             f"sink={sink_name}",
             f"latency_msec={latency_ms}"
         ], capture_output=True, text=True)
+        return result
 
-    result = try_create()
+    log(f"⏳ Waiting for sink '{sink_name}' to appear...")
+    for i in range(wait_seconds * 2):
+        if sink_exists():
+            log(f"✅ Sink '{sink_name}' found.")
+            unload_conflicting_loopbacks()
+            result = load_loopback()
+            if result.returncode == 0:
+                log(f"✅ Loopback for {sink_name} created successfully (module index: {result.stdout.strip()})")
+                return True
+            else:
+                log(f"❌ Failed to create loopback for {sink_name}: {result.stderr.strip()}")
+                return False
+        time.sleep(0.5)
 
-    if result.returncode == 0:
-        log(f"✅ Loopback for {sink_name} loaded with index: {result.stdout.strip()}")
-        return True
-    else:
-        log(f"⚠️ First attempt to load loopback for {sink_name} failed: {result.stderr.strip()}")
-        time.sleep(1)  # give the sink a moment to become active
-        log(f"🔁 Retrying loopback creation for {sink_name}...")
-        result = try_create()
-        if result.returncode == 0:
-            log(f"✅ Loopback for {sink_name} loaded on retry with index: {result.stdout.strip()}")
-            return True
-        else:
-            log(f"❌ Retry also failed to load loopback for {sink_name}: {result.stderr.strip()}")
-            return False
+    log(f"❌ Sink '{sink_name}' did not appear within {wait_seconds} seconds.")
+    return False
 
 
 

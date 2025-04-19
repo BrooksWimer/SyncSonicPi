@@ -20,7 +20,7 @@ def send_bt_command(proc, command, wait=0.5):
     proc.stdin.flush()
     time.sleep(wait)
 
-def pair_device(proc, mac, timeout=10):
+def pair_device(proc, mac, timeout=20):
     print(f"[PAIR] Pairing with {mac}...")
     send_bt_command(proc, f"pair {mac}")
     start_time = time.time()
@@ -76,7 +76,7 @@ def trust_device(proc, mac, timeout=10):
 
 
 
-def connect_device(proc, mac, timeout=10):
+def connect_device(proc, mac, timeout=20):
     print(f"[CONNECT] Connecting to {mac}...")
     send_bt_command(proc, f"connect {mac}")
     start_time = time.time()
@@ -217,3 +217,30 @@ def stop_discovery_all_hcis():
 
     except Exception as e:
         print(f"❌ Error while stopping discovery: {e}")
+
+
+def remove_device(proc, mac, timeout=10):
+    print(f"[REMOVE] Removing {mac}...")
+    send_bt_command(proc, f"remove {mac}")
+    start_time = time.time()
+
+    while True:
+        if time.time() - start_time > timeout:
+            print("[REMOVE] ❌ Timed out.")
+            return False
+
+        line = _read_line_with_timeout(proc, timeout)
+        if not line:
+            continue
+        line = line.strip()
+        print(f"[REMOVE] Output: {line}")
+
+        if "Device has been removed" in line or "Device removed" in line:
+            print("[REMOVE] ✅ Device removed successfully.")
+            return True
+        if "not available" in line or "does not exist" in line:
+            print("[REMOVE] ⚠️ Device not found, assuming removed.")
+            return True
+        if "Failed to remove" in line or "org.bluez.Error" in line:
+            print("[REMOVE] ❌ Removal failed.")
+            return False

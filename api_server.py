@@ -2,7 +2,7 @@ from flask import Flask
 
 # Import individual endpoints
 from endpoints.disconnect import api_disconnect
-from endpoints.volume import api_volume, api_set_sound_field
+from endpoints.volume import api_volume, api_mute
 from endpoints.latency import api_latency
 from endpoints.paired_devices import api_paired_devices
 from endpoints.connect_phone import api_connect_phone
@@ -27,7 +27,7 @@ app.add_url_rule("/connect_phone", view_func=api_connect_phone, methods=["POST"]
 app.add_url_rule("/reset-adapters", view_func=api_reset_adapters, methods=["POST"])
 app.add_url_rule("/connect-one", view_func=api_connect_one, methods=["POST"])
 app.add_url_rule("/connected-devices", view_func=api_get_connected_devices, methods=["GET"])
-app.add_url_rule("/set-sound-field", view_func=api_set_sound_field, methods=["POST"])
+app.add_url_rule("/mute", view_func=api_mute, methods=["POST"])
 
 
 # Register scanning routes

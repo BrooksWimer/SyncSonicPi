@@ -96,6 +96,91 @@ def scan_devices_background():
             scan_process.stdin.flush()
         
 
+# def scan_for_device(proc, target_mac: str, target_port: str, scan_timeout: int = 30) -> bool:
+#     """
+#     Scans for a Bluetooth device with the specified MAC using a bluetoothctl subprocess.
+#     Returns True if the device is found, otherwise False after timeout.
+#     """
+#     import re
+#     import time
+
+#     target_mac = target_mac.upper().replace("-", ":")
+#     print(f"[SCAN] Looking for MAC {target_mac} on port {target_port} for {scan_timeout}s...")
+#     time.sleep(3)
+
+#     # Step 2: Try scan on, handle InProgress error robustly
+#     for attempt in range(3):  # allow up to 2 retries
+#         print(f"[SCAN] ▶️ Attempting scan on (try {attempt + 1})")
+#         send_bt_command(proc, "scan on")
+#         time.sleep(0.5)  # let output settle
+
+#         scan_on_failed = False
+#         lines_seen = []
+#         new_devices_seen = 0
+
+#         for _ in range(10):  # read more lines over a few seconds
+#             line = _read_line_with_timeout(proc, 1)
+#             if not line:
+#                 continue
+#             line = line.strip()
+#             lines_seen.append(line)
+#             print(f"[SCAN] Output: {line}")
+
+#             if "org.bluez.Error.InProgress" in line:
+#                 scan_on_failed = True
+#             if "Device" in line:
+#                 new_devices_seen += 1
+
+#         if scan_on_failed:
+#             print("[SCAN] ⚠️ Scan already in progress, sending scan off and retrying...")
+#             send_bt_command(proc, "scan off")
+#             time.sleep(1.5)
+#         elif new_devices_seen >= 3:
+#             print(f"[SCAN] ✅ Scan appears active ({new_devices_seen} new devices, {len(lines_seen)} lines).")
+#             break
+#         else:
+#             print("[SCAN] ⚠️ Not enough activity seen. Retrying scan...")
+
+       
+#     else:
+#         print("[SCAN] ❌ Failed to start scan after retries.")
+#         return False  # or continue anyway, depending on your fallback logic
+
+#     scan_start = time.time()
+#     found = False
+
+#     try:
+#         while (time.time() - scan_start) < scan_timeout:
+#             line = _read_line_with_timeout(proc, 1)
+#             if not line:
+#                 continue
+
+#             print(f"[SCAN] Output: {line.strip()}")
+
+#             if ("NEW" in line or "CHG" in line) and "Device" in line:
+#                 parts = line.split()
+#                 if len(parts) >= 4:
+#                     mac = parts[2].upper().replace("-", ":")
+#                     name = " ".join(parts[3:])
+#                     if re.search(r'([0-9A-F]{2}-){2,}', name, re.IGNORECASE):
+#                         continue
+#                     if mac == target_mac:
+#                         print(f"[SCAN] ✅ Found target device {mac} with name '{name}'")
+#                         found = True
+#                         break
+#                     else:
+#                         print(f"[SCAN] Found different device {mac} → {name}")
+#         return found
+#     finally:
+#         print("[SCAN] 🔻 Stopping scan...")
+#         try:
+#             proc.stdin.write("scan off\n")
+#             proc.stdin.flush()
+#             time.sleep(1)
+#         except Exception:
+#             pass
+
+
 def scan_for_device(proc, target_mac: str, target_port: str, scan_timeout: int = 30) -> bool:
     """
     Scans for a Bluetooth device with the specified MAC using a bluetoothctl subprocess.
@@ -108,42 +193,25 @@ def scan_for_device(proc, target_mac: str, target_port: str, scan_timeout: int =
     print(f"[SCAN] Looking for MAC {target_mac} on port {target_port} for {scan_timeout}s...")
     time.sleep(3)
 
-    # Step 2: Try scan on, handle InProgress error robustly
-    for attempt in range(3):  # allow up to 2 retries
-        print(f"[SCAN] ▶️ Attempting scan on (try {attempt + 1})")
-        send_bt_command(proc, "scan on")
-        time.sleep(0.5)  # let output settle
+    # Try to start scanning, handle 'InProgress' errors
+    print("[SCAN] ▶️ Starting scan...")
+    send_bt_command(proc, "scan on")
+    time.sleep(0.5)
 
-        scan_on_failed = False
-        saw_confirmation = False
-
-        for _ in range(6):
-            line = _read_line_with_timeout(proc, 1)
-            if not line:
-                continue
-            line = line.strip()
-            print(f"[SCAN] Output: {line}")
-
-            if "org.bluez.Error.InProgress" in line:
-                scan_on_failed = True
-            if "scan on" in line.lower() or "discovery started" in line.lower() or "NEW Device" in line:
-                saw_confirmation = True
-
-        if scan_on_failed:
-            print("[SCAN] ⚠️ Scan already in progress, sending scan off and retrying...")
+    for _ in range(5):  # Read a few lines to check for scan errors
+        line = _read_line_with_timeout(proc, 1)
+        if not line:
+            continue
+        print(f"[SCAN] Output: {line.strip()}")
+        if "org.bluez.Error.InProgress" in line:
+            print("[SCAN] ⚠️ Scan already in progress. Resetting scan...")
             send_bt_command(proc, "scan off")
-            time.sleep(1.5)
-        elif saw_confirmation:
-            print("[SCAN] ✅ Scan started successfully.")
+            time.sleep(3)
+            send_bt_command(proc, "scan on")
             break
-        else:
-            print("[SCAN] ⚠️ No confirmation of scan start, retrying...")
-    else:
-        print("[SCAN] ❌ Failed to start scan after retries.")
-        return False  # or continue anyway, depending on your fallback logic
 
-    scan_start = time.time()
     found = False
+    scan_start = time.time()
 
     try:
         while (time.time() - scan_start) < scan_timeout:
@@ -153,8 +221,8 @@ def scan_for_device(proc, target_mac: str, target_port: str, scan_timeout: int =
 
             print(f"[SCAN] Output: {line.strip()}")
 
-            if "NEW" in line and "Device" in line:
-                parts = line.split()
+            if ("NEW" in line or "CHG" in line) and "Device" in line:
+                parts = line.strip().split()
                 if len(parts) >= 4:
                     mac = parts[2].upper().replace("-", ":")
                     name = " ".join(parts[3:])
@@ -167,11 +235,17 @@ def scan_for_device(proc, target_mac: str, target_port: str, scan_timeout: int =
                     else:
                         print(f"[SCAN] Found different device {mac} → {name}")
         return found
+
     finally:
         print("[SCAN] 🔻 Stopping scan...")
         try:
-            proc.stdin.write("scan off\n")
-            proc.stdin.flush()
-            time.sleep(1)
-        except Exception:
-            pass
+            send_bt_command(proc, "scan off")
+            time.sleep(1.5)
+            # Confirm discovery stopped
+            for _ in range(5):
+                line = _read_line_with_timeout(proc, 1)
+                if line and "Discovering: no" in line:
+                    print("[SCAN] ✅ Discovery stopped.")
+                    break
+        except Exception as e:
+            print(f"[SCAN] ⚠️ Error during scan shutdown: {e}")

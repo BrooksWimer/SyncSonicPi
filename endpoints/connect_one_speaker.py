@@ -11,15 +11,15 @@ from utils.global_state import *
 from utils.pulseaudio_service import create_loopback
 from utils.logging import log
 from utils.pulseaudio_service import cleanup_pulseaudio, setup_pulseaudio, partial_cleanup_pulseaudio, partial_cleanup_pulseaudio
-from utils.bluetooth_helper_functions import _read_line_with_timeout, send_bt_command, bt_select_controller, stop_discovery_all_hcis, pair_device, trust_device, connect_device
+from utils.bluetooth_helper_functions import _read_line_with_timeout, send_bt_command, bt_select_controller, stop_discovery_all_hcis, pair_device, trust_device, connect_device, remove_device
 from endpoints.scan import scan_for_device
-
-
+from endpoints.setup_box import api_reset_adapters
+from endpoints.volume import set_stereo_volume
 # Replace with your known controllers if desired
 ALL_CONTROLLERS = get_all_controllers()
 import subprocess
 import time
-from endpoints.volume import set_volume
+
 
 
 def connect_one_plan(
@@ -144,7 +144,7 @@ def analyze_device_status(controller_mac: str, device_mac: str) -> dict:
     result["uuids"] = device.get("uuids", [])
 
     # Check if an audio profile is available (A2DP Sink or Headset/Handsfree)
-    audio_profiles = ["110b", "1108", "111e"]
+    audio_profiles = ["110b"]
     found_profiles = [uuid for uuid in device["uuids"] if any(ap in uuid.lower() for ap in audio_profiles)]
     result["has_audio_profile"] = len(found_profiles) > 0
 
@@ -157,17 +157,18 @@ def analyze_device_status(controller_mac: str, device_mac: str) -> dict:
     log(f"  • UUIDs: {device['uuids']}")
     log(f"  • Audio Profile Present: {result['has_audio_profile']}")
 
-    # Simple recommendation
+    # Refined recommendation logic
     if not result["paired"]:
-        result["recommendation"] = "pair"
-    elif not result["services_resolved"]:
-        result["recommendation"] = "rediscover"
+        result["recommendation"] = "pair_and_connect"
+    elif not result["trusted"]:
+        result["recommendation"] = "trust_and_connect"
     elif not result["has_audio_profile"]:
-        result["recommendation"] = "skip connection"
+        result["recommendation"] = "rediscover"
     elif not result["connected"]:
-        result["recommendation"] = "connect"
+        result["recommendation"] = "connect_only"
     else:
-        result["recommendation"] = "already connected"
+        result["recommendation"] = "already_connected"
+
 
     log(f"  → Recommended action: {result['recommendation']}")
     return result
@@ -211,6 +212,14 @@ def api_connect_one():
     Connect or keep connected exactly one target speaker, while preserving
     other in-config speakers. Remove loopbacks and disconnect out-of-config or duplicate speakers.
     """
+    try:
+        log("🔄 Resetting Bluetooth adapters...")
+        subprocess.run(["/home/syncsonic2/reset_bt_adapters.sh"], check=True)
+        log("✅ Bluetooth adapters reset successfully.")
+    except subprocess.CalledProcessError as e:
+        log(f"❌ Failed to reset Bluetooth adapters: {str(e)}")
+        return jsonify({"error": f"Reset script failed: {str(e)}"}), 500
+    
     data = request.get_json()
     if not data:
         return jsonify({"error": "No JSON data"}), 400
@@ -288,8 +297,54 @@ def api_connect_one():
 
 
         
-        recommendation = analyze_device_status(controller_mac, target_mac)
-        if recommendation["recommendation"] == "run discovery":
+        recommendation = analyze_device_status(controller_mac, target_mac)['recommendation']
+        log(f"recommendation: {recommendation}")
+        if recommendation == "connect_only":
+            log(f"Connecting {target_mac} on {controller_mac}")
+            connect_ok = connect_device(proc, target_mac)
+            if not connect_ok:
+                recommendation = "trust_and_connect"
+                log(f"Failed to connect {target_mac} on {controller_mac}, trying trust_and_connect")
+            else:
+                success = True
+        if recommendation == "trust_and_connect":
+            log(f"Trusting {target_mac} on {controller_mac}")
+            trust_ok = trust_device(proc, target_mac)
+            if not trust_ok:
+                log(f"Failed to trust {target_mac} on {controller_mac}, trying pair_and_connect")
+                
+            log(f"Connecting {target_mac} on {controller_mac}")
+            connect_ok = connect_device(proc, target_mac)
+            if not connect_ok:
+                recommendation = "pair_and_connect"
+                log(f"Failed to connect {target_mac} on {controller_mac}, trying pair_and_connect")
+            else:
+                success = True
+        if recommendation == "pair_and_connect":
+            log(f"Pairing {target_mac} on {controller_mac}")
+            pair_ok = pair_device(proc, target_mac)
+            if not pair_ok:
+                recommendation = "rediscover"
+                log(f"Failed to pair {target_mac} on {controller_mac}, trying run discovery")
+            else:
+                log(f"Trusting {target_mac} on {controller_mac}")
+                trust_ok = trust_device(proc, target_mac)
+                if not trust_ok:
+                    log(f"Failed to trust {target_mac} on {controller_mac}, trying pair_and_connect")
+                    
+                log(f"Connecting {target_mac} on {controller_mac}")
+                connect_ok = connect_device(proc, target_mac)
+                if not connect_ok:
+                    recommendation = "rediscover"
+                    log(f"Failed to connect {target_mac} on {controller_mac}, trying pair_and_connect")
+                else:
+                        success = True
+        if recommendation == "rediscover":
+            log(f"removing device {target_mac} from {controller_mac}")
+            remove_device(proc, target_mac)
+            recommendation = "run discovery"
+
+        if recommendation == "run discovery":
             log(f"scanning {target_mac} on {controller_mac}")
             try:
                 found = scan_for_device(proc, target_mac, controller_mac)
@@ -299,33 +354,27 @@ def api_connect_one():
                 if proc:
                     proc.kill()
                 return jsonify({"error": f"Failed find {target_mac} on {controller_mac}"}), 400
-            
-        elif recommendation["recommendation"] == "rediscover":
-            pair_ok = pair_device(proc, target_mac)
-            trust_ok = trust_device(proc, target_mac)
-            connect_ok = connect_device(proc, target_mac)
-            if not connect_ok:
-                send_bt_command(proc, f'remove {target_mac}')
-                time.sleep(1)
-                log(f"failed to connect, removing and starting scanning {target_mac} on {controller_mac}")
-                try:
-                    found = scan_for_device(proc, target_mac, controller_mac)
-                except KeyboardInterrupt:
-                    print("Scan interrupted by user.")
-                if not found:
-                    if proc:
-                        proc.kill()
-                    return jsonify({"error": f"Failed find {target_mac} on {controller_mac}"}), 400
             else:
-                success = True
-            
+                log(f"Pairing {target_mac} on {controller_mac}")
+                pair_ok = pair_device(proc, target_mac)
+                if not pair_ok:
+                    success = False
+                    log(f"Failed to pair {target_mac} on {controller_mac}, trying run discovery")
+                else:
+                    log(f"Trusting {target_mac} on {controller_mac}")
+                    trust_ok = trust_device(proc, target_mac)
+                    if not trust_ok:
+                        success = False
+                        log(f"Failed to trust {target_mac} on {controller_mac}, trying pair_and_connect")
+                        
+                    log(f"Connecting {target_mac} on {controller_mac}")
+                    connect_ok = connect_device(proc, target_mac)
+                    if not connect_ok:
+                        recommendation = "pair_and_connect"
+                        log(f"Failed to connect {target_mac} on {controller_mac}, trying pair_and_connect")
+                    else:
+                        success = True
 
-    if not success:
-        log(f"Pairing, trusting, and connecting to {target_mac} on {controller_mac}...")
-        pair_ok = pair_device(proc, target_mac)
-        trust_ok = trust_device(proc, target_mac)
-        connect_ok = connect_device(proc, target_mac)
-        success = connect_ok
  
 
 
@@ -343,9 +392,10 @@ def api_connect_one():
             log(f"Loopback created for {target_mac} → {pactl_sink}")
 
             volume = speaker_settings.get("volume")
+            balance = speaker_settings.get("balance")
             if volume is not None:
-                volume_set = set_volume(target_mac, volume)
-                log(f"Volume set for {target_mac} → {volume_set}")
+                volume_set, left, right = set_stereo_volume(target_mac, balance, volume)
+                log(f"Volume set for {target_mac} → {volume_set}. left: {left}, right: {right}")
                 if proc:
                     proc.kill()
                 return jsonify({"success": True, "message": f"{target_name} connected and loopback created"}), 200
@@ -354,18 +404,13 @@ def api_connect_one():
             log(f"Could not create loopback for {target_mac}")
             return jsonify({"success": False, "message": "Device connected and but loopback not created"}), 500
     else:
-        log(f"Failed on: pair({pair_ok}), trust({trust_ok}), connect({connect_ok})")
 
         if proc:
             proc.kill()
 
         return jsonify({
-            "error": "Could not connect. Device removed for clean retry.",
-            "details": {
-                "pair": pair_ok,
-                "trust": trust_ok,
-                "connect": connect_ok
+            "error": "Could not connect. Device removed for clean retry."
             }
-        }), 500
+        ), 500
 
 

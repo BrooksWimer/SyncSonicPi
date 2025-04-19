@@ -84,6 +84,22 @@ def update_bluetooth_state():
                 "class": device.get("Class", 0),
                 "modalias": device.get("Modalias", "")
             }
+    # fallback in case something was missed
+    for path, ifaces in objects.items():
+        if "org.bluez.MediaTransport1" in ifaces:
+            transport = ifaces["org.bluez.MediaTransport1"]
+            dev_path = transport.get("Device", "")
+            if dev_path:
+                mac_fragment = dev_path.split("/")[-1].replace("dev_", "").replace("_", ":")
+                controller_fragment = dev_path.split("/")[3]  # e.g. "hci1"
+
+                # Map hci1 to actual MAC
+                for ctrl_mac, ctrl_data in GLOBAL_BLUETOOTH_STATE["controllers"].items():
+                    if ctrl_data["hci"] == controller_fragment:
+                        if mac_fragment not in ctrl_data["connected"]:
+                            log(f"🧠 Inferred {mac_fragment} connected via {ctrl_mac} from MediaTransport1")
+                            ctrl_data["connected"].append(mac_fragment)
+
     log("✅ Global Bluetooth state updated.")
 
 

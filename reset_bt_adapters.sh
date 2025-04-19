@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-EXPECTED_ADAPTER_COUNT=4   # Include all expected hciX, including hci0 if desired
+EXPECTED_ADAPTER_COUNT="${1:-4}"  # Include all expected hciX passed from the frontend, if not passed default to 4 
 HUB_PATH="1-1"             # Your USB hub's device path
 
 log() {
