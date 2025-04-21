@@ -14,11 +14,71 @@ def _read_line_with_timeout(proc, timeout_s):
         return proc.stdout.readline()
     return None
 
+# def wait_for_prompt(proc, timeout=3.0):
+#     """
+#     Waits for a bluetoothctl-style prompt (like [bluetooth]# or [DeviceName]#).
+#     Returns True if a valid prompt is detected, False if timeout or connection issue.
+#     """
+#     import time
+#     import re
+
+#     start = time.time()
+#     prompt_pattern = re.compile(r"\[[^\]]+\]#")
+#     while time.time() - start < timeout:
+#         line = _read_line_with_timeout(proc, 0.5)
+#         if line:
+#             line = line.strip()
+#             print(f"[PROMPT] Output: {line}")
+#             if "Waiting to connect to bluetoothd" in line:
+#                 print("[PROMPT] ❌ Bluetoothd not available. Aborting.")
+#                 return False
+#             if prompt_pattern.search(line):
+#                 return True
+#     return False
+
+
+# def send_bt_command(proc, command, wait=0.5, retries=2, confirm_echo=True):
+#     """
+#     Sends a command to bluetoothctl. Assumes we're already in a usable prompt.
+#     Tries to confirm via echo or prompt response after sending.
+#     """
+#     import time
+#     import re
+
+#     for attempt in range(retries + 1):
+#         print(f"[SEND] Attempt {attempt + 1}: sending '{command}'")
+
+#         try:
+#             proc.stdin.write(f"{command}\n")
+#             proc.stdin.flush()
+#             time.sleep(wait)
+
+#             if confirm_echo:
+#                 for _ in range(5):
+#                     line = _read_line_with_timeout(proc, 1)
+#                     if line:
+#                         line = line.strip()
+#                         print(f"[SEND] Echo: {line}")
+#                         if command.split()[0] in line or re.search(r"\[[^\]]+\]#", line):
+#                             return True
+#                 print(f"[SEND] ⚠️ No echo or prompt confirmation for '{command}'")
+
+#             return True  # Acceptable even if no echo, to keep things moving
+
+#         except Exception as e:
+#             print(f"[SEND] ❌ Error sending '{command}': {e}")
+
+#         time.sleep(1.0)
+
+#     print(f"[SEND] ❌ Failed to send '{command}' after {retries + 1} attempts.")
+#     return False
 
 def send_bt_command(proc, command, wait=0.5):
     proc.stdin.write(f"{command}\n")
     proc.stdin.flush()
     time.sleep(wait)
+
+
 
 def pair_device(proc, mac, timeout=20):
     print(f"[PAIR] Pairing with {mac}...")
@@ -37,7 +97,7 @@ def pair_device(proc, mac, timeout=20):
         line = line.strip()
         print(f"[PAIR] Output: {line}")
 
-        if "Pairing successful" in line or "Paired: yes" in line:
+        if "Pairing successful" in line or "Paired: yes" in line or "LegacyPairing: yes" in line or "Connected: yes" in line:
             print("[PAIR] ✅ Pairing successful.")
             return True
         if "AlreadyExists" in line or "Already paired" in line:
@@ -131,6 +191,7 @@ def bt_select_controller(proc, mac, retries=3, delay=0.5):
             print(f"[SELECT] Attempt {attempt+1} failed: {e}")
         time.sleep(delay)
     return True
+
 
 
 def bt_power_on(proc, retries=3, delay=0.5):

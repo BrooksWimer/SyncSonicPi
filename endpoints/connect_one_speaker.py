@@ -358,22 +358,21 @@ def api_connect_one():
                 log(f"Pairing {target_mac} on {controller_mac}")
                 pair_ok = pair_device(proc, target_mac)
                 if not pair_ok:
+                    log(f"Failed to pair {target_mac} on {controller_mac}")
+                
+                log(f"Trusting {target_mac} on {controller_mac}")
+                trust_ok = trust_device(proc, target_mac)
+                if not trust_ok:
                     success = False
-                    log(f"Failed to pair {target_mac} on {controller_mac}, trying run discovery")
+                    log(f"Failed to trust {target_mac} on {controller_mac}, trying pair_and_connect")
+                    
+                log(f"Connecting {target_mac} on {controller_mac}")
+                connect_ok = connect_device(proc, target_mac)
+                if not connect_ok:
+                    recommendation = "pair_and_connect"
+                    log(f"Failed to connect {target_mac} on {controller_mac}, trying pair_and_connect")
                 else:
-                    log(f"Trusting {target_mac} on {controller_mac}")
-                    trust_ok = trust_device(proc, target_mac)
-                    if not trust_ok:
-                        success = False
-                        log(f"Failed to trust {target_mac} on {controller_mac}, trying pair_and_connect")
-                        
-                    log(f"Connecting {target_mac} on {controller_mac}")
-                    connect_ok = connect_device(proc, target_mac)
-                    if not connect_ok:
-                        recommendation = "pair_and_connect"
-                        log(f"Failed to connect {target_mac} on {controller_mac}, trying pair_and_connect")
-                    else:
-                        success = True
+                    success = True
 
  
 

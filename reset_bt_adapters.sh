@@ -87,8 +87,6 @@ ensure_all_adapters_up() {
 }
 
 ### 🔁 Main Loop
-log "Starting Bluetooth adapter recovery..."
-log "🔄 ResettingPulseAudio and bluetoothd..."
 
 
 
