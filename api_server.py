@@ -1,13 +1,13 @@
 from flask import Flask
 
 # Import individual endpoints
-from endpoints.disconnect import api_disconnect
+from custom_bt_agent import api_disconnect, api_connect_one
 from endpoints.volume import api_volume, api_mute
 from endpoints.latency import api_latency
 from endpoints.paired_devices import api_paired_devices
 from endpoints.connect_phone import api_connect_phone
 from endpoints.setup_box import api_reset_adapters
-from endpoints.connect_one_speaker import api_connect_one
+# from endpoints.connect_one_speaker import api_connect_one
 from endpoints.scan import (
     api_start_scan,
     api_stop_scan,

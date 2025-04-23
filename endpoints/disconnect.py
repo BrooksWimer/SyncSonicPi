@@ -6,6 +6,9 @@ import json
 import time
 import os
 from utils.global_state import update_bluetooth_state, GLOBAL_BLUETOOTH_STATE
+# from custom_bt_agent import agent
+from utils.pulseaudio_service import remove_loopback_for_device
+
 
 def disconnect_device(device_mac: str, controller_mac: str = None) -> bool:
     """
@@ -49,9 +52,43 @@ def disconnect_device(device_mac: str, controller_mac: str = None) -> bool:
         log(f"❌ Failed to disconnect {device_mac}: {e}")
         return False
 
-def api_disconnect():
-    update_bluetooth_state()  # Refresh current state from all adapters
 
+def disconnect_device_dbus(mac: str) -> bool:
+    """
+    Attempts to disconnect the device with the given MAC from any controller it's connected to.
+    Returns True if a disconnect was attempted.
+    """
+    mac = mac.upper()
+    bus = SystemBus()
+    manager = bus.get("org.bluez", "/")
+    objects = manager.GetManagedObjects()
+
+    attempted = False
+
+    for path, ifaces in objects.items():
+        if "org.bluez.Device1" in ifaces:
+            dev = ifaces["org.bluez.Device1"]
+            dev_mac = dev.get("Address", "").upper()
+
+            if dev_mac == mac and dev.get("Connected", False):
+                try:
+                    log(f"Calling Disconnect() on {mac}")
+                    device = bus.get("org.bluez", path)
+                    device.Disconnect()
+                    attempted = True
+                    remove_loopback_for_device(mac)
+                    log(f"Disconnected {mac}")
+                except Exception as e:
+                    log(f"Failed to disconnect {mac}: {e}")
+
+    if not attempted:
+        log(f"No active connection found for {mac}")
+    return attempted
+
+
+
+
+def api_disconnect():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
@@ -65,12 +102,24 @@ def api_disconnect():
 
     results = {}
 
+    # Refresh the global state first so we're working with accurate data
+    update_bluetooth_state()
+
     for mac, name in speakers.items():
-        log(f"🔌 Disconnecting {name} ({mac})")
-        success = disconnect_device(mac)
+        mac = mac.upper()
+        log(f"❌ Marking {mac} as not expected")
+        agent.expected_devices.discard(mac)
+
+        log(f"🔌 Attempting direct disconnect of {mac}")
+        from custom_bt_agent import disconnect_device_dbus 
+        success = disconnect_device_dbus(mac)
+
         results[mac] = {
             "name": name,
-            "result": "Disconnected" if success else "Failed to disconnect"
+            "disconnected": success
         }
 
-    return jsonify(results)
+    return jsonify({
+        "message": "Speakers unmarked as expected and disconnected.",
+        "results": results
+    })

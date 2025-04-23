@@ -2,6 +2,9 @@ import select
 import subprocess
 import re
 import time
+from utils.pulseaudio_service import remove_loopback_for_device
+from pydbus import SystemBus
+from utils.logging import log
 
 
 def _read_line_with_timeout(proc, timeout_s):

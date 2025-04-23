@@ -67,6 +67,12 @@ def cleanup_pulseaudio():
         import traceback
         log(f"{RED}Traceback: {traceback.format_exc()}{ENDC}")
         return False
+    
+
+def remove_loopback_for_device(mac: str):
+    sink_name = f"bluez_sink.{mac.replace(':', '_')}.a2dp_sink"
+    subprocess.call(["pactl", "unload-module", f"module-loopback sink={sink_name}"])
+
 
 def partial_cleanup_pulseaudio(allowed_macs):
     """
@@ -120,7 +126,7 @@ def is_pipewire():
     except Exception:
         return False
     
-    
+
 def setup_pulseaudio():
     import subprocess
     import time
