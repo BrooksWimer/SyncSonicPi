@@ -1,7 +1,7 @@
 from flask import Flask
 
 # Import individual endpoints
-from custom_bt_agent import api_disconnect, api_connect_one
+from endpoints.bluetooth_orchestrator import api_connect_one, api_disconnect
 from endpoints.volume import api_volume, api_mute
 from endpoints.latency import api_latency
 from endpoints.paired_devices import api_paired_devices
@@ -15,6 +15,9 @@ from endpoints.scan import (
     api_scan_status
 )
 from utils.global_state import api_get_connected_devices
+from svc_singleton import service      # creates ConnectionService
+from event_pump import start_event_pump
+start_event_pump()
 
 app = Flask(__name__)
 

@@ -41,7 +41,6 @@ def api_latency():
         # 🎛️ Load new loopback with latency
         load_cmd = [
             "pactl", "load-module", "module-loopback",
-            "source=virtual_out.monitor",
             f"sink={sink_name}",
             f"latency_msec={latency}"
         ]

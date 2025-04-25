@@ -220,7 +220,6 @@ def create_loopback(expected_sink_prefix: str, latency_ms: int = 100, wait_secon
     def load_loopback(actual_sink_name: str):
         result = subprocess.run([
             "pactl", "load-module", "module-loopback",
-            "source=virtual_out.monitor",
             f"sink={actual_sink_name}",
             f"latency_msec={latency_ms}"
         ], capture_output=True, text=True)

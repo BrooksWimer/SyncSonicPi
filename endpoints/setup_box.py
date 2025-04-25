@@ -34,7 +34,8 @@ def api_reset_adapters():
                 subprocess.run(["sudo", "rm", "-rf", "/var/lib/bluetooth"], check=True)
                 subprocess.run(["sudo", "systemctl", "start", "bluetooth"], check=True)
                 subprocess.run(["rm", "-rf", PULSE_CONFIG_DIR], check=True)
-            subprocess.run(["pulseaudio", "--start"], check=False)
+            
+        subprocess.run(["sudo","systemctl","restart","bluetooth"])
 
         subprocess.run(["pulseaudio", "--start"], check=False)
 
