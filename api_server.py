@@ -17,6 +17,8 @@ from endpoints.scan import (
 from utils.global_state import api_get_connected_devices
 from svc_singleton import service      # creates ConnectionService
 from event_pump import start_event_pump
+# from ble.volume_service import register_ble_tree
+# register_ble_tree()  
 start_event_pump()
 
 app = Flask(__name__)

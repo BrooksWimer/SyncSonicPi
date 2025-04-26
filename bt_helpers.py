@@ -37,8 +37,12 @@ def pair_device_dbus(device_path: str, bus) -> bool:
         device.Pair()
         return True
     except Exception as e:
-        log(f"Failed to pair device at {device_path}: {e}")
-        return False
+        if "AlreadyExists" in str(e):
+            log(f"Device at {device_path} already paired. Continuing.")
+            return True  # treat as success
+        else:
+            log(f"Failed to pair device at {device_path}: {e}")
+            return False
 
 
 def remove_device_dbus(device_path: str, bus) -> bool:

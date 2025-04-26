@@ -89,8 +89,43 @@ ensure_all_adapters_up() {
 ### 🔁 Main Loop
 
 
+# 🚀 Fast check: parse hciconfig once and exit early if all is good
+log "🚀 Quick pre-check: parsing hciconfig output..."
 
-log "✅ Audio and Bluetooth services restarted."
+all_good=true
+current_hcis=0
+
+while IFS= read -r line; do
+  if [[ $line =~ ^hci[0-9]+: ]]; then
+    current_hcis=$((current_hcis + 1))
+    current_hci=$(echo "$line" | awk -F: '{print $1}')
+    adapter_state="unknown"
+  elif [[ $line =~ "BD Address" ]]; then
+    mac=$(echo "$line" | awk '{print $3}')
+    if [[ "$mac" == "00:00:00:00:00:00" ]]; then
+      log "❌ $current_hci has invalid MAC."
+      all_good=false
+    else
+      log "✅ $current_hci MAC: $mac"
+    fi
+  elif [[ $line =~ "DOWN" ]]; then
+    log "❌ $current_hci is DOWN."
+    all_good=false
+  fi
+done < <(hciconfig)
+
+if (( current_hcis < EXPECTED_ADAPTER_COUNT )); then
+  log "❌ Missing adapters. Expected $EXPECTED_ADAPTER_COUNT, found $current_hcis."
+  all_good=false
+fi
+
+if $all_good; then
+  log "🎯 Quick check passed: all adapters healthy. Exiting early."
+  exit 0
+else
+  log "⚡ Issues detected in quick check. Continuing with full reset logic..."
+fi
+
 
 while true; do
   missing_adapters=false
