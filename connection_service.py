@@ -236,6 +236,8 @@ class ConnectionService:
                     state = "trust"
                 else:
                     attempt += 1
+                    remove_device_dbus(device_path, self.bus)
+                    log("    ⚠️ pairing failed, removed device and retrying")
                     state = "run_discovery"  # remove & retry
 
             elif state == "trust":

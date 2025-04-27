@@ -1,22 +1,13 @@
 #!/usr/bin/env python3
 
-import dbus
-import dbus.exceptions
-import dbus.mainloop.glib
-import dbus.service
-import array
-import sys
-import os
-import threading
-import logging
+import sys, json, logging
+import dbus, dbus.mainloop.glib, dbus.service
 from gi.repository import GLib
-import json
-import subprocess
-import queue
-import re
-import time
 from svc_singleton import service
 from connection_service import Intent
+import subprocess
+from utils.pulseaudio_service import create_loopback
+from endpoints.volume import set_stereo_volume
 
 
 # Set up logging
@@ -47,19 +38,15 @@ MESSAGE_TYPES = {
     "PING": 0x01,
     "PONG": 0x02,
     "ERROR": 0x03,
-    "START_SCAN": 0x10,
-    "STOP_SCAN": 0x11,
-    "GET_DEVICES": 0x12,
-    "DEVICE_FOUND": 0x13,
-    "PAIR": 0x20,
-    "SET_VOLUME": 0x30,
-    "SET_LATENCY": 0x31,
-    "CONNECT": 0x40,
-    "DISCONNECT": 0x41,
-    "GET_PAIRED_DEVICES": 0x50,
     "SUCCESS": 0xF0,
     "FAILURE": 0xF1,
-    "CONNECT_ONE":  0x60
+    "CONNECT_ONE":  0x60,
+    "DISCONNECT":0x61,
+    "SET_LATENCY":0x62,
+    "SET_VOLUME":0x63,
+    "GET_PAIRED_DEVICES":0x64,
+    "SET_MUTE":0x65,
+
 }
 
 # UUIDs from specification
@@ -67,10 +54,7 @@ SERVICE_UUID = '19b10000-e8f2-537e-4f6c-d104768a1214'
 CHARACTERISTIC_UUID = '19b10001-e8f2-537e-4f6c-d104768a1217'
 
 mainloop = None
-device_queue = queue.Queue()
-scanning = False
-seen_devices = {}
-scan_process = None
+
 
 def find_adapter(bus, preferred_adapter=None):
     """
@@ -100,6 +84,7 @@ def find_adapter(bus, preferred_adapter=None):
             return path, adapter
 
     return None, None
+
 
 def reset_adapter(adapter):
     """
@@ -139,6 +124,7 @@ def reset_adapter(adapter):
         logger.info("Adapter reset successfully")
     except Exception as e:
         logger.error(f"Failed to reset adapter: {e}")
+
 
 class DeviceManager:
     def __init__(self, bus, adapter_path):
@@ -184,34 +170,6 @@ class DeviceManager:
         else:
             logger.info(f"Reset device state (keeping device): {path}")
 
-    def try_direct_connect(self, path):
-        """Attempt to connect to a device without pairing"""
-        if path not in self.devices:
-            return False
-
-        try:
-            device_iface = self.devices[path]['iface']
-            device_props = self.devices[path]['props']
-
-            # Check if device is already connected
-            try:
-                if device_props.Get(DEVICE_INTERFACE, 'Connected'):
-                    logger.info(f"Device {path} is already connected")
-                    return True
-            except:
-                pass
-
-            # Try to connect directly
-            try:
-                device_iface.Connect()
-                logger.info(f"Direct connection successful: {path}")
-                return True
-            except Exception as e:
-                logger.debug(f"Direct connection failed: {e}")
-                return False
-        except Exception as e:
-            logger.error(f"Error during direct connection attempt: {e}")
-            return False
 
     def interfaces_added(self, path, interfaces):
         if DEVICE_INTERFACE in interfaces:
@@ -228,47 +186,18 @@ class DeviceManager:
             if 'Paired' in changed:
                 if changed['Paired']:
                     logger.info(f"Device paired successfully: {path}")
-                    self.pairing_in_progress.discard(path)
-                    # Schedule connection after successful pairing
-                    def delayed_connect():
-                        try:
-                            if path in self.devices:
-                                device_iface = self.devices[path]['iface']
-                                device_iface.Connect()
-                                logger.info(f"Connected to newly paired device: {path}")
-                        except Exception as e:
-                            logger.error(f"Failed to connect after pairing: {e}")
-                        return False
-                    GLib.timeout_add(1000, delayed_connect)
                 else:
                     logger.info(f"Device unpaired: {path}")
-                    # If device becomes unpaired, reset its state
-                    self.reset_device_state(path)
+    
 
             # Handle connection state changes
             if 'Connected' in changed:
                 if not changed['Connected']:
                     logger.info(f"Device disconnected: {path}")
-                    # If we're in pairing mode and get a disconnect, assume pairing failed
-                    if path in self.pairing_in_progress:
-                        logger.warning(f"Device disconnected during pairing, resetting state: {path}")
-                        self.reset_device_state(path)
-                    elif path not in self.pairing_in_progress:
-                        if path not in self.reconnect_attempts:
-                            self.reconnect_attempts[path] = 0
-                        if self.reconnect_attempts[path] < self.max_reconnect_attempts:
-                            self.try_reconnect(path)
-                        else:
-                            logger.warning(f"Maximum reconnection attempts reached for device: {path}")
-                            self.reset_device_state(path)
+                   
                 else:
                     logger.info(f"Device connected: {path}")
-                    self.reconnect_attempts[path] = 0
-                    # Set trusted when successfully connected
-                    try:
-                        dev_props.Set(DEVICE_INTERFACE, 'Trusted', dbus.Boolean(True))
-                    except:
-                        pass
+           
 
     def device_found(self, path):
         if path in self.devices:
@@ -295,96 +224,11 @@ class DeviceManager:
 
             logger.info(f"New device registered: {path}")
 
-            # Check if this is a remembered device
-            try:
-                paired = device_props.Get(DEVICE_INTERFACE, 'Paired')
-                if paired:
-                    logger.info(f"Found remembered device, attempting direct connection: {path}")
-                    if self.try_direct_connect(path):
-                        return
-                    else:
-                        logger.info(f"Direct connection failed, will try fresh pairing")
-                        # Reset state but don't remove device yet
-                        self.reset_device_state(path, remove_device=False)
-            except:
-                pass
-
+        
         except Exception as e:
             logger.error(f"Failed to register device {path}: {e}")
 
-    def try_reconnect(self, path):
-        if path not in self.devices:
-            return
 
-        try:
-            device_iface = self.devices[path]['iface']
-            device_props = self.devices[path]['props']
-            self.reconnect_attempts[path] += 1
-            attempt = self.reconnect_attempts[path]
-
-            def delayed_connect():
-                try:
-                    # For first attempt on a remembered device, try direct connection
-                    if attempt == 1:
-                        try:
-                            paired = device_props.Get(DEVICE_INTERFACE, 'Paired')
-                            if paired:
-                                logger.info(f"Attempting direct connection to remembered device: {path}")
-                                if self.try_direct_connect(path):
-                                    return False
-                        except:
-                            pass
-
-                    # Check if device is already connected
-                    try:
-                        if device_props.Get(DEVICE_INTERFACE, 'Connected'):
-                            logger.info(f"Device {path} is already connected")
-                            return False
-                    except:
-                        pass
-
-                    # Check pairing state
-                    try:
-                        paired = device_props.Get(DEVICE_INTERFACE, 'Paired')
-                        if not paired:
-                            logger.info(f"Device {path} needs pairing, initiating pairing process")
-                            self.pairing_in_progress.add(path)
-                            device_iface.Pair()
-                            return False
-                    except dbus.exceptions.DBusException as e:
-                        if "org.bluez.Error.AuthenticationFailed" in str(e):
-                            logger.warning(f"Authentication failed for device {path}, resetting state")
-                            # Now we remove the device since authentication failed
-                            self.reset_device_state(path, remove_device=True)
-                            return False
-                        logger.debug(f"Could not check pairing state: {e}")
-
-                    # Only attempt connection if not currently pairing
-                    if path not in self.pairing_in_progress:
-                        device_iface.Connect()
-                        logger.info(f"Reconnected to device: {path}")
-                    else:
-                        logger.info(f"Skipping connection attempt while pairing is in progress: {path}")
-
-                except dbus.exceptions.DBusException as e:
-                    if "org.bluez.Error.AuthenticationFailed" in str(e):
-                        logger.warning(f"Authentication failed for device {path}, resetting state")
-                        self.reset_device_state(path, remove_device=True)
-                    else:
-                        logger.error(f"Failed to reconnect to {path} (attempt {attempt}): {e}")
-
-                    # If this was the last attempt, clean up
-                    if attempt >= self.max_reconnect_attempts:
-                        logger.warning(f"Giving up on reconnecting to device: {path}")
-                        self.reset_device_state(path, remove_device=True)
-                return False
-
-            # Exponential backoff for reconnection attempts
-            delay = min(1000 * (2 ** (attempt - 1)), 5000)  # Cap at 5 seconds
-            logger.info(f"Scheduling reconnection attempt {attempt} in {delay}ms")
-            GLib.timeout_add(delay, delayed_connect)
-        except Exception as e:
-            logger.error(f"Error during reconnection attempt to {path}: {e}")
 
 class Agent(dbus.service.Object):
     def __init__(self, bus):
@@ -517,37 +361,9 @@ class Characteristic(dbus.service.Object):
             logger.error(f"Error decoding message: {e}")
             return MESSAGE_TYPES["ERROR"], {"error": str(e)}
 
-    def handle_start_scan(self):
-        """Handle START_SCAN message"""
-        if self.scanning:
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"], {"message": "Already scanning"})
 
-        self.scanning = True
-        threading.Thread(target=self.scan_devices_background, daemon=True).start()
-        return self.encode_response(MESSAGE_TYPES["SUCCESS"], {"message": "Scan started"})
 
-    def handle_stop_scan(self):
-        """Handle STOP_SCAN message"""
-        self.scanning = False
-        try:
-            if self.scan_process and self.scan_process.stdin:
-                self.scan_process.stdin.write("scan off\n")
-                self.scan_process.stdin.flush()
-                time.sleep(1)
-                self.scan_process.kill()
-                self.scan_process = None
-        except Exception as e:
-            logger.error(f"Error stopping scan: {e}")
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
-        return self.encode_response(MESSAGE_TYPES["SUCCESS"], {"message": "Scan stopped"})
 
-    def handle_get_devices(self):
-        """Handle GET_DEVICES message"""
-        global seen_devices
-        while not device_queue.empty():
-            mac, name = device_queue.get()
-            seen_devices[mac] = name
-        return self.encode_response(MESSAGE_TYPES["SUCCESS"], seen_devices)
 
     def handle_pair(self, data):
         """Handle PAIR message"""
@@ -567,55 +383,8 @@ class Characteristic(dbus.service.Object):
         except Exception as e:
             return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
 
-    def handle_set_volume(self, data):
-        """Handle SET_VOLUME message"""
-        try:
-            if "mac" not in data or "volume" not in data:
-                return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": "Missing mac or volume"})
 
-            mac = data["mac"]
-            volume = data["volume"]
-
-            # Get sink name
-            sinks_output = subprocess.run(["pactl", "list", "sinks", "short"],
-                                        capture_output=True, text=True)
-
-            sink_name = None
-            mac_formatted = mac.replace(':', '_')
-
-            for line in sinks_output.stdout.splitlines():
-                if mac_formatted in line:
-                    sink_name = line.split()[1]
-                    break
-
-            if not sink_name:
-                return self.encode_response(MESSAGE_TYPES["ERROR"],
-                                         {"error": f"No sink found for device {mac}"})
-
-            # Set volume
-            subprocess.run(["pactl", "set-sink-volume", sink_name, f"{volume}%"],
-                         check=True)
-
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"],
-                                      {"message": f"Volume set to {volume}%"})
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
-
-    def handle_set_latency(self, data):
-        """Handle SET_LATENCY message"""
-        try:
-            if "mac" not in data or "latency" not in data:
-                return self.encode_response(MESSAGE_TYPES["ERROR"],
-                                         {"error": "Missing mac or latency"})
-
-            subprocess.run(["./set_latency.sh", data["mac"], str(data["latency"])],
-                         check=True)
-
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"],
-                                      {"message": f"Latency set to {data['latency']}ms"})
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
-
+ 
     def handle_connect(self, data):
         """
         CONNECT_ONE – expect:
@@ -638,121 +407,21 @@ class Characteristic(dbus.service.Object):
             return self.encode_response(MESSAGE_TYPES["ERROR"],
                                         {"error": str(e)})
 
-    def handle_disconnect(self, data):
-        """Handle DISCONNECT message"""
-        try:
-            if not all(key in data for key in ["configID", "configName", "speakers", "settings"]):
-                return self.encode_response(MESSAGE_TYPES["ERROR"],
-                                         {"error": "Missing required fields"})
 
-            cmd = [
-                "./disconnect_configuration.sh",
-                str(data["configID"]),
-                data["configName"],
-                json.dumps(data["speakers"]),
-                json.dumps(data["settings"])
-            ]
-            subprocess.run(cmd, check=True)
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"],
-                                     {"message": "Disconnected successfully"})
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
 
-    def handle_get_paired_devices(self):
-        """Handle GET_PAIRED_DEVICES message"""
-        try:
-            devices = {}
 
-            # Get list of controllers
-            list_output = subprocess.check_output(
-                ["bluetoothctl", "list"],
-                universal_newlines=True
-            )
-
-            # Process each controller
-            for line in list_output.splitlines():
-                if line.startswith("Controller"):
-                    ctrl_mac = line.strip().split()[1]
-
-                    # Get paired devices for this controller
-                    proc = subprocess.Popen(
-                        ["bluetoothctl"],
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        universal_newlines=True
-                    )
-
-                    proc.stdin.write(f"select {ctrl_mac}\n")
-                    proc.stdin.write("devices Paired\n")
-                    proc.stdin.write("exit\n")
-                    proc.stdin.flush()
-
-                    output, _ = proc.communicate(timeout=3)
-
-                    # Process paired devices
-                    for dev_line in output.splitlines():
-                        if dev_line.startswith("Device"):
-                            parts = dev_line.split()
-                            if len(parts) >= 3:
-                                mac = parts[1]
-                                name = " ".join(parts[2:]).strip()
-                                devices[mac] = name
-
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"], devices)
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
-
-    def scan_devices_background(self):
-        """Background scanning process"""
-        self.scan_process = subprocess.Popen(
-            ["bluetoothctl"],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            universal_newlines=True
-        )
-
-        self.scan_process.stdin.write("power on\n")
-        self.scan_process.stdin.write("agent on\n")
-        self.scan_process.stdin.write("default-agent\n")
-        self.scan_process.stdin.write("scan on\n")
-        self.scan_process.stdin.flush()
-
-        try:
-            while self.scanning:
-                line = self.scan_process.stdout.readline()
-                if "NEW" in line:
-                    parts = line.strip().split()
-                    if len(parts) >= 4:
-                        mac = parts[2]
-                        name = " ".join(parts[3:])
-                        if not re.search(r'([0-9A-F]{2}-){2,}', name, re.IGNORECASE):
-                            device_queue.put((mac, name))
-                            # Notify connected clients about new device
-                            if self.notifying:
-                                response = self.encode_response(MESSAGE_TYPES["DEVICE_FOUND"],
-                                                             {"mac": mac, "name": name})
-                                self.value = response
-                                self.PropertiesChanged(GATT_CHRC_IFACE,
-                                                     {'Value': dbus.Array(self.value)}, [])
-        except Exception as e:
-            logger.error(f"Scan error: {e}")
-        finally:
-            self.scanning = False
-            if self.scan_process and self.scan_process.stdin:
-                self.scan_process.stdin.write("scan off\n")
-                self.scan_process.stdin.flush()
-            if self.scan_process:
-                self.scan_process.kill()
-                self.scan_process = None
 
     @dbus.service.method(GATT_CHRC_IFACE, in_signature='aya{sv}')
     def WriteValue(self, value, options):
-        logger.warning("WRITE-VALUE CALLED  len=%d  bytes=%s  opts=%s",
-                   len(value), list(value), options)
+     
         """Handle incoming messages"""
         logger.debug(f"WriteValue called with value: {value}, options: {options}")
+        logger.debug(f"=== Backend WriteValue Debug ===")
+        logger.debug(f"Raw value received: {value}")
+        logger.debug(f"Value as hex: {[hex(b) for b in value]}")
+        logger.debug(f"Value as bytes: {[b for b in value]}")
+        logger.debug(f"Options: {options}")
+    
 
         # Handle device connection
         device = options.get('device', None)
@@ -766,26 +435,18 @@ class Characteristic(dbus.service.Object):
             if message_type == MESSAGE_TYPES["PING"]:
                 response = [dbus.Byte(MESSAGE_TYPES["PONG"])]
                 response.extend([dbus.Byte(b) for b in data.get("count", 0).to_bytes(4, byteorder='big')])
-            elif message_type == MESSAGE_TYPES["START_SCAN"]:
-                response = self.handle_start_scan()
-            elif message_type == MESSAGE_TYPES["STOP_SCAN"]:
-                response = self.handle_stop_scan()
-            elif message_type == MESSAGE_TYPES["GET_DEVICES"]:
-                response = self.handle_get_devices()
-            elif message_type == MESSAGE_TYPES["PAIR"]:
-                response = self.handle_pair(data)
-            elif message_type == MESSAGE_TYPES["SET_VOLUME"]:
-                response = self.handle_set_volume(data)
-            elif message_type == MESSAGE_TYPES["SET_LATENCY"]:
-                response = self.handle_set_latency(data)
-            elif message_type == MESSAGE_TYPES["CONNECT"]:
-                response = self.handle_connect(data)
+            elif message_type == MESSAGE_TYPES["CONNECT_ONE"]:
+                response = self.handle_connect_one(data)
             elif message_type == MESSAGE_TYPES["DISCONNECT"]:
                 response = self.handle_disconnect(data)
+            elif message_type == MESSAGE_TYPES["SET_LATENCY"]:
+                response = self.handle_set_latency(data)
+            elif message_type == MESSAGE_TYPES["SET_VOLUME"]:
+                response = self.handle_set_volume(data)
             elif message_type == MESSAGE_TYPES["GET_PAIRED_DEVICES"]:
-                response = self.handle_get_paired_devices()
-            elif message_type == MESSAGE_TYPES["CONNECT_ONE"]:
-                response = self.handle_connect_one(data)  
+                response = self.handle_get_paired_devices(data)
+            elif message_type == MESSAGE_TYPES["SET_MUTE"]:
+                response = self.handle_set_mute(data)
             else:
                 response = self.encode_response(MESSAGE_TYPES["ERROR"],
                                              {"error": "Unknown message type"})
@@ -837,6 +498,211 @@ class Characteristic(dbus.service.Object):
                 MESSAGE_TYPES["ERROR"],
                 {"error": str(e)}
             )
+        
+    def handle_disconnect(self, data):
+        """
+        DISCONNECT_ONE — expected payload:
+        { "mac": "AA:BB:CC:DD:EE:FF" }
+        Queues an Intent.DISCONNECT job for the background ConnectionService.
+        """
+        try:
+            mac = data.get("mac")
+            if not mac:
+                return self.encode_response(
+                    MESSAGE_TYPES["ERROR"],
+                    {"error": "Missing mac"}
+                )
+
+            # Push the work item to the singleton service queue
+            service.submit(Intent.DISCONNECT, {"mac": mac})
+
+            return self.encode_response(
+                MESSAGE_TYPES["SUCCESS"],
+                {"queued": True}
+            )
+
+        except Exception as e:
+            logger.error(f"handle_disconnect_one: {e}")
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": str(e)}
+            )
+        
+
+
+    def handle_set_latency(self, data):
+        """
+        SET_LATENCY — expected payload:
+          { "mac": "AA:BB:CC:DD:EE:FF", "latency": 100 }
+        """
+        # Validate input
+        mac = data.get("mac")
+        latency = data.get("latency")
+        if not mac or latency is None:
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": "Missing 'mac' or 'latency'"}
+            )
+
+        try:
+            # Exactly your existing loopback logic:
+            mac_fmt = mac.replace(":", "_")
+            sink_prefix = f"bluez_sink.{mac_fmt}"
+            # create_loopback is in your pulseaudio_service module
+            success = create_loopback(sink_prefix, latency_ms=latency)
+
+            if success:
+                return self.encode_response(
+                    MESSAGE_TYPES["SUCCESS"],
+                    {"message": f"Latency for {mac} set to {latency} ms"}
+                )
+            else:
+                return self.encode_response(
+                    MESSAGE_TYPES["ERROR"],
+                    {"error": f"Failed to create loopback for {mac}"}
+                )
+
+        except Exception as e:
+            logger.error(f"handle_set_latency: {e}")
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": str(e)}
+            )
+        
+    def handle_set_volume(self, data):
+        mac     = data.get("mac")
+        volume  = data.get("volume")
+        balance = data.get("balance", 0.5)
+
+        if mac is None or volume is None:
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": "Missing 'mac' or 'volume'"}
+            )
+
+        try:
+            success, left, right = set_stereo_volume(mac, balance, int(volume))
+
+            if success:
+                return self.encode_response(
+                    MESSAGE_TYPES["SUCCESS"],
+                    {
+                      "mac": mac,
+                      "left": left,
+                      "right": right
+                    }
+                )
+            else:
+                return self.encode_response(
+                    MESSAGE_TYPES["ERROR"],
+                    {"error": f"Failed to set volume for {mac}"}
+                )
+
+        except Exception as e:
+            logger.error(f"handle_set_volume: {e}")
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": str(e)}
+            )
+        
+
+    def handle_get_paired_devices(self, data):
+        om = dbus.Interface(
+            self.bus.get_object("org.bluez", "/"),
+            "org.freedesktop.DBus.ObjectManager"
+        )
+        objects = om.GetManagedObjects()
+
+        devices = {}
+        for path, ifaces in objects.items():
+            dev = ifaces.get("org.bluez.Device1")
+            if not dev or not dev.get("Paired", False):
+                continue
+            mac  = dev.get("Address")
+            name = dev.get("Alias") or dev.get("Name") or mac
+            devices[mac] = name
+
+        if not devices:
+            return self.encode_response(
+                MESSAGE_TYPES["SUCCESS"],
+                {"message": "No devices are paired."}
+            )
+        return self.encode_response(
+            MESSAGE_TYPES["SUCCESS"],
+            devices
+        )
+    
+    
+    def handle_set_mute(self, data):
+        """
+        SET_MUTE — payload:
+          { "mac": "AA:BB:CC:DD:EE:FF", "mute": true }
+        """
+        mac  = data.get("mac")
+        mute = data.get("mute")
+
+        if mac is None or mute is None:
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": "Missing 'mac' or 'mute'"}
+            )
+
+        try:
+            # list sinks
+            proc = subprocess.run(
+                ["pactl", "list", "sinks", "short"],
+                capture_output=True, text=True
+            )
+            if proc.returncode != 0:
+                err = proc.stderr.strip()
+                logger.error(f"Error getting sink list: {err}")
+                return self.encode_response(
+                    MESSAGE_TYPES["ERROR"],
+                    {"error": "Failed to get sink list"}
+                )
+
+            # find the sink matching this MAC
+            mac_fmt = mac.replace(":", "_")
+            sink_name = None
+            for line in proc.stdout.splitlines():
+                if mac_fmt in line:
+                    sink_name = line.split()[1]
+                    break
+
+            if not sink_name:
+                return self.encode_response(
+                    MESSAGE_TYPES["ERROR"],
+                    {"error": f"No sink found for device {mac}"}
+                )
+
+            # mute or unmute
+            flag = "1" if mute else "0"
+            subprocess.run(
+                ["pactl", "set-sink-mute", sink_name, flag],
+                check=True
+            )
+            action = "Muted" if mute else "Unmuted"
+            logger.info(f"{action} speaker {mac} ({sink_name})")
+
+            return self.encode_response(
+                MESSAGE_TYPES["SUCCESS"],
+                {"mac": mac, "mute": mute}
+            )
+
+        except subprocess.CalledProcessError as e:
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": f"Command failed: {e}"}
+            )
+        except Exception as e:
+            logger.error(f"handle_set_mute: {e}")
+            return self.encode_response(
+                MESSAGE_TYPES["ERROR"],
+                {"error": str(e)}
+            )
+    
+
+
 
     @dbus.service.method(GATT_CHRC_IFACE)
     def StartNotify(self):
@@ -979,11 +845,10 @@ def main():
     # Create device manager
     device_manager = DeviceManager(bus, adapter_path)
 
-    # Reset the adapter to a clean state
     reset_adapter(adapter)
 
+    agent = Agent(bus)  
     # Create and register the agent
-    agent = Agent(bus)
     agent_manager = dbus.Interface(
         bus.get_object(BLUEZ_SERVICE_NAME, '/org/bluez'),
         AGENT_MANAGER_INTERFACE
@@ -1024,7 +889,7 @@ def main():
     # Create the GATT service and characteristic
     service = Service(bus, 0, SERVICE_UUID, True)
     char = Characteristic(bus, 0, CHARACTERISTIC_UUID, ['read', 'write', 'write-without-response', 'notify'], service)
-    char.set_device_manager(device_manager)  # Set the device manager
+    char.set_device_manager(device_manager)
     service.add_characteristic(char)
 
     # Create the GATT application
