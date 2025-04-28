@@ -153,7 +153,7 @@ class DeviceManager:
     def _publish(self):
         if not self._char:
             return
-        payload = {"connected": list(self._status.keys())}
+        payload = {"connected": list(self.connected)}
         self._char.push_status(payload) 
 
     def _update_status(self, mac: str, connected: bool, alias: str):
@@ -426,12 +426,12 @@ class Characteristic(dbus.service.Object):
     def WriteValue(self, value, options):
      
         """Handle incoming messages"""
-        logger.debug(f"WriteValue called with value: {value}, options: {options}")
-        logger.debug(f"=== Backend WriteValue Debug ===")
-        logger.debug(f"Raw value received: {value}")
-        logger.debug(f"Value as hex: {[hex(b) for b in value]}")
-        logger.debug(f"Value as bytes: {[b for b in value]}")
-        logger.debug(f"Options: {options}")
+        # logger.debug(f"WriteValue called with value: {value}, options: {options}")
+        # logger.debug(f"=== Backend WriteValue Debug ===")
+        # logger.debug(f"Raw value received: {value}")
+        # logger.debug(f"Value as hex: {[hex(b) for b in value]}")
+        # logger.debug(f"Value as bytes: {[b for b in value]}")
+        # logger.debug(f"Options: {options}")
 
 
         # Check if this is a CCCD write (notification enable/disable)
@@ -738,11 +738,8 @@ class Characteristic(dbus.service.Object):
             return
         self.notifying = True
         logger.info("Notifications enabled via StartNotify")
-        # Send initial notification if needed
-        if self.value:
-            self.PropertiesChanged(GATT_CHRC_IFACE, {'Value': dbus.Array(self.value)}, [])
-            self._emit_notify()
-
+   
+      
 
     @dbus.service.method(GATT_CHRC_IFACE)
     def StopNotify(self):
