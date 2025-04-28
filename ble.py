@@ -6,10 +6,9 @@ from gi.repository import GLib
 from svc_singleton import service
 from connection_service import Intent
 import subprocess
-from utils.pulseaudio_service import create_loopback
+from utils.pulseaudio_service import create_loopback, remove_loopback_for_device
 from endpoints.volume import set_stereo_volume
-
-
+from phone_connection_agent import PhonePairingAgent, CAPABILITY
 # Set up logging
 logging.basicConfig(
     level=logging.DEBUG,
@@ -33,6 +32,7 @@ ADAPTER_INTERFACE = 'org.bluez.Adapter1'
 DEVICE_INTERFACE = 'org.bluez.Device1'
 AGENT_PATH = '/org/bluez/example/agent'
 
+_launched_classic = False
 # Message types
 MESSAGE_TYPES = {
     "PING": 0x01,
@@ -101,24 +101,24 @@ def reset_adapter(adapter):
         GLib.timeout_add(2000, lambda: None)  # Longer delay to ensure power down
         adapter_props.Set(ADAPTER_INTERFACE, "Powered", dbus.Boolean(True))
 
-        # Remove all devices
-        objects = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, '/'), DBUS_OM_IFACE).GetManagedObjects()
-        for path, interfaces in objects.items():
-            if 'org.bluez.Device1' in interfaces:
-                device = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, path), 'org.bluez.Device1')
-                device_props = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, path), DBUS_PROP_IFACE)
-                try:
-                    # Remove trusted status and disconnect
-                    device_props.Set('org.bluez.Device1', 'Trusted', dbus.Boolean(False))
-                    device.Disconnect()
-                except:
-                    pass
-                try:
-                    adapter.RemoveDevice(dbus.ObjectPath(path))
-                except:
-                    pass
+        # # Remove all devices
+        # objects = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, '/'), DBUS_OM_IFACE).GetManagedObjects()
+        # for path, interfaces in objects.items():
+        #     if 'org.bluez.Device1' in interfaces:
+        #         device = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, path), 'org.bluez.Device1')
+        #         device_props = dbus.Interface(bus.get_object(BLUEZ_SERVICE_NAME, path), DBUS_PROP_IFACE)
+        #         try:
+        #             # Remove trusted status and disconnect
+        #             device_props.Set('org.bluez.Device1', 'Trusted', dbus.Boolean(False))
+        #             device.Disconnect()
+        #         except:
+        #             pass
+        #         try:
+        #             adapter.RemoveDevice(dbus.ObjectPath(path))
+        #         except:
+        #             pass
 
-        # Wait a bit after cleaning up devices
+        # # Wait a bit after cleaning up devices
         GLib.timeout_add(1000, lambda: None)
 
         logger.info("Adapter reset successfully")
@@ -135,6 +135,34 @@ class DeviceManager:
         self.max_reconnect_attempts = 3
         self.pairing_in_progress = set()
         self.setup_device_monitoring()
+        self._status = {}          # mac → {"path": <dbus>, "alias": str, "connected": bool}
+        self._char   = None        # will hold a ref to the GATT characteristic
+        self.connected = set()   
+
+    @staticmethod
+    def _extract_mac(path: str) -> str | None:
+        if "dev_" not in path:
+            return None
+        return path.split("/")[-1].replace("dev_", "").replace("_", ":").upper()
+
+    # called once from main() after you instantiate Characteristic
+    def attach_characteristic(self, char):
+        self._char = char
+
+    # helper that recomputes full status & notifies
+    def _publish(self):
+        if not self._char:
+            return
+        payload = {"connected": list(self._status.keys())}
+        self._char.push_status(payload) 
+
+    def _update_status(self, mac: str, connected: bool, alias: str):
+        self._status[mac] = {
+            "alias": alias,
+            "connected": connected
+        }
+        logger.info(f"[STATUS] {mac} → {'✓ connected' if connected else '✗ disconnected'}")
+        self._publish()
 
     def setup_device_monitoring(self):
         obj = self.bus.get_object('org.freedesktop.DBus', '/org/freedesktop/DBus')
@@ -176,8 +204,39 @@ class DeviceManager:
             self.device_found(path)
 
     def properties_changed(self, interface, changed, invalidated, path):
+        # logger.info(f"[DeviceManager] PropertiesChanged: iface={interface}, path={path}, changed={changed}")
+        global _launched_classic
         if interface != DEVICE_INTERFACE:
             return
+
+        
+        if interface == DEVICE_INTERFACE and 'Connected' in changed:
+        
+            connected = bool(changed['Connected'])
+            mac       = self._extract_mac(path)         # guaranteed by first-seen block
+            logger.info(f"[BlueZ] {mac} is now "
+                f"{'✓ CONNECTED' if connected else '✗ DISCONNECTED'}")
+
+            if connected:
+                # --- NEW connection -------------------------------------------------
+                if mac not in self.connected:        # first time we see it
+                    self.connected.add(mac)
+                    create_loopback(mac)   
+                    logger.info(f"created loopback for {mac}")      # create loopback for this device
+
+
+
+            else:
+                # --- DISCONNECTION ---------------------------------------------------
+                if mac in self.connected:
+                    self.connected.remove(mac)
+                    remove_loopback_for_device(mac)
+                    logger.info(f"{mac} disconnected – now {len(self.connected)} left")
+
+
+            self._update_status(mac, connected, changed.get('Alias', mac))  
+            
+        
 
         if path in self.devices:
             dev_props = self.devices[path]['props']
@@ -186,18 +245,16 @@ class DeviceManager:
             if 'Paired' in changed:
                 if changed['Paired']:
                     logger.info(f"Device paired successfully: {path}")
+        
+
+
                 else:
                     logger.info(f"Device unpaired: {path}")
     
 
-            # Handle connection state changes
-            if 'Connected' in changed:
-                if not changed['Connected']:
-                    logger.info(f"Device disconnected: {path}")
-                   
-                else:
-                    logger.info(f"Device connected: {path}")
-           
+
+               
+            
 
     def device_found(self, path):
         if path in self.devices:
@@ -229,60 +286,6 @@ class DeviceManager:
             logger.error(f"Failed to register device {path}: {e}")
 
 
-
-class Agent(dbus.service.Object):
-    def __init__(self, bus):
-        super().__init__(bus, AGENT_PATH)
-        self.bus = bus
-        self.paired_devices = set()
-        logger.info("Agent initialized")
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="", out_signature="")
-    def Release(self):
-        logger.info("Agent released")
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="os", out_signature="")
-    def AuthorizeService(self, device, uuid):
-        logger.info(f"AuthorizeService: {device} {uuid}")
-        # Always authorize the service
-        return
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="o", out_signature="s")
-    def RequestPinCode(self, device):
-        logger.info(f"RequestPinCode: {device}")
-        return "000000"
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="o", out_signature="u")
-    def RequestPasskey(self, device):
-        logger.info(f"RequestPasskey: {device}")
-        return dbus.UInt32(0)
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="ouq", out_signature="")
-    def DisplayPasskey(self, device, passkey, entered):
-        logger.info(f"DisplayPasskey: {device} {passkey} {entered}")
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="os", out_signature="")
-    def DisplayPinCode(self, device, pincode):
-        logger.info(f"DisplayPinCode: {device} {pincode}")
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="ou", out_signature="")
-    def RequestConfirmation(self, device, passkey):
-        logger.info(f"RequestConfirmation: {device} {passkey}")
-        return
-
-    @dbus.service.method(AGENT_INTERFACE,
-                        in_signature="o", out_signature="")
-    def RequestAuthorization(self, device):
-        logger.info(f"RequestAuthorization: {device}")
-        return
-
 class Characteristic(dbus.service.Object):
     def __init__(self, bus, index, uuid, flags, service):
         self.path = service.path + '/char' + str(index)
@@ -298,6 +301,33 @@ class Characteristic(dbus.service.Object):
         self.scan_process = None
         dbus.service.Object.__init__(self, bus, self.path)
         logger.info(f"Characteristic created with UUID: {uuid}")
+
+    def notify_connected(self, macs: list[str]):
+        self.value = self.encode_response(MESSAGE_TYPES["SUCCESS"],
+                                        {"connected": macs})
+        if self.notifying:
+            self.PropertiesChanged(GATT_CHRC_IFACE,
+                                {'Value': dbus.Array(self.value)}, [])
+            
+    def push_status(self, payload: dict):
+        """
+        Encode *payload* as JSON and fire a notification.
+        Example payload the phone will receive:
+            {
+              "connected": ["AA:BB:…", "11:22:…"],
+              "playback":  {"AA:BB:…": {"latency": 120}, ...}
+            }
+
+        """
+        logger.debug(f"[PUSH]   {json.dumps(payload)}")
+
+        self.value = self.encode_response(MESSAGE_TYPES["SUCCESS"], payload)
+        if self.notifying:                            # only if the phone wrote CCCD
+            self.PropertiesChanged(
+                GATT_CHRC_IFACE,
+                {'Value': dbus.Array(self.value)},    # new value
+                []                                    # no invalidated props
+            )
 
     def set_device_manager(self, device_manager):
         self.device_manager = device_manager
@@ -364,33 +394,14 @@ class Characteristic(dbus.service.Object):
 
 
 
-
-    def handle_pair(self, data):
-        """Handle PAIR message"""
-        try:
-            if not all(key in data for key in ["configID", "configName", "devices", "settings"]):
-                return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": "Missing required fields"})
-
-            cmd = [
-                "./connect_configuration.sh",
-                str(data["configID"]),
-                data["configName"],
-                json.dumps(data["devices"]),
-                json.dumps(data["settings"])
-            ]
-            subprocess.run(cmd, check=True)
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"], {"message": "Pairing completed"})
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"], {"error": str(e)})
-
-
  
     def handle_connect(self, data):
         """
         CONNECT_ONE – expect:
             {
             "targetSpeaker": { "mac": "AA:BB:CC:DD:EE:FF", "name": "Friendly" },
-            "settings": { "AA:BB:...": {...}, … }
+            "settings": { "AA:BB:...": {...}, … },
+            "allowed": [ "AA:BB:CC:DD:EE:FF", ... ]
             }
         """
         try:
@@ -398,7 +409,7 @@ class Characteristic(dbus.service.Object):
             payload = {
                 "mac":           tgt["mac"],
                 "friendly_name": tgt.get("name", ""),
-                "allowed":       list(data.get("settings", {}).keys()),
+                "allowed":       data.get("allowed", []),
             }
             service.submit(Intent.CONNECT_ONE, payload)
             return self.encode_response(MESSAGE_TYPES["SUCCESS"],
@@ -421,6 +432,17 @@ class Characteristic(dbus.service.Object):
         logger.debug(f"Value as hex: {[hex(b) for b in value]}")
         logger.debug(f"Value as bytes: {[b for b in value]}")
         logger.debug(f"Options: {options}")
+
+
+        # Check if this is a CCCD write (notification enable/disable)
+        if len(value) == 2 and value[0] == 0x01:  # CCCD write
+            self.cccd_value = value
+            if value[1] == 0x01:  # Enable notifications
+                self.notifying = True
+                logger.info("Notifications enabled via CCCD")
+            else:  # Disable notifications
+                self.notifying = False
+                logger.info("Notifications disabled via CCCD")
     
 
         # Handle device connection
@@ -482,9 +504,11 @@ class Characteristic(dbus.service.Object):
             payload = {
                 "mac":           tgt["mac"],
                 "friendly_name": tgt.get("name", ""),
-                "allowed":       list(data.get("settings", {}).keys()),
+                "allowed":       data.get("allowed", []),
             }
 
+            logging.info(f"handle_connect_one: {payload}")
+            
             # Push the work item to the singleton service queue
             service.submit(Intent.CONNECT_ONE, payload)
 
@@ -700,6 +724,9 @@ class Characteristic(dbus.service.Object):
                 MESSAGE_TYPES["ERROR"],
                 {"error": str(e)}
             )
+        
+    
+
     
 
 
@@ -707,16 +734,23 @@ class Characteristic(dbus.service.Object):
     @dbus.service.method(GATT_CHRC_IFACE)
     def StartNotify(self):
         if self.notifying:
+            logger.info("Already notifying, ignoring StartNotify")
             return
         self.notifying = True
-        logger.info("Notifications enabled")
+        logger.info("Notifications enabled via StartNotify")
+        # Send initial notification if needed
+        if self.value:
+            self.PropertiesChanged(GATT_CHRC_IFACE, {'Value': dbus.Array(self.value)}, [])
+            self._emit_notify()
+
 
     @dbus.service.method(GATT_CHRC_IFACE)
     def StopNotify(self):
         if not self.notifying:
+            logger.info("Not notifying, ignoring StopNotify")
             return
         self.notifying = False
-        logger.info("Notifications disabled")
+        logger.info("Notifications disabled via StopNotify")
 
     @dbus.service.signal(DBUS_PROP_IFACE,
                         signature='sa{sv}as')
@@ -737,7 +771,7 @@ class Advertisement(dbus.service.Object):
         self.solicit_uuids = None
         self.service_data = None
         self.discoverable = True
-        self.pairing = True  # Changed to True to enable pairing
+        self.pairing      = False 
         dbus.service.Object.__init__(self, bus, self.path)
         logger.info("Advertisement created")
 
@@ -752,7 +786,7 @@ class Advertisement(dbus.service.Object):
                 'LocalName': dbus.String(self.local_name),
                 'IncludeTxPower': dbus.Boolean(self.include_tx_power),
                 'Discoverable': dbus.Boolean(self.discoverable),
-                'Pairing': dbus.Boolean(self.pairing)
+                # 'Pairing': dbus.Boolean(self.pairing)
             }
         }
         return props
@@ -842,12 +876,15 @@ def main():
 
     logger.info(f"Using Bluetooth adapter: {adapter_path}")
 
+    
+
     # Create device manager
     device_manager = DeviceManager(bus, adapter_path)
 
-    reset_adapter(adapter)
+    # reset_adapter(adapter)
 
-    agent = Agent(bus)  
+ 
+    agent = PhonePairingAgent(bus, AGENT_PATH)  
     # Create and register the agent
     agent_manager = dbus.Interface(
         bus.get_object(BLUEZ_SERVICE_NAME, '/org/bluez'),
@@ -855,7 +892,7 @@ def main():
     )
 
     try:
-        agent_manager.RegisterAgent(AGENT_PATH, 'NoInputNoOutput')
+        agent_manager.RegisterAgent(AGENT_PATH, CAPABILITY)
         agent_manager.RequestDefaultAgent(AGENT_PATH)
         logger.info("Agent registered")
     except Exception as e:
@@ -891,6 +928,8 @@ def main():
     char = Characteristic(bus, 0, CHARACTERISTIC_UUID, ['read', 'write', 'write-without-response', 'notify'], service)
     char.set_device_manager(device_manager)
     service.add_characteristic(char)
+
+    device_manager.attach_characteristic(char)  
 
     # Create the GATT application
     app = Application(bus)
