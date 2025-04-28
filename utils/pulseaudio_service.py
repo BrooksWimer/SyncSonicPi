@@ -193,7 +193,7 @@ def setup_pulseaudio():
 
 
 
-def create_loopback(expected_sink_prefix: str, latency_ms: int = 100, wait_seconds: int = 10) -> bool:
+def create_loopback(expected_sink_prefix: str, latency_ms: int = 100, wait_seconds: int = 20) -> bool:
     """
     Waits for a specific sink to appear (matching by prefix), unloads any existing loopbacks for it,
     and then creates a clean new loopback.

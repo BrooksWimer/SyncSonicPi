@@ -132,7 +132,6 @@ class ConnectionService:
             except Empty:
                 continue
             
-            setup_pulseaudio()
 
             if intent is Intent.SET_EXPECTED:
                 macs: List[str] = [m.upper() for m in payload["macs"]]
@@ -149,17 +148,17 @@ class ConnectionService:
 
                 self.expected.add(mac)          # so loopback sync recognises it
 
-                subprocess.run(
-                    ["/home/syncsonic2/reset_bt_adapters.sh"],
-                    check=True,
-                    timeout=600           # seconds
-                )
+                # subprocess.run(
+                #     ["/home/syncsonic2/reset_bt_adapters.sh"],
+                #     check=True,
+                #     timeout=600           # seconds
+                # )
 
-                time.sleep(2)              # allow BlueZ to re-enumerate HCIs
-                self.scan.refresh_adapters()
-                log("✅ Adapters reset & ScanManager refreshed")
+                # time.sleep(2)              # allow BlueZ to re-enumerate HCIs
+                # self.scan.refresh_adapters()
+                # log("✅ Adapters reset & ScanManager refreshed")
 
-                # Re‑evaluate object tree each time
+                # # Re‑evaluate object tree each time
 
                 obj_mgr = self.bus.get("org.bluez", "/").GetManagedObjects()
                 status, ctrl_mac, dc_list = connect_one_plan(mac, allow, obj_mgr)

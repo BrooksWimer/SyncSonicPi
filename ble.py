@@ -6,7 +6,7 @@ from gi.repository import GLib
 from svc_singleton import service
 from connection_service import Intent
 import subprocess
-from utils.pulseaudio_service import create_loopback, remove_loopback_for_device
+from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from endpoints.volume import set_stereo_volume
 from phone_connection_agent import PhonePairingAgent, CAPABILITY
 # Set up logging
@@ -221,7 +221,8 @@ class DeviceManager:
                 # --- NEW connection -------------------------------------------------
                 if mac not in self.connected:        # first time we see it
                     self.connected.add(mac)
-                    create_loopback(mac)   
+                    sink_name = f"bluez_sink.{mac.replace(':', '_')}.a2dp_sink"
+                    create_loopback(sink_name)   
                     logger.info(f"created loopback for {mac}")      # create loopback for this device
 
 
@@ -859,6 +860,9 @@ class Application(dbus.service.Object):
 def main():
     global mainloop
     global bus
+
+    logger.info("Setting up pulseaudio...")
+    setup_pulseaudio()
 
     logger.info("Starting BLE server...")
 
