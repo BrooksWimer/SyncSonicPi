@@ -9,6 +9,13 @@ import subprocess
 from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from endpoints.volume import set_stereo_volume
 from phone_connection_agent import PhonePairingAgent, CAPABILITY
+import os
+
+# Getting reserved vaiable
+reserved = os.getenv("RESERVED_HCI")
+if not reserved:
+    raise RuntimeError("RESERVED_HCI not set – cannot pick phone adapter")
+
 # Set up logging
 logging.basicConfig(
     level=logging.DEBUG,
@@ -30,7 +37,7 @@ AGENT_INTERFACE = 'org.bluez.Agent1'
 AGENT_MANAGER_INTERFACE = 'org.bluez.AgentManager1'
 ADAPTER_INTERFACE = 'org.bluez.Adapter1'
 DEVICE_INTERFACE = 'org.bluez.Device1'
-AGENT_PATH = '/org/bluez/example/agent'
+AGENT_PATH = "/com/syncsonic/pair_agent"
 
 _launched_classic = False
 # Message types
@@ -137,13 +144,31 @@ class DeviceManager:
         self.setup_device_monitoring()
         self._status = {}          # mac → {"path": <dbus>, "alias": str, "connected": bool}
         self._char   = None        # will hold a ref to the GATT characteristic
-        self.connected = set()   
+        self.connected = set()
+     
 
     @staticmethod
     def _extract_mac(path: str) -> str | None:
         if "dev_" not in path:
             return None
         return path.split("/")[-1].replace("dev_", "").replace("_", ":").upper()
+    
+
+    def _devices_on_adapter(self, adapter_prefix):
+        """Return a list of MACs for devices currently Connected under that adapter."""
+        om  = self.bus.get_object(BLUEZ_SERVICE_NAME, "/")
+        mgr = dbus.Interface(om, DBUS_OM_IFACE)
+        objs = mgr.GetManagedObjects()
+
+        connected = []
+        for obj_path, ifaces in objs.items():
+            dev = ifaces.get("org.bluez.Device1")
+            if not dev or not dev.get("Connected", False):
+                continue
+            # path is like /org/bluez/hciX/dev_XX_YY_…
+            if obj_path.startswith(adapter_prefix):
+                connected.append(dev["Address"])
+        return connected
 
     # called once from main() after you instantiate Characteristic
     def attach_characteristic(self, char):
@@ -216,16 +241,64 @@ class DeviceManager:
             mac       = self._extract_mac(path)         # guaranteed by first-seen block
             logger.info(f"[BlueZ] {mac} is now "
                 f"{'✓ CONNECTED' if connected else '✗ DISCONNECTED'}")
+            
 
             if connected:
+
                 # --- NEW connection -------------------------------------------------
-                if mac not in self.connected:        # first time we see it
+                if mac not in self.connected:
+                    dev_obj   = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
+                    dev_props = dbus.Interface(dev_obj, DBUS_PROP_IFACE)
+
+                    adapter_prefix = "/".join(path.split("/")[:4])
+
+                    # dynamic check instead of your dict:
+                    existing = self._devices_on_adapter(adapter_prefix)
+                    others = [m for m in existing if m != mac]
+                    if others:
+                            # somebody’s already using that adapter
+                            dev_iface = dbus.Interface(dev_obj, DEVICE_INTERFACE)
+                            dev_iface.Disconnect()
+                            logger.warning(
+                                f"{mac} tried to connect on {adapter_prefix}, "
+                                f"but {others[0]} is already using it. "
+                                "Click connect to find an open port."
+                            )
+                            return
+
+                    # 1) Only speakers with A2DP in their UUID list
+                    try:
+                        uuids = dev_props.Get(DEVICE_INTERFACE, "UUIDs")
+                    except Exception:
+                        uuids = []
+                    if not any("110b" in u.lower() for u in uuids):
+                        logger.info(f"{mac} has no A2DP UUIDs, skipping")
+                        return
+
+                    # 2) Check if BlueZ already has a MediaTransport1 for this device
+                    om  = self.bus.get_object(BLUEZ_SERVICE_NAME, "/")
+                    mgr = dbus.Interface(om, DBUS_OM_IFACE)
+                    objs = mgr.GetManagedObjects()
+                    fmt = mac.replace(":", "_")
+                    has_transport = any(
+                        "org.bluez.MediaTransport1" in ifaces and fmt in path
+                        for path, ifaces in objs.items()
+                    )
+
+                    # 3) If no transport yet, trigger profile connect
+                    dev_iface = dbus.Interface(dev_obj, DEVICE_INTERFACE)
+                    if not has_transport:
+                        try:
+                            dev_iface.ConnectProfile("0000110b-0000-1000-8000-00805f9b34fb")
+                            logger.info(f"Triggered A2DP connect for {mac}")
+                        except Exception as e:
+                            logger.error(f"Failed ConnectProfile on {mac}: {e}")
+
+                    sink_name = f"bluez_sink.{fmt}.a2dp_sink"
+                    # 5) Finally create the loopback
                     self.connected.add(mac)
-                    sink_name = f"bluez_sink.{mac.replace(':', '_')}.a2dp_sink"
-                    create_loopback(sink_name)   
-                    logger.info(f"created loopback for {mac}")      # create loopback for this device
-
-
+                    create_loopback(sink_name)
+                    logger.info(f"Created loopback for {mac}")
 
             else:
                 # --- DISCONNECTION ---------------------------------------------------
@@ -509,9 +582,13 @@ class Characteristic(dbus.service.Object):
             }
 
             logging.info(f"handle_connect_one: {payload}")
+
+            if self.device_manager:
+                self.device_manager.connected.add(tgt["mac"])
             
             # Push the work item to the singleton service queue
             service.submit(Intent.CONNECT_ONE, payload)
+
 
             return self.encode_response(
                 MESSAGE_TYPES["SUCCESS"],
@@ -519,6 +596,9 @@ class Characteristic(dbus.service.Object):
             )
         except Exception as e:
             logger.error(f"handle_connect_one: {e}")
+            if self.device_manager:
+                self.device_manager.connected.discard(tgt["mac"])
+            
             return self.encode_response(
                 MESSAGE_TYPES["ERROR"],
                 {"error": str(e)}
@@ -870,7 +950,7 @@ def main():
     bus = dbus.SystemBus()
 
     # Find the Bluetooth adapter (prefer hci1)
-    adapter_path, adapter = find_adapter(bus, 'hci0')
+    adapter_path, adapter = find_adapter(bus, reserved)
     if not adapter_path:
         logger.error("No Bluetooth adapter found")
         sys.exit(1)

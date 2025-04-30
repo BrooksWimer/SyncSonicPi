@@ -12,6 +12,11 @@ from utils.pulseaudio_service import setup_pulseaudio
 from device_event_watcher import DeviceEventWatcher
 from utils.global_state import get_hci_name_for_adapter 
 from bus_manager import get_bus
+import os
+
+reserved = os.getenv("RESERVED_HCI")
+if not reserved:
+    raise RuntimeError("RESERVED_HCI not set – cannot pick phone adapter")
 
 def get_managed_objects(bus):
     return bus.get("org.bluez", "/").GetManagedObjects()
@@ -398,7 +403,7 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
         if "org.bluez.Adapter1" in ifaces:
             addr = ifaces["org.bluez.Adapter1"].get("Address", "").upper()
             hci_name = path.split("/")[-1]
-            if hci_name == "hci0":
+            if hci_name == reserved:
                 continue  # Skip reserved adapter
             adapters[addr] = path
 

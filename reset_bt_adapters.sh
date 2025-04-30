@@ -1,15 +1,16 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-EXPECTED_ADAPTER_COUNT="${1:-4}"  # Include all expected hciX passed from the frontend, if not passed default to 4 
-HUB_PATH="1-1"             # Your USB hub's device path
+EXPECTED_ADAPTER_COUNT="${1:-4}"  # how many HCIs you expect
+HUB_PATH="1-1"                    # your USB hub’s device path
+ENVFILE=/etc/default/syncsonic     # where we’ll record the reserved HCI
 
 log() {
   echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
 }
 
 get_mac() {
-  hciconfig "$1" | grep 'BD Address' | awk '{print $3}'
+  hciconfig "$1" | awk '/BD Address/ { print $3 }'
 }
 
 detect_adapters() {
@@ -17,168 +18,126 @@ detect_adapters() {
 }
 
 get_usb_device_for_hci() {
-  local hci="$1"
-  local path
+  local hci="$1" path
   path=$(readlink -f /sys/class/bluetooth/"$hci"/device)
-
   while [[ -n "$path" && ! $(basename "$path") =~ ^[0-9]-[0-9](\.[0-9]+)*$ ]]; do
     path=$(dirname "$path")
   done
-
-  echo "$(basename "$path")"
+  basename "$path"
 }
 
-
 reset_usb_device() {
-  local dev_name="$1"
-  log "Unbinding USB device $dev_name..."
-  echo "$dev_name" | sudo tee /sys/bus/usb/drivers/usb/unbind > /dev/null
+  local dev="$1"
+  log "Unbinding USB device $dev…"
+  echo "$dev" | sudo tee /sys/bus/usb/drivers/usb/unbind >/dev/null
   sleep 1
-  log "Rebinding USB device $dev_name..."
-  echo "$dev_name" | sudo tee /sys/bus/usb/drivers/usb/bind > /dev/null
+  log "Rebinding USB device $dev…"
+  echo "$dev" | sudo tee /sys/bus/usb/drivers/usb/bind >/dev/null
   sleep 5
 }
 
 power_cycle_entire_hub() {
-  log "🔌 Power cycling USB hub $HUB_PATH..."
+  log "🔌 Power-cycling USB hub $HUB_PATH…"
   echo "$HUB_PATH" | sudo tee /sys/bus/usb/drivers/usb/unbind
   sleep 3
   echo "$HUB_PATH" | sudo tee /sys/bus/usb/drivers/usb/bind
-  log "✅ Hub power cycle complete."
+  log "✅ Hub cycle done."
   sleep 8
 }
 
 all_adapters_healthy() {
-  local bad=false
-  local hci_list
-  hci_list=($(detect_adapters))
-
-  if (( ${#hci_list[@]} < EXPECTED_ADAPTER_COUNT )); then
-    log "❌ Missing adapters! Expected $EXPECTED_ADAPTER_COUNT, found ${#hci_list[@]}"
-    return 1
-  fi
-
+  local bad=false hci_list mac
+  IFS=$'\n' read -r -d '' -a hci_list < <(detect_adapters && printf '\0')
+  (( ${#hci_list[@]} < EXPECTED_ADAPTER_COUNT )) && return 1
   for hci in "${hci_list[@]}"; do
     mac=$(get_mac "$hci")
-    if [[ "$mac" == "00:00:00:00:00:00" || -z "$mac" ]]; then
-      log "❌ $hci has invalid MAC: $mac"
+    if [[ -z "$mac" || "$mac" == "00:00:00:00:00:00" ]]; then
       bad=true
-    else
-      log "✅ $hci has valid MAC: $mac"
+      break
     fi
   done
-
   $bad && return 1 || return 0
 }
-
 
 ensure_all_adapters_up() {
   for hci in $(detect_adapters); do
     for i in {1..5}; do
       if sudo hciconfig "$hci" up 2>/dev/null; then
-        log "✅ $hci successfully brought UP."
+        log "✅ $hci is UP."
         break
       else
-        log "⚠️ Failed to bring $hci up. Retry $i..."
+        log "⚠️ $hci up failed, retry $i."
         sleep 2
       fi
     done
   done
 }
 
-### 🔁 Main Loop
+### 🔁 Main loop
 
-
-# 🚀 Fast check: parse hciconfig once and exit early if all is good
-log "🚀 Quick pre-check: parsing hciconfig output..."
-
-all_good=true
-current_hcis=0
-
-while IFS= read -r line; do
-  if [[ $line =~ ^hci[0-9]+: ]]; then
-    current_hcis=$((current_hcis + 1))
-    current_hci=$(echo "$line" | awk -F: '{print $1}')
-    adapter_state="unknown"
-  elif [[ $line =~ "BD Address" ]]; then
-    mac=$(echo "$line" | awk '{print $3}')
-    if [[ "$mac" == "00:00:00:00:00:00" ]]; then
-      log "❌ $current_hci has invalid MAC."
-      all_good=false
-    else
-      log "✅ $current_hci MAC: $mac"
-    fi
-  elif [[ $line =~ "DOWN" ]]; then
-    log "❌ $current_hci is DOWN."
-    all_good=false
-  fi
-done < <(hciconfig)
-
-if (( current_hcis < EXPECTED_ADAPTER_COUNT )); then
-  log "❌ Missing adapters. Expected $EXPECTED_ADAPTER_COUNT, found $current_hcis."
-  all_good=false
-fi
-
-if $all_good; then
-  log "🎯 Quick check passed: all adapters healthy. Exiting early."
-  exit 0
-else
-  log "⚡ Issues detected in quick check. Continuing with full reset logic..."
-fi
-
+# log "🚀 Quick precheck…"
+# all_adapters_healthy && { log "🎯 All good. Exiting."; exit 0; }
+# log "⚡ Issues found. Running full reset…"
 
 while true; do
-  missing_adapters=false
-  invalid_adapters=()
-
+  missing=false
+  invalid=()
   hci_list=($(detect_adapters))
 
-  if (( ${#hci_list[@]} < EXPECTED_ADAPTER_COUNT )); then
-    log "❌ Missing adapters! Expected $EXPECTED_ADAPTER_COUNT, found ${#hci_list[@]}"
-    missing_adapters=true
-  fi
+  (( ${#hci_list[@]} < EXPECTED_ADAPTER_COUNT )) && missing=true
 
   for hci in "${hci_list[@]}"; do
     mac=$(get_mac "$hci")
-    if [[ "$mac" == "00:00:00:00:00:00" || -z "$mac" ]]; then
-      log "❌ $hci has invalid MAC: $mac"
-      invalid_adapters+=("$hci")
-    else
-      log "✅ $hci has valid MAC: $mac"
-    fi
+    [[ -z "$mac" || "$mac" == "00:00:00:00:00:00" ]] && invalid+=("$hci")
   done
 
-  # If adapters are missing, power cycle the whole hub
-  if $missing_adapters; then
-    log "⚠️ Some adapters disappeared. Performing hub power cycle..."
+  if $missing; then
+    log "⚠️ Missing adapters. Hub cycle."
     power_cycle_entire_hub
-    sleep 8
     continue
   fi
 
-  # Retry resets for any invalid adapters
-  if (( ${#invalid_adapters[@]} > 0 )); then
-    log "🔁 Retrying USB reset for adapters with invalid MACs..."
-    for hci in "${invalid_adapters[@]}"; do
-      dev_name=$(get_usb_device_for_hci "$hci")
-      if [[ -n "$dev_name" ]]; then
-        reset_usb_device "$dev_name"
-      else
-        log "⚠️ Could not find USB device for $hci"
-      fi
+  if (( ${#invalid[@]} )); then
+    log "🔁 Resetting invalid adapters: ${invalid[*]}"
+    for hci in "${invalid[@]}"; do
+      dev=$(get_usb_device_for_hci "$hci")
+      [[ -n "$dev" ]] && reset_usb_device "$dev"
     done
-    sleep 3
     continue
   fi
 
-
-  # Ensure all adapters are turned on
-  log "🔌 Ensuring all adapters are turned ON..."
+  log "🔌 Bringing all adapters UP…"
   ensure_all_adapters_up
-
-
-  log "🎉 All Bluetooth adapters are present and healthy."
-
- 
+  log "🎉 All adapters healthy."
   break
 done
+
+### ✨ New: detect & name adapters, record UART one
+
+declare -a ALL_HCIS
+mapfile -t ALL_HCIS < <(detect_adapters)
+
+RESERVED=""
+count=1
+
+for hci in "${ALL_HCIS[@]}"; do
+  # pull “Bus: <TYPE>” line
+  bus_type=$(sudo hciconfig "$hci" | awk '/Bus:/ {print $5; exit}')
+  if [[ "$bus_type" == "UART" ]]; then
+    RESERVED="$hci"
+    sudo hciconfig "$hci" name "Sync-Sonic"
+    log "📡 Reserved $hci for phone (UART bus)."
+  else
+    sudo hciconfig "$hci" name "raspberrypi-$count"
+    log "🔊 Named $hci → raspberrypi-$count"
+    count=$((count+1))
+  fi
+done
+
+# Persist for systemd + Python
+if [[ -n "$RESERVED" ]]; then
+  echo "export RESERVED_HCI=$RESERVED" | sudo tee /etc/default/syncsonic >/dev/null
+  log "💾 exported RESERVED_HCI=$RESERVED to $ENVFILE"
+else
+  log "⚠️ No UART adapter found; RESERVED_HCI left unset."
+fi

@@ -1,5 +1,9 @@
 from utils.logging import log
+import os
 
+reserved = os.getenv("RESERVED_HCI")
+if not reserved:
+    raise RuntimeError("RESERVED_HCI not set – cannot pick phone adapter")
 
 def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) -> tuple[str, str, list[tuple[str, str]]]:
     """
@@ -32,7 +36,7 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
         if "org.bluez.Adapter1" in ifaces:
             addr = ifaces["org.bluez.Adapter1"].get("Address", "").upper()
             hci_name = path.split("/")[-1]
-            if hci_name == "hci0":
+            if hci_name == reserved:
                 continue  # Skip reserved adapter
             adapters[addr] = path
 

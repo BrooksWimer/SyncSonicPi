@@ -8,10 +8,16 @@ import dbus
 import dbus.service
 import dbus.mainloop.glib
 from gi.repository import GLib
+import os
+
+
+reserved = os.getenv("RESERVED_HCI")
+if not reserved:
+    raise RuntimeError("RESERVED_HCI not set – cannot pick phone adapter")
 
 # ── Configuration ────────────────────────────────────────────────────────
 BLUEZ        = "org.bluez"
-ADAPTER      = "hci0"
+ADAPTER      = reserved
 PHONE_AGENT_PATH   = "/com/syncsonic/pair_agent"
 CAPABILITY   = "DisplayYesNo"
 IDLE_TIMEOUT = 60   # seconds for idle exit
