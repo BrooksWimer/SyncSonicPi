@@ -3,8 +3,8 @@
 import sys, json, logging
 import dbus, dbus.mainloop.glib, dbus.service
 from gi.repository import GLib
-from svc_singleton import service
-from connection_service import Intent
+from syncsonic_ble.svc_singleton import service
+from syncsonic_ble.flow.connection_service import Intent
 import subprocess
 from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from endpoints.volume import set_stereo_volume
@@ -53,6 +53,7 @@ MESSAGE_TYPES = {
     "SET_VOLUME":0x63,
     "GET_PAIRED_DEVICES":0x64,
     "SET_MUTE":0x65,
+    "CONNECTION_STATUS_UPDATE": 0x70,
 
 }
 
@@ -468,29 +469,6 @@ class Characteristic(dbus.service.Object):
 
 
 
- 
-    def handle_connect(self, data):
-        """
-        CONNECT_ONE – expect:
-            {
-            "targetSpeaker": { "mac": "AA:BB:CC:DD:EE:FF", "name": "Friendly" },
-            "settings": { "AA:BB:...": {...}, … },
-            "allowed": [ "AA:BB:CC:DD:EE:FF", ... ]
-            }
-        """
-        try:
-            tgt = data["targetSpeaker"]
-            payload = {
-                "mac":           tgt["mac"],
-                "friendly_name": tgt.get("name", ""),
-                "allowed":       data.get("allowed", []),
-            }
-            service.submit(Intent.CONNECT_ONE, payload)
-            return self.encode_response(MESSAGE_TYPES["SUCCESS"],
-                                        {"queued": True})
-        except Exception as e:
-            return self.encode_response(MESSAGE_TYPES["ERROR"],
-                                        {"error": str(e)})
 
 
 

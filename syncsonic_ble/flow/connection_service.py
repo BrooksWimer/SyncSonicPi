@@ -17,10 +17,10 @@ from enum import Enum, auto
 from queue import Queue, Empty
 from typing import Dict, List, Tuple
 
-from bus_manager import get_bus
-from scan_manager import ScanManager
-from connect_planner import connect_one_plan  # rename of your existing file
-from bt_helpers import (                      # thin wrappers around DBus ops
+from syncsonic_ble.infra.bus_manager import get_bus
+from syncsonic_ble.flow.scan_manager import ScanManager
+from syncsonic_ble.flow.connect_planner import connect_one_plan  # rename of your existing file
+from syncsonic_ble.core.bt_helpers import (                      # thin wrappers around DBus ops
     disconnect_device_dbus,
     connect_device_dbus,
     pair_device_dbus,

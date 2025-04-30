@@ -15,7 +15,7 @@ UNDERLINE = '\033[4m'
 # utils/pulseaudio.py (add this function)
 import subprocess
 from utils.logging import log
-from utils.global_state import GLOBAL_BLUETOOTH_STATE  
+
 
 def cleanup_pulseaudio():
     try:

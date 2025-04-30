@@ -23,7 +23,7 @@ from typing import Dict, Optional
 from logging import log
 from typing import Any
 
-from bus_manager import get_bus
+from syncsonic_ble.infra.bus_manager import get_bus
 
 # ---------------------------------------------------------------------------
 # Helper types

@@ -1,7 +1,7 @@
 # event_pump.py
 import threading
 from gi.repository import GLib
-from bus_manager import get_bus
+from syncsonic_ble.infra.bus_manager import get_bus
 from utils.logging import log
 
 def start_event_pump():

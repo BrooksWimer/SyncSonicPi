@@ -1,7 +1,7 @@
 # endpoints/bluetooth_orchestrator.py
 from flask import request, jsonify
-from svc_singleton import service
-from connection_service import Intent
+from syncsonic_ble.svc_singleton import service
+from syncsonic_ble.flow.connection_service import Intent
 
 # /connect-one  -------------------------------------------------
 def api_connect_one():
