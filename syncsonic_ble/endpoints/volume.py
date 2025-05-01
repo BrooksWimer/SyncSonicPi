@@ -1,11 +1,7 @@
 from flask import request, jsonify
 import subprocess
-from utils.logging import log, RED, GREEN, ENDC
 
 
-from flask import request, jsonify
-import subprocess
-from utils.logging import log, RED, GREEN, ENDC
 
 def set_stereo_volume(mac: str, balance: int, volume: int) -> bool:
     # Clamp balance to [0.0, 1.0]
@@ -23,8 +19,6 @@ def set_stereo_volume(mac: str, balance: int, volume: int) -> bool:
         ["pactl", "set-sink-volume", sink_name, f"{left}%", f"{right}%"],
         capture_output=True, text=True
     )
-    if result.returncode == 0:
-        log(f"{GREEN}Set stereo volume for {mac}: L={left}%, R={right}%{ENDC}")
-    else:
-        log(f"{RED}Error setting stereo volume for {mac}: {result.stderr.strip()}{ENDC}")
+ 
+
     return result.returncode == 0, left, right
