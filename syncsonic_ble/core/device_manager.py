@@ -125,7 +125,7 @@ class DeviceManager:
         others = [m for m in self._devices_on_adapter(adapter_prefix) if m != mac]
         if others:
             # another speaker already owns that controller
-            other_path = f"{adapter_prefix}/dev_{other_mac.replace(':','_')}"
+            other_path = f"{adapter_prefix}/dev_{others[0].replace(':','_')}"
             dbus.Interface(dev_obj, DEVICE_INTERFACE).Disconnect()
             from syncsonic_ble.core.bt_helpers import remove_device_dbus
             remove_device_dbus(other_path, others[0], self.bus)
