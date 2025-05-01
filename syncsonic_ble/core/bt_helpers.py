@@ -1,6 +1,6 @@
 from gi.repository import GLib
 import time
-from utils.pulseaudio_service import remove_loopback_for_device
+from ..utils.pulseaudio_service import remove_loopback_for_device
 
 def get_adapter_path_from_device(device_path: str) -> str:
     return "/".join(device_path.split("/")[:4])

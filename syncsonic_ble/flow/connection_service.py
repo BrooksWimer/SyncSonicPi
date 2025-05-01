@@ -27,7 +27,7 @@ from syncsonic_ble.core.bt_helpers import (                      # thin wrappers
     trust_device_dbus,
     remove_device_dbus,
 )
-from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
+from ..utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from ..logging_conf import get_logger
 import subprocess, time
 from ..constants import (Msg, DBUS_PROP_IFACE, DEVICE_INTERFACE, ADAPTER_INTERFACE, BLUEZ_SERVICE_NAME)
