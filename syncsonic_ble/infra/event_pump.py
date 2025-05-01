@@ -2,12 +2,12 @@
 import threading
 from gi.repository import GLib
 from syncsonic_ble.infra.bus_manager import get_bus
-from utils.logging import log
+
 
 def start_event_pump():
     """Start GLib MainLoop in a background thread exactly once."""
     def _runner():
-        log("🌀 GLib event loop running")
+       
         loop = GLib.MainLoop()
         loop.run()
 

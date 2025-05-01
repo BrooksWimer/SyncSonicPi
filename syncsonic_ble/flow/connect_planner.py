@@ -1,5 +1,6 @@
-from utils.logging import log
+from ..logging_conf import get_logger
 import os
+logger = get_logger(__name__)
 
 reserved = os.getenv("RESERVED_HCI")
 if not reserved:
@@ -12,7 +13,7 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
     - If needs connection and a controller is available, returns 'needs_connection'.
     - If no suitable controllers are available, returns 'error'.
 
-    Args:
+    Args:   
         target_mac (str): The MAC address of the target device.
         allowed_macs (list[str]): The list of allowed speaker MACs.
         objects (dict): The D-Bus object tree from GetManagedObjects().
@@ -40,8 +41,8 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
                 continue  # Skip reserved adapter
             adapters[addr] = path
 
-    log(f"Planning connection for target: {target_mac}")
-    log(f"Allowed MACs in config: {allowed_macs}")
+    logger.info(f"Planning connection for target: {target_mac}")
+    logger.info(f"Allowed MACs in config: {allowed_macs}")
 
     # Analyze all devices
     for path, ifaces in objects.items():
@@ -61,33 +62,33 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
             continue  # This device does not belong to a recognized adapter
 
         if dev.get("Connected", False):
-            log(f"Found connected device: {dev_mac} on {ctrl_mac}")
+            logger.info(f"Found connected device: {dev_mac} on {ctrl_mac}")
 
             if dev_mac in allowed_macs:
                 config_speaker_usage.setdefault(dev_mac, []).append(ctrl_mac)
 
             if dev_mac == target_mac:
                 target_connected_on.append(ctrl_mac)
-                log(f"Target {dev_mac} already connected on {ctrl_mac}")
+                logger.info(f"Target {dev_mac} already connected on {ctrl_mac}")
 
             elif dev_mac not in allowed_macs:
                 disconnect_list.append((dev_mac, ctrl_mac))
-                log(f"Out-of-config device {dev_mac} → marked for disconnection")
+                logger.info(f"Out-of-config device {dev_mac} → marked for disconnection")
 
             elif dev_mac in allowed_macs:
                 used_controllers.add(ctrl_mac)
-                log(f"Config speaker {dev_mac} occupies controller {ctrl_mac}")
+                logger.info(f"Config speaker {dev_mac} occupies controller {ctrl_mac}")
 
-    log(f"Target is currently connected on: {target_connected_on}")
-    log(f"Disconnect list built: {disconnect_list}")
-    log(f"Controllers in use by config devices: {used_controllers}")
+    logger.info(f"Target is currently connected on: {target_connected_on}")
+    logger.info(f"Disconnect list built: {disconnect_list}")
+    logger.info(f"Controllers in use by config devices: {used_controllers}")
 
     # Handle multiple connections of target
     if len(target_connected_on) > 1:
         controller_to_keep = target_connected_on[0]
         for ctrl_mac in target_connected_on[1:]:
             disconnect_list.append((target_mac, ctrl_mac))
-        log(f"Target connected on multiple controllers, keeping {controller_to_keep}, disconnecting others")
+        logger.info(f"Target connected on multiple controllers, keeping {controller_to_keep}, disconnecting others")
         return "already_connected", controller_to_keep, disconnect_list
 
     # Target connected once: ensure it's not sharing with another config speaker
@@ -96,12 +97,12 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
         for mac, controllers in config_speaker_usage.items():
             if mac != target_mac and controller in controllers:
                 disconnect_list.append((target_mac, controller))
-                log(f"Target {target_mac} shares controller {controller} with config speaker {mac}, reallocating")
+                logger.info(f"Target {target_mac} shares controller {controller} with config speaker {mac}, reallocating")
 
                 # Try to find a free controller
                 for new_ctrl_mac in adapters:
                     if new_ctrl_mac not in used_controllers and new_ctrl_mac != controller:
-                        log(f"Assigning free controller {new_ctrl_mac} to target {target_mac}")
+                        logger.info(f"Assigning free controller {new_ctrl_mac} to target {target_mac}")
                         return "needs_connection", new_ctrl_mac, disconnect_list
 
                 # Fallback: free a duplicate
@@ -109,10 +110,10 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
                     if len(controllers2) > 1:
                         ctrl_to_free = controllers2[1]
                         disconnect_list.append((mac2, ctrl_to_free))
-                        log(f"Freeing {ctrl_to_free} from {mac2} to connect target {target_mac}")
+                        logger.info(f"Freeing {ctrl_to_free} from {mac2} to connect target {target_mac}")
                         return "needs_connection", ctrl_to_free, disconnect_list
 
-                log(f"No controller available after rebalance for target {target_mac}")
+                logger.info(f"No controller available after rebalance for target {target_mac}")
                 return "error", "", disconnect_list
 
         return "already_connected", controller, disconnect_list
@@ -120,15 +121,15 @@ def connect_one_plan(target_mac: str, allowed_macs: list[str], objects: dict) ->
     # Target is not currently connected anywhere
     for ctrl_mac in adapters:
         if ctrl_mac not in used_controllers:
-            log(f"Free controller {ctrl_mac} found for target {target_mac}")
+            logger.info(f"Free controller {ctrl_mac} found for target {target_mac}")
             return "needs_connection", ctrl_mac, disconnect_list
 
     for mac, controllers in config_speaker_usage.items():
         if len(controllers) > 1:
             ctrl_to_free = controllers[1]
             disconnect_list.append((mac, ctrl_to_free))
-            log(f"Freeing controller {ctrl_to_free} from {mac} to connect target {target_mac}")
+            logger.info(f"Freeing controller {ctrl_to_free} from {mac} to connect target {target_mac}")
             return "needs_connection", ctrl_to_free, disconnect_list
 
-    log(f"No available controller found for target {target_mac}")
+    logger.info(f"No available controller found for target {target_mac}")
     return "error", "", disconnect_list

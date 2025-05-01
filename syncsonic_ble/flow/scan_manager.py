@@ -20,10 +20,12 @@ from __future__ import annotations
 import threading
 import time
 from typing import Dict, Optional
-from logging import log
+from logging_conf import get_logger
 from typing import Any
 
 from syncsonic_ble.infra.bus_manager import get_bus
+
+logger = get_logger(__name__)
 
 # ---------------------------------------------------------------------------
 # Helper types
@@ -106,7 +108,7 @@ class ScanManager:
                     entry.proxy.StopDiscovery()
                 except Exception as e:  # noqa: BLE001
                     if "InProgress" in str(e):
-                        log("[ScanMgr] StopDiscovery ignored (BlueZ busy)")
+                        logger.info("[ScanMgr] StopDiscovery ignored (BlueZ busy)")
                     else:
                         raise 
     def wait_for_device(
