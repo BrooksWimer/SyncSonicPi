@@ -12,6 +12,7 @@ from ..constants import (
     DEVICE_INTERFACE, ADAPTER_INTERFACE,
 )
 from ..utils.pulseaudio_service import create_loopback, remove_loopback_for_device
+from ..constants import Msg
 
 log = get_logger(__name__)
 
@@ -31,6 +32,7 @@ class DeviceManager:
         self.expected: set[str] = set()
         self._status: Dict[str, Dict] = {}
         self._char   = None            # will be injected later
+        self.scanning: bool = False 
 
         self._setup_monitoring()
 
@@ -151,30 +153,28 @@ class DeviceManager:
 
     # ───────────────────────── misc helpers ─────────────────────────────────
     def _device_found(self, path: str):
-        # Already tracking it?
-        if path in self.devices:
-            return
-
-        # Extract the MAC from the object path
         mac = self._extract_mac(path)
         if not mac:
             return
-
-        # Only care about devices we explicitly expect
+        # STREAMING SCAN MODE: broadcast each found device
+        if self.scanning and self._char:
+            obj = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
+            props = dbus.Interface(obj, DBUS_PROP_IFACE)
+            name = props.Get(DEVICE_INTERFACE, "Alias") or props.Get(DEVICE_INTERFACE, "Name")
+            paired = bool(props.Get(DEVICE_INTERFACE, "Paired"))
+            device_info = {"mac": mac, "name": name, "paired": paired}
+            log.info("→ [SCAN STREAM] Discovered %s (%s), paired=%s", name, mac, paired)
+            self.scan_results.append(device_info)
+            self._char.send_notification(Msg.SCAN_DEVICES, {"device": device_info})
+            return
+        # NORMAL mode: only expected speakers
         if mac.upper() not in self.connected:
             log.debug("Ignoring un-expected device %s (%s)", path, mac)
             return
-
-        # Build the proxies so we can call methods on this Device1
-        device     = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
-        props_iface= dbus.Interface(device, DBUS_PROP_IFACE)
-        dev_iface  = dbus.Interface(device, DEVICE_INTERFACE)
-
-        self.devices[path] = {
-            "device": device,
-            "props":  props_iface,
-            "iface":  dev_iface
-        }
+        obj = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
+        props_iface = dbus.Interface(obj, DBUS_PROP_IFACE)
+        dev_iface   = dbus.Interface(obj, DEVICE_INTERFACE)
+        self.devices[path] = {"device": obj, "props": props_iface, "iface": dev_iface}
         log.info("Registered expected speaker %s at %s", mac, path)
 
 # helper – ensure MediaTransport exists before we create loopback ------------
