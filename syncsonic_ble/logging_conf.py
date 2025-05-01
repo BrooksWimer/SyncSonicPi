@@ -3,7 +3,7 @@ import logging, sys
 
 LOG_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format=LOG_FORMAT,
     handlers=[logging.StreamHandler(sys.stdout)],
 )

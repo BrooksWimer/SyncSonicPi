@@ -30,8 +30,10 @@ from syncsonic_ble.core.bt_helpers import (                      # thin wrappers
 from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from utils.logging import log
 import subprocess, time
-from ..constants import (Msg, DBUS_PROP_IFACE, DEVICE_INTERFACE, ADAPTER_INTERFACE)
+from ..constants import (Msg, DBUS_PROP_IFACE, DEVICE_INTERFACE, ADAPTER_INTERFACE, BLUEZ_SERVICE_NAME)
 from ..core.characteristic import Characteristic
+from dbus import Interface
+
 # ---------------------------------------------------------------------------
 # Public intent enum + shared queue
 # ---------------------------------------------------------------------------
@@ -165,6 +167,27 @@ class ConnectionService:
                 
                 if status == "already_connected":
                     sink = f"bluez_sink.{mac.replace(':', '_')}.a2dp_sink"
+                    A2DP_UUID = "0000110b-0000-1000-8000-00805f9b34fb"
+                    # use ctrl_mac (the HCI) and mac (the device) instead
+                    device_path = self._device_path(ctrl_mac, mac)
+                    raw_obj     = self.bus.get(BLUEZ_SERVICE_NAME, device_path)
+                    dev_iface   = Interface(raw_obj, DEVICE_INTERFACE)
+
+                    log(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
+                    try:
+                        dev_iface.ConnectProfile(A2DP_UUID)
+                        log("→ [DEBUG] ConnectProfile(A2DP) succeeded")
+                    except Exception as e:
+                        log(f"⚠️ ConnectProfile(A2DP) failed: {e}")
+                                    
+
+                     # signal connect success
+                    if self._char:
+                        self._char.send_notification(
+                            Msg.CONNECTION_STATUS_UPDATE,
+                            {"phase": "connect_success", "device": mac}
+                        )
+
                     if mac not in self.loopbacks:
                         if create_loopback(sink):
                             self.loopbacks.add(mac)
@@ -305,6 +328,23 @@ class ConnectionService:
                     )
 
                 if connect_device_dbus(device_path, self.bus):
+
+                    device_path = self._device_path(adapter_mac, dev_mac)
+                    raw_obj     = self.bus.get(BLUEZ_SERVICE_NAME, device_path)
+
+                    # wrap it in the Device1 interface
+                    dev_iface   = Interface(raw_obj, DEVICE_INTERFACE)
+
+                    # A2DP Sink UUID
+                    A2DP_UUID    = "0000110b-0000-1000-8000-00805f9b34fb"
+
+                    log(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
+                    try:
+                        dev_iface.ConnectProfile(A2DP_UUID)
+                        log("→ [DEBUG] ConnectProfile(A2DP) succeeded")
+                    except Exception as e:
+                        log(f"⚠️ ConnectProfile(A2DP) failed: {e}")
+
                     # signal connect success
                     if self._char:
                         self._char.send_notification(
