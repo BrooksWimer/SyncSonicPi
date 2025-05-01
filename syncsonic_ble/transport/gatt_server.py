@@ -24,7 +24,7 @@ from ..core.device_manager import DeviceManager
 from ..core.characteristic import Characteristic
 from ..core.service import GattService, Application
 from ..core.advertisement import Advertisement
-from utils.pulseaudio_service import setup_pulseaudio
+from ..utils.pulseaudio_service import setup_pulseaudio
 from ..core.descriptors import ClientConfigDescriptor
 
 log = get_logger(__name__)
@@ -79,6 +79,7 @@ def main():
     dev_mgr.attach_characteristic(char)
     char.device_manager = dev_mgr
     cccd = ClientConfigDescriptor(bus, 0, char)
+    char.add_descriptor(cccd)  
     # If your Characteristic class tracks descriptors, append it there:
     if hasattr(char, 'descriptors'):
         char.descriptors.append(cccd)
