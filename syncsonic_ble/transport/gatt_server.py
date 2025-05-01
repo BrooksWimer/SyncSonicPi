@@ -79,7 +79,6 @@ def main():
     dev_mgr.attach_characteristic(char)
     char.device_manager = dev_mgr
     cccd = ClientConfigDescriptor(bus, 0, char)
-    char.add_descriptor(cccd)  
     # If your Characteristic class tracks descriptors, append it there:
     if hasattr(char, 'descriptors'):
         char.descriptors.append(cccd)

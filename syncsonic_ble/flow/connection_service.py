@@ -28,11 +28,12 @@ from syncsonic_ble.core.bt_helpers import (                      # thin wrappers
     remove_device_dbus,
 )
 from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
-from utils.logging import log
+from ..logging_conf import get_logger
 import subprocess, time
 from ..constants import (Msg, DBUS_PROP_IFACE, DEVICE_INTERFACE, ADAPTER_INTERFACE, BLUEZ_SERVICE_NAME)
 from ..core.characteristic import Characteristic
 from dbus import Interface
+logger = get_logger(__name__)
 
 # ---------------------------------------------------------------------------
 # Public intent enum + shared queue
@@ -73,7 +74,7 @@ class ConnectionService:
         self._worker = threading.Thread(target=self._run_worker, daemon=True)
         self._worker.start()
         self._char = None  # will be injected later
-        log("ConnectionService worker thread started")
+        logger.info("ConnectionService worker thread started")
 
     # -----------------------------
     # Public helper: enqueue intents
@@ -103,7 +104,7 @@ class ConnectionService:
         return path.split("/")[-1].replace("dev_", "").replace("_", ":").upper()
 
     def _on_props_changed(self, sender, obj_path, iface, signal, params):
-        #log(f"PROP signal {mac} Connected={connected}")
+        #logger.info(f"PROP signal {mac} Connected={connected}")
 
         # Params is a GLib Variant → unpack to tuple
         changed_iface, changed_dict, _invalidated = params
@@ -144,7 +145,7 @@ class ConnectionService:
                     self.expected = set(macs)
                 else:
                     self.expected.update(macs)
-                log(f"Expected set now {self.expected}")
+                logger.info(f"Expected set now {self.expected}")
 
             elif intent is Intent.CONNECT_ONE:
                 mac   = payload["mac"].upper()
@@ -173,12 +174,12 @@ class ConnectionService:
                     raw_obj     = self.bus.get(BLUEZ_SERVICE_NAME, device_path)
                     dev_iface   = Interface(raw_obj, DEVICE_INTERFACE)
 
-                    log(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
+                    logger.info(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
                     try:
                         dev_iface.ConnectProfile(A2DP_UUID)
-                        log("→ [DEBUG] ConnectProfile(A2DP) succeeded")
+                        logger.info("→ [DEBUG] ConnectProfile(A2DP) succeeded")
                     except Exception as e:
-                        log(f"⚠️ ConnectProfile(A2DP) failed: {e}")
+                        logger.info(f"⚠️ ConnectProfile(A2DP) failed: {e}")
                                     
 
                      # signal connect success
@@ -191,7 +192,7 @@ class ConnectionService:
                     if mac not in self.loopbacks:
                         if create_loopback(sink):
                             self.loopbacks.add(mac)
-                            log(f"✅ Loopback created for already-connected {mac}")
+                            logger.info(f"✅ Loopback created for already-connected {mac}")
                     # we’re done; nothing else to do for this intent
                     continue
 
@@ -210,11 +211,11 @@ class ConnectionService:
                 if connected and mac not in self.loopbacks:
                     if create_loopback(sink):
                         self.loopbacks.add(mac)
-                        log(f"✅ Loopback autoprovisioned for {mac}")
+                        logger.info(f"✅ Loopback autoprovisioned for {mac}")
                 elif not connected and mac in self.loopbacks:
                     remove_loopback_for_device(mac)
                     self.loopbacks.remove(mac)
-                    log(f"🗑️  Loopback removed after disconnect for {mac}")
+                    logger.info(f"🗑️  Loopback removed after disconnect for {mac}")
 
 
     # -----------------------------
@@ -222,7 +223,7 @@ class ConnectionService:
     # -----------------------------
 
     def _try_reconnect(self, adapter_mac: str, dev_mac: str):
-        log(f"FSM: reconnect {dev_mac} via {adapter_mac}")
+        logger.info(f"FSM: reconnect {dev_mac} via {adapter_mac}")
 
         # NEW → ask the object tree what still needs doing
         state = self._analyze_device(adapter_mac, dev_mac)
@@ -238,7 +239,7 @@ class ConnectionService:
                 {"phase": "fsm_start", "device": dev_mac}
             )
         while attempt < max_retry:
-            log(f"  → [{attempt+1}/3] state={state}")
+            logger.info(f"  → [{attempt+1}/3] state={state}")
             if self._char:
                 self._char.send_notification(
                     Msg.CONNECTION_STATUS_UPDATE,
@@ -265,7 +266,7 @@ class ConnectionService:
                     self.scan.release_discovery(adapter_mac)
 
                 if not path:
-                    log("discovery timeout")
+                    logger.info("discovery timeout")
                     # signal discovery failed
                     if self._char:
                         self._char.send_notification(
@@ -300,7 +301,7 @@ class ConnectionService:
                 else:
                     attempt += 1
                     remove_device_dbus(device_path, self.bus)
-                    log("    ⚠️ pairing failed, removed device and retrying")
+                    logger.info("    ⚠️ pairing failed, removed device and retrying")
                     state = "run_discovery"  # remove & retry
                     # signal pairing failure
                     if self._char:
@@ -338,12 +339,12 @@ class ConnectionService:
                     # A2DP Sink UUID
                     A2DP_UUID    = "0000110b-0000-1000-8000-00805f9b34fb"
 
-                    log(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
+                    logger.info(f"→ [DEBUG] Asking BlueZ to connect A2DP on {device_path}")
                     try:
                         dev_iface.ConnectProfile(A2DP_UUID)
-                        log("→ [DEBUG] ConnectProfile(A2DP) succeeded")
+                        logger.info("→ [DEBUG] ConnectProfile(A2DP) succeeded")
                     except Exception as e:
-                        log(f"⚠️ ConnectProfile(A2DP) failed: {e}")
+                        logger.info(f"⚠️ ConnectProfile(A2DP) failed: {e}")
 
                     # signal connect success
                     if self._char:
@@ -353,10 +354,10 @@ class ConnectionService:
                         )
                     if create_loopback(loopback_sink):
                         self.loopbacks.add(dev_mac)
-                        log("    ✅ connected + loopback")
+                        logger.info("    ✅ connected + loopback")
                         return
                     else:
-                        log("    ⚠️ connected but loopback creation failed")
+                        logger.info("    ⚠️ connected but loopback creation failed")
                         if self._char:
                             self._char.send_notification(
                                 Msg.ERROR,
@@ -373,7 +374,7 @@ class ConnectionService:
                 state = "pair"  # fall back
                 attempt += 1
 
-        log(f"    ❌ failed to reconnect {dev_mac}")
+        logger.info(f"    ❌ failed to reconnect {dev_mac}")
 
     def _disconnect_everywhere(self, mac: str):
         obj_mgr = self.bus.get("org.bluez", "/").GetManagedObjects()
