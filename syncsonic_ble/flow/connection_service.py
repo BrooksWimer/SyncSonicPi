@@ -30,7 +30,8 @@ from syncsonic_ble.core.bt_helpers import (                      # thin wrappers
 from utils.pulseaudio_service import create_loopback, remove_loopback_for_device, setup_pulseaudio
 from utils.logging import log
 import subprocess, time
-
+from ..constants import (Msg, DBUS_PROP_IFACE, DEVICE_INTERFACE, ADAPTER_INTERFACE)
+from ..core.characteristic import Characteristic
 # ---------------------------------------------------------------------------
 # Public intent enum + shared queue
 # ---------------------------------------------------------------------------
@@ -69,6 +70,7 @@ class ConnectionService:
 
         self._worker = threading.Thread(target=self._run_worker, daemon=True)
         self._worker.start()
+        self._char = None  # will be injected later
         log("ConnectionService worker thread started")
 
     # -----------------------------
@@ -148,15 +150,7 @@ class ConnectionService:
 
                 self.expected.add(mac)          # so loopback sync recognises it
 
-                # subprocess.run(
-                #     ["/home/syncsonic2/reset_bt_adapters.sh"],
-                #     check=True,
-                #     timeout=600           # seconds
-                # )
 
-                # time.sleep(2)              # allow BlueZ to re-enumerate HCIs
-                # self.scan.refresh_adapters()
-                # log("✅ Adapters reset & ScanManager refreshed")
 
                 # # Re‑evaluate object tree each time
 
@@ -214,11 +208,33 @@ class ConnectionService:
         device_path = self._device_path(adapter_mac, dev_mac)
         max_retry = 3
         attempt   = 0
+        # send update to frontend
+        if self._char:
+            self._char.send_notification(
+                Msg.CONNECTION_STATUS_UPDATE,
+                {"phase": "fsm_start", "device": dev_mac}
+            )
         while attempt < max_retry:
             log(f"  → [{attempt+1}/3] state={state}")
+            if self._char:
+                self._char.send_notification(
+                    Msg.CONNECTION_STATUS_UPDATE,
+                    {
+                        "phase": "fsm_state",
+                        "device": dev_mac,
+                        "state": state,
+                        "attempt": attempt
+                    }
+                )
 
             # --- state handlers ---
             if state == "run_discovery":
+                # signal discovery start
+                if self._char:
+                    self._char.send_notification(
+                        Msg.CONNECTION_STATUS_UPDATE,
+                        {"phase": "discovery_start", "device": dev_mac}
+                    )
                 try:
                     self.scan.ensure_discovery(adapter_mac)
                     path = self.scan.wait_for_device(adapter_mac, dev_mac, 20)
@@ -226,32 +242,94 @@ class ConnectionService:
                     self.scan.release_discovery(adapter_mac)
 
                 if not path:
-                    log("discovery timeout"); break
+                    log("discovery timeout")
+                    # signal discovery failed
+                    if self._char:
+                        self._char.send_notification(
+                            Msg.ERROR,
+                            {"phase": "discovery_timeout", "device": dev_mac}
+                        )
+                    break
+                # signal discovery success
+                if self._char:
+                    self._char.send_notification(
+                        Msg.CONNECTION_STATUS_UPDATE,
+                        {"phase": "discovery_complete", "device": dev_mac}
+                    )
                 device_path = path
                 state = "pair"   
 
             elif state == "pair":
+                # signal pairing start
+                if self._char:
+                    self._char.send_notification(
+                        Msg.CONNECTION_STATUS_UPDATE,
+                        {"phase": "pairing_start", "device": dev_mac}
+                    )
                 if pair_device_dbus(device_path, bus=self.bus):
                     state = "trust"
+                    # signal pairing success
+                    if self._char:
+                        self._char.send_notification(
+                            Msg.CONNECTION_STATUS_UPDATE,
+                            {"phase": "pairing_success", "device": dev_mac}
+                        )
                 else:
                     attempt += 1
                     remove_device_dbus(device_path, self.bus)
                     log("    ⚠️ pairing failed, removed device and retrying")
                     state = "run_discovery"  # remove & retry
+                    # signal pairing failure
+                    if self._char:
+                        self._char.send_notification(
+                            Msg.ERROR,
+                            {"phase": "pairing_failed", "device": dev_mac, "attempt": attempt}
+                        )
 
             elif state == "trust":
                 trust_device_dbus(device_path, self.bus)
                 state = "connect"
+                # signal trusting start
+                if self._char:
+                    self._char.send_notification(
+                        Msg.CONNECTION_STATUS_UPDATE,
+                        {"phase": "trusting", "device": dev_mac}
+                    )
 
             elif state == "connect":
+                # signal connect start
+                if self._char:
+                    self._char.send_notification(
+                        Msg.CONNECTION_STATUS_UPDATE,
+                        {"phase": "connect_start", "device": dev_mac}
+                    )
+
                 if connect_device_dbus(device_path, self.bus):
+                    # signal connect success
+                    if self._char:
+                        self._char.send_notification(
+                            Msg.CONNECTION_STATUS_UPDATE,
+                            {"phase": "connect_success", "device": dev_mac}
+                        )
                     if create_loopback(loopback_sink):
                         self.loopbacks.add(dev_mac)
                         log("    ✅ connected + loopback")
                         return
                     else:
                         log("    ⚠️ connected but loopback creation failed")
+                        if self._char:
+                            self._char.send_notification(
+                                Msg.ERROR,
+                                {"phase": "loopback creation failed, click connect again", "device": dev_mac}
+                            )
                         return
+                    
+                if self._char:
+                    self._char.send_notification(
+                        Msg.ERROR,
+                        {"phase": "connect_failed", "device": dev_mac, "attempt": attempt}
+                    )
+
                 state = "pair"  # fall back
                 attempt += 1
 

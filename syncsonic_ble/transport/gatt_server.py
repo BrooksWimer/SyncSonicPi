@@ -82,6 +82,11 @@ def main():
     # If your Characteristic class tracks descriptors, append it there:
     if hasattr(char, 'descriptors'):
         char.descriptors.append(cccd)
+    char.set_device_manager(dev_mgr)
+
+    from syncsonic_ble.svc_singleton import service
+    service._char = char
+    log.info("🔗 Injected Characteristic instance into ConnectionService")
 
     # 6) Application tree assembly
     app = Application(bus)

@@ -9,8 +9,7 @@ from ..constants import (
     GATT_CHRC_IFACE, DBUS_PROP_IFACE, GATT_SERVICE_IFACE, DEVICE_INTERFACE,
     Msg, CHARACTERISTIC_UUID, DBUS_OM_IFACE
 )
-from ..svc_singleton import service            # unchanged
-from ..flow.connection_service import Intent        # unchanged
+
 from ..utils.pulseaudio_service import create_loopback, remove_loopback_for_device
 from ..endpoints.volume import set_stereo_volume
 
@@ -35,16 +34,43 @@ class Characteristic(dbus.service.Object):
 
         log.info("Characteristic created (%s)", uuid)
 
+
+     # ───────────────────── allow device manager ────────────────────────────
+    def set_device_manager(self, device_manager):
+        """Give me a handle to the DeviceManager so I can call back on it."""
+        self.device_manager = device_manager
+
     
 
 
     # ───────────────────── notification helpers ────────────────────────────
-    def push_status(self, payload: Dict[str, Any]):
-        self.value = self._encode(Msg.SUCCESS, payload)
+    def send_notification(self, msg_type: Msg, payload: Dict[str, Any]):
+        """
+        Encode *payload* under the given message type and send it as a BLE notification,
+        if the client has enabled notifications.
+        """
+        # 1) Build the byte array
+        data = self._encode(msg_type, payload)
+
+        # 2) Log everything for full visibility
+        log.info(
+            "→ [BLE Notify] type=%s(0x%02x) payload=%s",
+            msg_type.name,
+            msg_type.value,
+            payload
+        )
+
+        # 3) Actually send if the client has turned on notifications
         if self.notifying:
             self.PropertiesChanged(
-                GATT_CHRC_IFACE, {"Value": dbus.Array(self.value)}, []
+                GATT_CHRC_IFACE,
+                {"Value": dbus.Array(data, signature="y")},
+                []
             )
+
+    # You can keep push_status as a thin wrapper for backward compatibility:
+    def push_status(self, payload: Dict[str, Any]):
+        self.send_notification(Msg.SUCCESS, payload)
 
     # ────────────────────── D‑Bus boilerplate ───────────────────────────────
     def get_properties(self):
@@ -120,6 +146,8 @@ class Characteristic(dbus.service.Object):
         return self._encode(Msg.PONG, {"count": count})
 
     def _handle_connect_one(self, data):
+        from syncsonic_ble.svc_singleton import service
+        from ..flow.connection_service import Intent 
         tgt = data.get("targetSpeaker", {})
         mac = tgt.get("mac")
         if not mac:
@@ -132,11 +160,17 @@ class Characteristic(dbus.service.Object):
         }
         log.info("Queuing CONNECT_ONE %s", payload)
         service.submit(Intent.CONNECT_ONE, payload)
+
+
+
         if self.device_manager:
             self.device_manager.connected.add(mac)
+
         return self._encode(Msg.SUCCESS, {"queued": True})
 
     def _handle_disconnect(self, data):
+        from syncsonic_ble.svc_singleton import service
+        from ..flow.connection_service import Intent 
         mac = data.get("mac")
         if not mac:
             return self._encode(Msg.ERROR, {"error": "Missing mac"})

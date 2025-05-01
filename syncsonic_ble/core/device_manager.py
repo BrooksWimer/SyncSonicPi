@@ -28,7 +28,7 @@ class DeviceManager:
         self.max_reconnect_attempts: int = 3
         self.pairing_in_progress: Set[str] = set()
         self.connected: Set[str] = set()
-
+        self.expected: set[str] = set()
         self._status: Dict[str, Dict] = {}
         self._char   = None            # will be injected later
 
@@ -125,8 +125,11 @@ class DeviceManager:
         others = [m for m in self._devices_on_adapter(adapter_prefix) if m != mac]
         if others:
             # another speaker already owns that controller
+            other_path = f"{adapter_prefix}/dev_{other_mac.replace(':','_')}"
             dbus.Interface(dev_obj, DEVICE_INTERFACE).Disconnect()
-            log.warning("%s tried adapter %s but %s is already there", mac, adapter_prefix, others[0])
+            from syncsonic_ble.core.bt_helpers import remove_device_dbus
+            remove_device_dbus(other_path, others[0], self.bus)
+            log.warning("%s tried adapter %s but %s is already there. Disconnecting and removing", mac, adapter_prefix, others[0])
             return
 
 
@@ -148,21 +151,31 @@ class DeviceManager:
 
     # ───────────────────────── misc helpers ─────────────────────────────────
     def _device_found(self, path: str):
+        # Already tracking it?
         if path in self.devices:
             return
-        try:
-            device = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
-            device_props = dbus.Interface(device, DBUS_PROP_IFACE)
-            device_props.Set(DEVICE_INTERFACE, "Trusted", dbus.Boolean(True))
-            device_props.Set(DEVICE_INTERFACE, "Blocked", dbus.Boolean(False))
-            self.devices[path] = {
-                "device": device,
-                "props": device_props,
-                "iface": dbus.Interface(device, DEVICE_INTERFACE),
-            }
-            log.info("New device registered: %s", path)
-        except Exception as exc:
-            log.error("Failed to register device %s: %s", path, exc)
+
+        # Extract the MAC from the object path
+        mac = self._extract_mac(path)
+        if not mac:
+            return
+
+        # Only care about devices we explicitly expect
+        if mac.upper() not in self.connected:
+            log.debug("Ignoring un-expected device %s (%s)", path, mac)
+            return
+
+        # Build the proxies so we can call methods on this Device1
+        device     = self.bus.get_object(BLUEZ_SERVICE_NAME, path)
+        props_iface= dbus.Interface(device, DBUS_PROP_IFACE)
+        dev_iface  = dbus.Interface(device, DEVICE_INTERFACE)
+
+        self.devices[path] = {
+            "device": device,
+            "props":  props_iface,
+            "iface":  dev_iface
+        }
+        log.info("Registered expected speaker %s at %s", mac, path)
 
 # helper – ensure MediaTransport exists before we create loopback ------------
 
