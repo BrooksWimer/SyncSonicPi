@@ -1,7 +1,7 @@
 """Tiny glue layer – turn validated dicts into ConnectionService intents."""
 from typing import Any
 from .constants import Msg
-from .logging_conf import get_logger
+from logging_conf import get_logger
 from syncsonic_ble.flow.connection_service import Intent, service   # existing singleton
 
 log = get_logger(__name__)

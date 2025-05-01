@@ -20,7 +20,7 @@ from __future__ import annotations
 import threading
 import time
 from typing import Dict, Optional
-from logging_conf import get_logger
+from ..logging_conf import get_logger
 from typing import Any
 
 from syncsonic_ble.infra.bus_manager import get_bus
