@@ -231,6 +231,31 @@ class Characteristic(dbus.service.Object):
     def _unknown(self, _):
         return self._encode(Msg.ERROR, {"error": "Unknown message"})
     
+    def _get_connected_speakers(self):
+        """Return a list of {'mac':…, 'alias':…} for every Device1 with Connected=True."""
+        om = dbus.Interface(
+            self.bus.get_object(BLUEZ_SERVICE_NAME, "/"),
+            DBUS_OM_IFACE
+        )
+        devices = []
+        for path, ifs in om.GetManagedObjects().items():
+            dev = ifs.get(DEVICE_INTERFACE)
+            if not dev or not dev.get("Connected", False):
+                continue
+            devices.append({
+                "mac":   dev.get("Address"),
+                "alias": dev.get("Alias") or dev.get("Name", "")
+            })
+        return devices
+
+    def _notify_connected_speakers(self):
+        """Push a CONNECTION_STATUS_UPDATE notification with the current speakers."""
+        speakers = self._get_connected_speakers()
+        log.info("→ [STATUS] notifying %d connected speaker(s)", len(speakers))
+        # Use CONNECTION_STATUS_UPDATE for your enum value (0x70)
+        self.send_notification(Msg.CONNECTION_STATUS_UPDATE, {"devices": speakers})
+
+    
    
     def _handle_scan_start(self, _):
         """Begin streaming scan: start BlueZ discovery on RESERVED_HCI."""
@@ -286,6 +311,8 @@ class Characteristic(dbus.service.Object):
             return  
         self.notifying = True
         log.info("Notifications enabled via StartNotify")
+
+        self._notify_connected_speakers()
    
       
 
