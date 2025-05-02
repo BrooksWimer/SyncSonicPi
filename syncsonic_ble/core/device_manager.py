@@ -130,7 +130,7 @@ class DeviceManager:
             other_path = f"{adapter_prefix}/dev_{others[0].replace(':','_')}"
             dbus.Interface(dev_obj, DEVICE_INTERFACE).Disconnect()
             from syncsonic_ble.core.bt_helpers import remove_device_dbus
-            remove_device_dbus(other_path, others[0], self.bus)
+            remove_device_dbus(other_path, self.bus)
             log.warning("%s tried adapter %s but %s is already there. Disconnecting and removing", mac, adapter_prefix, others[0])
             return
 

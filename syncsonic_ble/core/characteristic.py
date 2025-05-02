@@ -283,7 +283,7 @@ class Characteristic(dbus.service.Object):
     def StartNotify(self):
         if self.notifying:
             log.info("Already notifying, ignoring StartNotify")
-            return
+            return  
         self.notifying = True
         log.info("Notifications enabled via StartNotify")
    
