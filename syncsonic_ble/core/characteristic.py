@@ -315,8 +315,6 @@ class Characteristic(dbus.service.Object):
             self._scan_mgr.ensure_discovery(adapter_mac)
             log.info("→ [SCAN_START] Discovery started on %s", adapter_mac)
             self._scan_adapter_mac = adapter_mac
-            if self.device_manager:
-                self.device_manager.scanning = False
         except Exception as e:
             log.error("⚠️ [SCAN_START] Error starting discovery: %s", e)
             return self._encode(Msg.ERROR, {"error": "Could not start scan"})
@@ -337,7 +335,9 @@ class Characteristic(dbus.service.Object):
         except Exception as e:
             log.error("⚠️ [SCAN_STOP] Error stopping discovery: %s", e)
             return self._encode(Msg.ERROR, {"error": "Could not stop scan"})
-
+        
+        if self.device_manager:
+            self.device_manager.scanning = False
         # clean up
         self._scan_mgr = None
         self._scan_adapter_mac = None
