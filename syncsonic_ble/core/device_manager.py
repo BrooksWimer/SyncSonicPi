@@ -170,8 +170,6 @@ class DeviceManager:
             else:
                 self._char.send_notification(Msg.SCAN_DEVICES, {"device": device_info})
                 log.info(f"Adding device: {mac} with name: {name}")
-
-            
             return
         # NORMAL mode: only expected speakers
         if mac.upper() not in self.connected:

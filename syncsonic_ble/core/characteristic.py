@@ -246,6 +246,7 @@ class Characteristic(dbus.service.Object):
                 self._scan_mgr = ScanManager()
                 self._scan_mgr.ensure_discovery(adapter_mac)
                 self.device_manager.scanning = True
+                self._scan_adapter_mac = adapter_mac
         except Exception as e:
             log.error("⚠️ [SCAN_START] Adapter lookup failed: %s", e)
             return self._encode(Msg.ERROR, {"error": "Adapter not found"})
