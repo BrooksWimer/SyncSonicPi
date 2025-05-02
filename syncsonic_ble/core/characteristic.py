@@ -33,6 +33,8 @@ class Characteristic(dbus.service.Object):
         self.notifying = False
         self.connected_devices = set()
         self.device_manager = None
+        self._scan_mgr = None
+        self._scan_adapter_mac = None
         super().__init__(bus, self.path)
 
         log.info("Characteristic created (%s)", uuid)
@@ -291,17 +293,48 @@ class Characteristic(dbus.service.Object):
         return self._encode(Msg.SUCCESS, {"queued": True})
     
     def _handle_scan_start(self, _):
-        """Enable streaming scan mode."""
-        if self.device_manager:
-            self.device_manager.scanning = True
-            self.device_manager.scan_results.clear()
-        return self._encode(Msg.SUCCESS, {})
+        """Begin streaming scan: start BlueZ discovery on RESERVED_HCI."""
+        # 1) find adapter path & MAC
+        hci = os.getenv("RESERVED_HCI")        # e.g. "hci3"
+        adapter_path = f"/org/bluez/{hci}"
+        try:
+            obj = self.bus.get_object(BLUEZ_SERVICE_NAME, adapter_path)
+            props = dbus.Interface(obj, DBUS_PROP_IFACE)
+            adapter_mac = props.Get(ADAPTER_INTERFACE, "Address")
+        except Exception as e:
+            log.error("⚠️ [SCAN_START] Adapter lookup failed: %s", e)
+            return self._encode(Msg.ERROR, {"error": "Adapter not found"})
+
+        # 2) start discovery
+        self._scan_mgr = ScanManager()
+        try:
+            self._scan_mgr.ensure_discovery(adapter_mac)
+            log.info("→ [SCAN_START] Discovery started on %s", adapter_mac)
+            self._scan_adapter_mac = adapter_mac
+        except Exception as e:
+            log.error("⚠️ [SCAN_START] Error starting discovery: %s", e)
+            return self._encode(Msg.ERROR, {"error": "Could not start scan"})
+
+        return self._encode(Msg.SUCCESS, {"scanning": True})
 
     def _handle_scan_stop(self, _):
-        """Disable streaming scan mode."""
-        if self.device_manager:
-            self.device_manager.scanning = False
-        return self._encode(Msg.SUCCESS, {})
+        """Halt streaming scan: stop BlueZ discovery on RESERVED_HCI."""
+        if not self._scan_mgr or not self._scan_adapter_mac:
+            log.warning("→ [SCAN_STOP] No active scan to stop")
+            return self._encode(Msg.ERROR, {"error": "Scan not active"})
+
+        try:
+            self._scan_mgr.release_discovery(self._scan_adapter_mac)
+            log.info("→ [SCAN_STOP] Discovery stopped on %s", self._scan_adapter_mac)
+        except Exception as e:
+            log.error("⚠️ [SCAN_STOP] Error stopping discovery: %s", e)
+            return self._encode(Msg.ERROR, {"error": "Could not stop scan"})
+
+        # clean up
+        self._scan_mgr = None
+        self._scan_adapter_mac = None
+
+        return self._encode(Msg.SUCCESS, {"scanning": False})
 
 
     # ───────────────────── notify start/stop --------------------------------
