@@ -52,3 +52,4 @@ class Msg(IntEnum):
     CONNECTION_STATUS_UPDATE= 0x70
     SCAN_START      = 0x40
     SCAN_STOP       = 0x41
+    SCAN_DEVICES = 0X43
