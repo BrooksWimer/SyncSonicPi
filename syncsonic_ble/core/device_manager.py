@@ -13,6 +13,7 @@ from ..constants import (
 )
 from ..utils.pulseaudio_service import create_loopback, remove_loopback_for_device
 from ..constants import Msg
+import re
 
 log = get_logger(__name__)
 
@@ -163,7 +164,14 @@ class DeviceManager:
             paired = bool(props.Get(DEVICE_INTERFACE, "Paired"))
             device_info = {"mac": mac, "name": name, "paired": paired}
             log.info("→ [SCAN STREAM] Discovered %s (%s), paired=%s", name, mac, paired)
-            self._char.send_notification(Msg.SCAN_DEVICES, {"device": device_info})
+    
+            if re.search(r'([0-9A-F]{2}-){2,}', name, re.IGNORECASE):
+                log.info(f"Filtering out device: {name}")
+            else:
+                self._char.send_notification(Msg.SCAN_DEVICES, {"device": device_info})
+                log.info(f"Adding device: {mac} with name: {name}")
+
+            
             return
         # NORMAL mode: only expected speakers
         if mac.upper() not in self.connected:
