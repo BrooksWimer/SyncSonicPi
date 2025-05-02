@@ -119,6 +119,8 @@ class Characteristic(dbus.service.Object):
             Msg.GET_PAIRED_DEVICES: self._handle_get_paired,
             Msg.SET_MUTE:        self._handle_set_mute,
             Msg.SCAN_DEVICES:    self._handle_scan_devices,
+            Msg.SCAN_START:      self._handle_scan_start,
+            Msg.SCAN_STOP:       self._handle_scan_stop,
         }.get(msg_type, self._unknown)
 
         response = handler(data)
@@ -229,60 +231,77 @@ class Characteristic(dbus.service.Object):
         return self._encode(Msg.ERROR, {"error": "Unknown message"})
     
     
-    @dbus.service.method(GATT_CHRC_IFACE, in_signature="aya{sv}")
     def _handle_scan_devices(self, data):
         """
-        Scan for classic-BT devices via BlueZ, streaming each as it's found,
-        then send a final summary over BLE.
+        Scan for classic-BT devices via BlueZ, then send them back as a BLE notification.
         """
-        # 1) enter scan mode on the DeviceManager
-        if self.device_manager:
-            self.device_manager.scanning = True
-            self.device_manager.scan_results.clear()
-
-        # 2) figure out real adapter MAC
         hci = os.getenv("RESERVED_HCI")          # e.g. "hci3"
         adapter_path = f"/org/bluez/{hci}"
         log.info("→ [SCAN] Using adapter path %s", adapter_path)
+
+        # 1) fetch the real MAC
         try:
             adapter_obj = self.bus.get_object(BLUEZ_SERVICE_NAME, adapter_path)
-            props = dbus.Interface(adapter_obj, DBUS_PROP_IFACE)
-            adapter_mac = props.Get(ADAPTER_INTERFACE, "Address")
+            props_iface = dbus.Interface(adapter_obj, DBUS_PROP_IFACE)
+            adapter_mac = props_iface.Get(ADAPTER_INTERFACE, "Address")
         except Exception as e:
             log.error("⚠️ [SCAN] Failed to read adapter Address: %s", e)
-            # exit scan mode
-            if self.device_manager:
-                self.device_manager.scanning = False
             return self._encode(Msg.ERROR, {"error": "Adapter not found"})
 
-        # 3) start discovery
+        log.info("→ [SCAN] Starting device scan on adapter %s", adapter_mac)
         scan_mgr = ScanManager()
+
+        # 2) start discovery
         try:
             scan_mgr.ensure_discovery(adapter_mac)
-            log.info("→ [SCAN] Discovery started on %s", adapter_mac)
+            log.info("→ [SCAN] Discovery started")
         except Exception as e:
             log.error("⚠️ [SCAN] Error starting discovery: %s", e)
         time.sleep(5)
+
+        # 3) collect devices under that adapter
+        log.info("→ [SCAN] Collecting discovered devices")
+        om = dbus.Interface(self.bus.get(BLUEZ_SERVICE_NAME, "/"), DBUS_OM_IFACE)
+        objects = om.GetManagedObjects()
+
+        devices = []
+        for path, ifs in objects.items():
+            dev = ifs.get(DEVICE_INTERFACE)
+            if not dev or not path.startswith(adapter_path):
+                continue
+            mac = dev["Address"]
+            name = dev.get("Alias") or dev.get("Name")
+            paired = bool(dev.get("Paired", False))
+            log.info("→ [SCAN] Found device: %s (%s), paired=%s", name, mac, paired)
+            devices.append({"mac": mac, "name": name, "paired": paired})
+
+        # 4) stop discovery
         try:
             scan_mgr.release_discovery(adapter_mac)
             log.info("→ [SCAN] Discovery stopped")
         except Exception as e:
             log.error("⚠️ [SCAN] Error stopping discovery: %s", e)
 
-        # 4) exit scan mode
+        # 5) notify back
+        log.info("→ [SCAN] Sending %d devices over BLE", len(devices))
+        self.send_notification(Msg.SCAN_DEVICES, {"devices": devices})
+
+        # 6) return ACK
+        log.info("→ [SCAN] Handler complete, returning ACK")
+        return self._encode(Msg.SUCCESS, {"queued": True})
+    
+    def _handle_scan_start(self, _):
+        """Enable streaming scan mode."""
+        if self.device_manager:
+            self.device_manager.scanning = True
+            self.device_manager.scan_results.clear()
+        return self._encode(Msg.SUCCESS, {})
+
+    def _handle_scan_stop(self, _):
+        """Disable streaming scan mode."""
         if self.device_manager:
             self.device_manager.scanning = False
-
-        # 5) send final summary
-        results = (self.device_manager.scan_results 
-                   if self.device_manager 
-                   else [])
-        log.info("→ [SCAN] Sending summary of %d devices over BLE", len(results))
-        self.send_notification(Msg.SCAN_DEVICES, {"devices": results})
-
-        # 6) ack the write
-        return self._encode(Msg.SUCCESS, {"queued": True})
-
+        return self._encode(Msg.SUCCESS, {})
 
 
     # ───────────────────── notify start/stop --------------------------------

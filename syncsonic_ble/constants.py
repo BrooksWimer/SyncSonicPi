@@ -51,3 +51,5 @@ class Msg(IntEnum):
     SET_MUTE                = 0x65
     CONNECTION_STATUS_UPDATE= 0x70
     SCAN_DEVICES          = 0x40
+    SCAN_START      = 0x40
+    SCAN_STOP       = 0x41
