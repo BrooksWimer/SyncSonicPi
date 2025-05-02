@@ -120,7 +120,6 @@ class Characteristic(dbus.service.Object):
             Msg.SET_VOLUME:      self._handle_set_volume,
             Msg.GET_PAIRED_DEVICES: self._handle_get_paired,
             Msg.SET_MUTE:        self._handle_set_mute,
-            Msg.SCAN_DEVICES:    self._handle_scan_devices,
             Msg.SCAN_START:      self._handle_scan_start,
             Msg.SCAN_STOP:       self._handle_scan_stop,
         }.get(msg_type, self._unknown)
@@ -232,66 +231,7 @@ class Characteristic(dbus.service.Object):
     def _unknown(self, _):
         return self._encode(Msg.ERROR, {"error": "Unknown message"})
     
-    
-    def _handle_scan_devices(self, data):
-        """
-        Scan for classic-BT devices via BlueZ, then send them back as a BLE notification.
-        """
-        hci = os.getenv("RESERVED_HCI")          # e.g. "hci3"
-        adapter_path = f"/org/bluez/{hci}"
-        log.info("→ [SCAN] Using adapter path %s", adapter_path)
-
-        # 1) fetch the real MAC
-        try:
-            adapter_obj = self.bus.get_object(BLUEZ_SERVICE_NAME, adapter_path)
-            props_iface = dbus.Interface(adapter_obj, DBUS_PROP_IFACE)
-            adapter_mac = props_iface.Get(ADAPTER_INTERFACE, "Address")
-        except Exception as e:
-            log.error("⚠️ [SCAN] Failed to read adapter Address: %s", e)
-            return self._encode(Msg.ERROR, {"error": "Adapter not found"})
-
-        log.info("→ [SCAN] Starting device scan on adapter %s", adapter_mac)
-        scan_mgr = ScanManager()
-
-        # 2) start discovery
-        try:
-            scan_mgr.ensure_discovery(adapter_mac)
-            log.info("→ [SCAN] Discovery started")
-        except Exception as e:
-            log.error("⚠️ [SCAN] Error starting discovery: %s", e)
-        time.sleep(5)
-
-        # 3) collect devices under that adapter
-        log.info("→ [SCAN] Collecting discovered devices")
-        om = dbus.Interface(self.bus.get(BLUEZ_SERVICE_NAME, "/"), DBUS_OM_IFACE)
-        objects = om.GetManagedObjects()
-
-        devices = []
-        for path, ifs in objects.items():
-            dev = ifs.get(DEVICE_INTERFACE)
-            if not dev or not path.startswith(adapter_path):
-                continue
-            mac = dev["Address"]
-            name = dev.get("Alias") or dev.get("Name")
-            paired = bool(dev.get("Paired", False))
-            log.info("→ [SCAN] Found device: %s (%s), paired=%s", name, mac, paired)
-            devices.append({"mac": mac, "name": name, "paired": paired})
-
-        # 4) stop discovery
-        try:
-            scan_mgr.release_discovery(adapter_mac)
-            log.info("→ [SCAN] Discovery stopped")
-        except Exception as e:
-            log.error("⚠️ [SCAN] Error stopping discovery: %s", e)
-
-        # 5) notify back
-        log.info("→ [SCAN] Sending %d devices over BLE", len(devices))
-        self.send_notification(Msg.SCAN_DEVICES, {"devices": devices})
-
-        # 6) return ACK
-        log.info("→ [SCAN] Handler complete, returning ACK")
-        return self._encode(Msg.SUCCESS, {"queued": True})
-    
+   
     def _handle_scan_start(self, _):
         """Begin streaming scan: start BlueZ discovery on RESERVED_HCI."""
         # 1) find adapter path & MAC
@@ -302,22 +242,14 @@ class Characteristic(dbus.service.Object):
             props = dbus.Interface(obj, DBUS_PROP_IFACE)
             adapter_mac = props.Get(ADAPTER_INTERFACE, "Address")
             if self.device_manager:
+                log.info("→ [SCAN_START] Found adapter %s (%s)", adapter_path, adapter_mac)
+                self._scan_mgr = ScanManager()
+                self._scan_mgr.ensure_discovery(adapter_mac)
                 self.device_manager.scanning = True
         except Exception as e:
             log.error("⚠️ [SCAN_START] Adapter lookup failed: %s", e)
             return self._encode(Msg.ERROR, {"error": "Adapter not found"})
-        
-
-
-        # 2) start discovery
-        self._scan_mgr = ScanManager()
-        try:
-            self._scan_mgr.ensure_discovery(adapter_mac)
-            log.info("→ [SCAN_START] Discovery started on %s", adapter_mac)
-            self._scan_adapter_mac = adapter_mac
-        except Exception as e:
-            log.error("⚠️ [SCAN_START] Error starting discovery: %s", e)
-            return self._encode(Msg.ERROR, {"error": "Could not start scan"})
+    
 
         return self._encode(Msg.SUCCESS, {"scanning": True})
     
