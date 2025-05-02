@@ -32,8 +32,7 @@ class DeviceManager:
         self.expected: set[str] = set()
         self._status: Dict[str, Dict] = {}
         self._char   = None            # will be injected later
-        self.scanning: bool = False 
-
+        self.scanning = False          # set to True when scanning for devices
         self._setup_monitoring()
 
     # ─────────────────────────── helpers ────────────────────────────────────

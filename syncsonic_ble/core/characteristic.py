@@ -301,9 +301,14 @@ class Characteristic(dbus.service.Object):
             obj = self.bus.get_object(BLUEZ_SERVICE_NAME, adapter_path)
             props = dbus.Interface(obj, DBUS_PROP_IFACE)
             adapter_mac = props.Get(ADAPTER_INTERFACE, "Address")
+            if self.device_manager:
+                self.device_manager.scanning = True
+                self.device_manager.scan_results.clear()
         except Exception as e:
             log.error("⚠️ [SCAN_START] Adapter lookup failed: %s", e)
             return self._encode(Msg.ERROR, {"error": "Adapter not found"})
+        
+
 
         # 2) start discovery
         self._scan_mgr = ScanManager()
@@ -311,11 +316,15 @@ class Characteristic(dbus.service.Object):
             self._scan_mgr.ensure_discovery(adapter_mac)
             log.info("→ [SCAN_START] Discovery started on %s", adapter_mac)
             self._scan_adapter_mac = adapter_mac
+            if self.device_manager:
+                self.device_manager.scanning = False
         except Exception as e:
             log.error("⚠️ [SCAN_START] Error starting discovery: %s", e)
             return self._encode(Msg.ERROR, {"error": "Could not start scan"})
 
         return self._encode(Msg.SUCCESS, {"scanning": True})
+    
+    
 
     def _handle_scan_stop(self, _):
         """Halt streaming scan: stop BlueZ discovery on RESERVED_HCI."""
