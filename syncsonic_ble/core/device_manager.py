@@ -163,7 +163,6 @@ class DeviceManager:
             paired = bool(props.Get(DEVICE_INTERFACE, "Paired"))
             device_info = {"mac": mac, "name": name, "paired": paired}
             log.info("→ [SCAN STREAM] Discovered %s (%s), paired=%s", name, mac, paired)
-            self.scan_results.append(device_info)
             self._char.send_notification(Msg.SCAN_DEVICES, {"device": device_info})
             return
         # NORMAL mode: only expected speakers
